@@ -6,7 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from .managers import CustomUserManager
 
-# Create your models here.
+
 class Usuarios(AbstractBaseUser, PermissionsMixin):
     matricula = models.CharField(_("Matricula"), max_length=10, unique=True, null=False)
     nombre = models.CharField(max_length=100, null=False)
@@ -33,3 +33,10 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
 
 class Role(models.Model):
     role = models.CharField(max_length=30, unique=True)
+
+
+class Registro_Semestre(models.Model):
+    alumno_id = models.ForeignKey("Usuario", null=True, on_delete=models.CASCADE)
+    is_valid = models.BooleanField(default=True, null=False)
+    fecha_inicio = models.DateTimeField(null=False)
+    fecha_final = models.DateTimeField(null=False)
