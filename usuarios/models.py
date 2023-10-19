@@ -13,16 +13,17 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     correo = models.EmailField(_("Correo Universitario"), unique=True)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
     cerated_at = models.DateTimeField(default=timezone.now)
-    modified_at = models.DateTimeField()
+    modified_at = models.DateTimeField(null=True)
 
     role_id = models.ForeignKey(
-        "Role",
+        "Role", null=True,
         on_delete=models.CASCADE
     )
 
     USERNAME_FIELD = "matricula"
-    REQUIRED_FIELDS = ["role_id"]
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 
