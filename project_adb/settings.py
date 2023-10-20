@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = ['C:/Users/Juan Tapia/Documents/GitHub/project-adb/usuarios/templates/static']
+STATICFILES_DIRS = ['C:/Users/Juan Tapia/Documents/GitHub/project/usuarios/templates/static']
 
 # Application definition
 
