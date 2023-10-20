@@ -20,6 +20,10 @@ from django.urls import path
 from usuarios.views import Home
 
 urlpatterns = [
+<<<<<<< HEAD
     path('admin/', admin.site.urls),
+=======
+>>>>>>> bf21e94 (feat: Add models and migrations for grupos, practicas y sessiones app)
     path('', Home),
+    path('admin/', admin.site.urls),
 ]

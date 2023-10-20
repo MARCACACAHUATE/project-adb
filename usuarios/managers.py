@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
-#from .models import Role
+
+from usuarios.models import Role
 
 class CustomUserManager(BaseUserManager):
     """
@@ -24,9 +25,11 @@ class CustomUserManager(BaseUserManager):
         """
             Crea y guarda un SuperUser con la matricula y password dada.
         """
+        admin_role = Role.objects.get(role="Admin")
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
+        extra_fields.setdefault("role_id", admin_role)
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError(_("Superuser must have is_staff=True."))

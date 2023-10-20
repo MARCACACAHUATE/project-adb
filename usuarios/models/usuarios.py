@@ -4,8 +4,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .managers import CustomUserManager
-
+from usuarios.managers import CustomUserManager
 
 class Usuarios(AbstractBaseUser, PermissionsMixin):
     matricula = models.CharField(_("Matricula"), max_length=10, unique=True, null=False)
@@ -29,14 +28,3 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self) -> str:
         return f"{self.nombre} {self.matricula}"
-
-
-class Role(models.Model):
-    role = models.CharField(max_length=30, unique=True)
-
-
-class Registro_Semestre(models.Model):
-    alumno_id = models.ForeignKey("Usuarios", null=True, on_delete=models.CASCADE)
-    is_valid = models.BooleanField(default=True, null=False)
-    fecha_inicio = models.DateTimeField(null=False)
-    fecha_final = models.DateTimeField(null=False)
