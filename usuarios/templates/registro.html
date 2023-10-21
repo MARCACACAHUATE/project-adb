@@ -30,12 +30,17 @@
           <form action="" method="POST"      
                 class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
                                 sm:w-1/2 sm:mx-auto sm:grid-cols-1">
-            {% csrf_token %}  
+            {% csrf_token %} 
+            <!--{% if mensaje %}
+            
+              <div class="text-verde font-bold  text-titulo-min-xl mt-0
+              sm:mt-20 sm:text-titulo-xl">Alumno registrado correctamente</div>
+            {% endif %}-->
             <select name="role_id" id="role_id" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
             sm:col-span-1 sm:w-full">
               <option value="0">Seleccionar</option>
               <option value="2">Alumno</option>
-              <option value="3">Administrador</option>
+            
             </select>
              
             <input name="nombre" id="nombre" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
@@ -57,7 +62,8 @@
             <input name="password_confirm" id="password_confirm" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
                           type="password" placeholder="Confirmar contraseña">
-
+             
+                            
             <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Registrarse</button>
             <!--<button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Cancelar</button>-->
             <a href="{% url 'Home' %}" class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer 

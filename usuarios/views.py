@@ -3,7 +3,9 @@ from django.contrib import messages
 
 from django.contrib.auth.models import User
 
-from usuarios.forms import UserCreationForm, UserChangeForm
+from usuarios.forms.registrouser import CustomUserForm
+from django.contrib.auth import login, authenticate
+
 from usuarios.models import Usuarios
 
 def home(request):
@@ -11,49 +13,23 @@ def home(request):
     return render(request, "login.html")
 
 #signup
-def registro(request):
-
-    form = UserCreationForm()
+def registro(request):    
+    data = {
+        'form':CustomUserForm()
+    }
 
     if request.method == 'POST':
-        
-        #password_confirm = request.POST['password_confirm']
-        
-        if UserChangeForm.is_valid(request):
+        formulario = CustomUserForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()   
+            role_id = formulario.cleaned_data['role_id']
+            nombre = formulario.cleaned_data['nombre']
+            matricula = formulario.cleaned_data['matricula']
+            correo = formulario.cleaned_data['correo']
+            password = formulario.cleaned_data['password']        
+            return render(request, 'login.html', {"form": formulario, "mensaje": 'ok'})
 
-            usuarios = Usuarios()
-
-            usuarios.role_id = form.cleaned_data['role_id']
-            usuarios.nombre = form.cleaned_data['nombre']
-            usuarios.matricula = form.cleaned_data['matricula']
-            usuarios.correo = form.cleaned_data['correo']
-            usuarios.password = form.cleaned_data['password']
-
-        #if password==password_confirm:
-         #   if Usuarios.objects.filter(matricula=matricula).exists():
-          #      messages.info(request, 'Username is already taken')
-           #     return redirect(registro)
-            #elif Usuarios.objects.filter(correo=correo).exists():
-             #   messages.info(request, 'Email is already taken')
-              #  return redirect(registro)
-
-        
-        #user = Usuarios.objects.create_user(role_id=role_id, matricula=matricula, password=password, correo=correo, nombre=nombre)
-            usuarios.save()
-                
-        else:
-            print("Invalido")
-
-    
     return render(request, 'registro.html')
-
-
-
-    
-#, {
-        #"form": UserCreationForm
-        #})
-    
 
 
 def alumnoinicio(request):
