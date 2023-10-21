@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static '/output.css' %}" rel="stylesheet">
-    <link href="{% static '/styles.css' %}" rel="stylesheet">
-    <link href="{% static 'img/Logo.png' %}" rel="shortcut icon">
+    <link href="{% static 'styles/output.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link href="{% static '/Logo.png' %}" rel="shortcut icon">
     <title>Menú</title>
 </head>
 
@@ -20,7 +20,7 @@
           class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
           href="index.html"
         >
-          <img src="img/Huella.png" class="h-12 w-13"" /> labs
+          <img src="{% static 'img/Huella.png' %}" class="h-12 w-13"" /> labs
         </a>
 
         <!-- Right elements -->
@@ -39,7 +39,7 @@
               data-te-dropdown-toggle-ref
               aria-expanded="false"
             >
-              <img src="img/campana.png" class="w-6 h-6 mr-2" />
+              <img src="{% static 'img/campana.png' %}" class="w-6 h-6 mr-2" />
               <!-- User avatar -->
               <img
                 src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
@@ -69,7 +69,7 @@
     </div>
 <!--Pie de pagina CAMBIO-->
 <footer class="center py-0">
-  <img src="img/VLFIME.png" class="w-25 h-14 absolute bottom-2 right-2" />
+  <img src="{% static 'img/VLFIME.png'%}" class="w-25 h-14 absolute bottom-2 right-2" />
 </footer>
 
 </body>

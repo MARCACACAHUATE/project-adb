@@ -6,9 +6,9 @@
     <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="{% static '/output.css' %}" rel="stylesheet">
-      <link href="{% static '/styles.css' %}" rel="stylesheet">
-      <link href="{% static 'img/Logo.png' %}" rel="shortcut icon">
+      <link href="{% static 'styles/output.css' %}" rel="stylesheet">
+      <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+      <link href="{% static '/Logo.png' %}" rel="shortcut icon">
     </head>
     <body class="fondoinicio">
       <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4"
@@ -19,7 +19,7 @@
           class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
           href="index.html"
         >
-          <img src="img/Huella.png" class="h-12 w-13"" /> labs
+          <img src="{% static 'img/Huella.png' %}" class="h-12 w-13"" /> labs
         </a>
 
         <!-- Right elements -->
@@ -38,7 +38,7 @@
               data-te-dropdown-toggle-ref
               aria-expanded="false"
             >
-              <img src="img/campana.png" class="w-6 h-6 mr-2" />
+              <img src="{% static 'img/campana.png' %}" class="w-6 h-6 mr-2" />
               <!-- User avatar -->
               <img
                 src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
@@ -55,7 +55,7 @@
         <!--Boton -->
           <div class="flex items-center mx-2 my-10">
             <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
-                <img src="img/Herramienta.png" class="w-8 h-8 absolute left-12 top-55">
+                <img src="{% static 'img/Herramienta.png' %}" class="w-8 h-8 absolute left-12 top-55">
                 Ir a la prática
             </button>
             
@@ -82,7 +82,7 @@
                 <p class="text-white text-center"><strong>Completada</strong></p>
                 <!-- Icono -->
                 <div class="absolute top-0 right-0 p-2">
-                    <img src="img/Check.png" class="w-4">
+                    <img src="{$ static 'img/Check.png' %}" class="w-4">
                   </div>
               </div>
           
@@ -103,7 +103,7 @@
                 <p class="text-black"><strong>12:00 a 13:40</strong></p>
                 <!-- Icono -->
                 <div class="absolute top-0 right-0 p-2">
-                    <img src="img/Reloj.png" class="w-4">
+                    <img src="{% static 'img/Reloj.png' %}" class="w-4">
                 </div>
               </div>
 
@@ -143,7 +143,7 @@
 
                <!-- Botón Reservar -->
                     <div class="p-5 flex items-center">
-                        <img src="img/Calendario.png" class="mr-5" width="10" height="10">
+                        <img src="{% static 'img/Calendario.png' %}" class="mr-5" width="10" height="10">
                     <button class="bg-verde text-white py-2 px-20 rounded-lg">
                         Reservar</button>
                     </div>

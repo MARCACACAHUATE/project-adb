@@ -22,7 +22,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = "matricula"
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ["role_id"]
 
     objects = CustomUserManager()
 

@@ -1,12 +1,13 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{% static '/output.css' %}" rel="stylesheet">
-    <link href="{% static '/styles.css' %}" rel="stylesheet">
-    <link href="{% static 'img/Logo.png' %}" rel="shortcut icon">
+    <link href="{% static 'styles/output.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link href="{% static '/Logo.png' %}" rel="shortcut icon">
     <title>Registrate</title>
 </head>
 <body class="h-screen fondologin">
@@ -24,36 +25,43 @@
           <h1 class="text-verde font-bold  text-titulo-min-xl mt-0
                     sm:mt-20 sm:text-titulo-xl">Registrate</h1>
     
-          <form action="" class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
+          
+          <!--{{form.as_p}}-->
+          <form action="" method="POST"      
+                class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
                                 sm:w-1/2 sm:mx-auto sm:grid-cols-1">
-            <select name="" disabled id="" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
-            sm:col-span-1 sm:w-full">
+            {% csrf_token %}  
+            <select name="rol" id="rol" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
+            sm:col-span-1 sm:w-full" required>
+              <option value="">Seleccionar</option>
               <option value="">Alumno</option>
             </select>
              
-            <input class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
+            <input name="nombre" id="nombre" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
                           sm:col-span-1 sm:w-full" 
-                          type="text" placeholder="Nombre Completo">
+                          type="text" placeholder="Nombre Completo" required>
             
-            <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
+            <input name="matricula" id="matricula" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="number" placeholder="Matricula">
+                          type="number" placeholder="Matricula" required>
             
-            <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
+            <input name="correo" id="correo" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="email" placeholder="Correo">
+                          type="email" placeholder="Correo" required>
             
-            <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
+            <input name="password" id="password" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="password" placeholder="Contraseña">
+                          type="password" placeholder="Contraseña" required>
             
-            <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
+            <input name="password_confirm" id="password_confirm" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
                           type="password" placeholder="Confirmar contraseña">
 
             <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Registrarse</button>
-            <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Cancelar</button>
-           
+            <!--<button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Cancelar</button>-->
+            <a href="{% url 'Home' %}" class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer 
+              hover:bg-green-300 mt-4"><div>Cancelar</div></a>
+            <br>
         
           </form>
         </article>

@@ -16,14 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
-from usuarios.views import Home
+#from usuarios.views import registro
+from usuarios import views
 
 urlpatterns = [
-<<<<<<< HEAD
+
     path('admin/', admin.site.urls),
-=======
->>>>>>> bf21e94 (feat: Add models and migrations for grupos, practicas y sessiones app)
-    path('', Home),
-    path('admin/', admin.site.urls),
+
+    path('', views.home, name="Home"),
+    #signup
+    path('registro', views.registro, name="Registro"),
+    #path('', VRegistro.as_view(), name="Registro"),
+    path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
+    path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
 ]

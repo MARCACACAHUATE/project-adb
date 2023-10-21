@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="{% static 'styles/output.css' %}" rel="stylesheet">
   <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
-  <link href="{% static 'img/Logo.png' %}" rel="shortcut icon">
+  <link href="{% static '/Logo.png' %}" rel="shortcut icon">
   <title>Iniciar Sesión</title>
 </head>
 <body class="h-screen w-screen fondologin">
@@ -37,17 +37,17 @@
         </select>
         -->
         <br>
-          <input class="border border-gray-300 w-full px-3 py-2 mb-4 rounded-md bg-gray-100" type="text" placeholder="Matricula">
+          <input name="matricula" id="matricula" class="border border-gray-300 w-full px-3 py-2 mb-4 rounded-md bg-gray-100" type="text" placeholder="Matricula">
         <br>
         <div class="relative">
-          <input class="border border-gray-300 w-full px-3 py-2 mb-0 rounded-md bg-gray-100" type="password" placeholder="Contraseña">
+          <input name="password" id="password" class="border border-gray-300 w-full px-3 py-2 mb-0 rounded-md bg-gray-100" type="password" placeholder="Contraseña">
           <a href="#"><p class="text-gray-400 underline mt-2
                                 sm:absolute sm:left-0 ">¿Olvidasta tu contraseña?</p></a>
         </div>
         <input class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4
                       sm:mt-14" type="submit" value="Entrar">
         <br>
-        <a href="registro.html"><p class="font-bold underline mt-4">Registrate Aqui</p></a>
+        <a href="{% url 'Registro' %}"><p class="font-bold underline mt-4">Registrate Aqui</p></a>
     
       </form>
     </article>
