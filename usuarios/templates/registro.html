@@ -32,9 +32,10 @@
                                 sm:w-1/2 sm:mx-auto sm:grid-cols-1">
             {% csrf_token %}  
             <select name="role_id" id="role_id" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
-            sm:col-span-1 sm:w-full" required>
+            sm:col-span-1 sm:w-full">
               <option value="0">Seleccionar</option>
               <option value="2">Alumno</option>
+              <option value="3">Administrador</option>
             </select>
              
             <input name="nombre" id="nombre" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
