@@ -1,6 +1,8 @@
 from django.shortcuts import render
 
-from django.contrib.auth.forms import UserCreationForm
+#from django.contrib.auth.forms import UserCreationForm
+
+from usuarios.forms import UserCreationForm
 
 def home(request):
 
@@ -9,11 +11,14 @@ def home(request):
 #signup
 def registro(request):
 
-    if request.method == 'GET':
-        print('enviando formulario')
-    else: 
+    if request.method == 'POST':
+        
+
         print(request.POST)
         print('obteniendo datos')
+
+    else: 
+        print('enviando formulario')
 
     return render(request, "registro.html", {
         "form": UserCreationForm

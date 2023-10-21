@@ -20,13 +20,11 @@ from django.urls import path
 from usuarios import views
 
 urlpatterns = [
-
-    path('admin/', admin.site.urls),
-
     path('', views.home, name="Home"),
     #signup
     path('registro', views.registro, name="Registro"),
     #path('', VRegistro.as_view(), name="Registro"),
     path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
     path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
+    path('admin', admin.site.urls),
 ]

@@ -25,7 +25,12 @@ class CustomUserManager(BaseUserManager):
         """
             Crea y guarda un SuperUser con la matricula y password dada.
         """
-        admin_role = Role.objects.get(role="Admin")
+        try: 
+            admin_role = Role.objects.get(role="Admin")
+        except Exception:
+            admin_role = Role.objects.create(role="Admin")
+            admin_role.save()
+
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)

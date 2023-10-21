@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = ['C:/Users/Juan Tapia/Documents/GitHub/project/usuarios/templates/static']
+STATICFILES_DIRS = [f'{BASE_DIR}/usuarios/templates/static']
 
 # Application definition
 
