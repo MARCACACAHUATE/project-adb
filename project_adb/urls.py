@@ -16,15 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+#from usuarios.views import registro
 from usuarios import views
-
+#from usuarios.views import FormularioRegistro, FormularioUsuarioView
 
 urlpatterns = [
     path('', views.home, name="Home"),
     #signup
     path('registro', views.registro, name="Registro"),
-    path('registro_done', views.registro, name="Registro"),
-    path('login', views.login, name="Home"),
+    
+    #path('registro', FormularioUsuarioView.procesar_registro , name="Registro"),
+    #path('', VRegistro.as_view(), name="Registro"),
 
     path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
     path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
