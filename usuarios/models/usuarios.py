@@ -9,7 +9,7 @@ from usuarios.managers import CustomUserManager
 class Usuarios(AbstractBaseUser, PermissionsMixin):
     matricula = models.CharField(_("Matricula"), max_length=10, unique=True, null=False)
     nombre = models.CharField(max_length=100, null=False)
-    correo = models.EmailField(_("Correo Universitario"), unique=True)
+    correo = models.EmailField(_("Correo Universitario"), unique=True, null=True)
     is_verified = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
@@ -22,7 +22,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
     )
 
     USERNAME_FIELD = "matricula"
-    REQUIRED_FIELDS = ["role_id"]
+    REQUIRED_FIELDS = []
 
     objects = CustomUserManager()
 

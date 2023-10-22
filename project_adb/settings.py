@@ -130,3 +130,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "usuarios.Usuarios"
+
+AUTHENTICATION_BACKENDS = ['project_adb.custom_auth.MatriculaBackend']

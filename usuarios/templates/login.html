@@ -26,8 +26,8 @@
       <h1 class="text-verde font-bold  text-titulo-min-xl
                 sm:mt-32 sm:text-titulo-xl">Iniciar Sesión</h1>
 
-      <form action="" class="bg-white mx-7 mt-2 rounded-lg p-6 shadow-2xl shadow-gray-600
-                            sm:w-96 sm:mx-auto">
+      <form action="" method="post" class="bg-white mx-7 mt-2 rounded-lg p-6 shadow-2xl shadow-gray-600 sm:w-96 sm:mx-auto">
+        {% csrf_token %} 
         
         <!--
         <select class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" name="" id="">
