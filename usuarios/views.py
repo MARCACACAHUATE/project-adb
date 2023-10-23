@@ -20,8 +20,14 @@ def home(request):
             if user.role_id.Role == "Alumno":
                 print("session iniciada")
                 return redirect("/alumnoinicio")
-            else:
+            
+            elif user.role_id.Role == "Maestro":
+                print("session iniciada")
                 return redirect("/maestroinicio")
+            
+            elif user.role_id.Role == "Administrador":
+                print("session iniciada")
+                return redirect("/admininicio")
         else:
             print("Credenciales invalidas")
 
@@ -79,7 +85,48 @@ def maestroinicio(request):
     return render(request, "MaestroMenu.html")
 
 
+def admininicio(request):
 
+    return render(request, "AdminInicio.html")
 
+def registromaestros(request):
+
+    if request.method == 'POST':
+
+        formulario = FormularioRegistro(request.POST)
+        print(formulario.is_valid())
+        if formulario.is_valid():
+
+            try:
+
+                #alumno = Usuarios.objects.get(matricula=formulario.cleaned_data["matricula"])
+                #alumno.is_verified = True
+
+                role_id = formulario.cleaned_data["role_id"]
+                role = Role.objects.get(pk=role_id)
+
+                Usuarios.objects.create_user(
+                    correo=formulario.cleaned_data['correo'],
+                    nombre = formulario.cleaned_data['nombre'],
+                    role_id = role,
+                    matricula = formulario.cleaned_data['matricula'],
+                    password = formulario.cleaned_data['password']
+                )
+
+                return render(request, "AdminInicio.html")
+
+            except Exception as error:
+                print(error)
+                print(type(error).__name__)
+                traceback.print_exc()
+
+        else:
+            print("Formulario Invalido")
+            return render(request, 'RegistroMaestros.html', {
+                "form": formulario,
+                "mensaje": 'error en el formulario'
+            })
+
+    return render(request, "RegistroMaestros.html")
 
 # Create your views here.

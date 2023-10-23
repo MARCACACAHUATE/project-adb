@@ -8,27 +8,26 @@
     <link href="{% static 'styles/output.css' %}" rel="stylesheet">
     <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
     <link href="{% static '/Logo.png' %}" rel="shortcut icon">
-    <title>Registrate</title>
+    <title>Registrar a Maestros</title>
 </head>
 <body class="h-screen fondologin">
     <section class="grid grid-cols-2 h-full
                     sm:grid-cols-3">
         <article class="text-center w-screen mt-2
                         sm:w-full">
-          <h2 class="font-bold text-titulo-min-xl text-white
-                    sm:text-titulo-xl  sm:mt-56">Bienvenido a</h2>
-          <h1 class="font-bold text-titulo-min-2xl text-white 
-                    sm:text-titulo-2xl sm:mt-12">LABS</h1>
+          <br>
+          <h1 class="font-bold text-titulo-min-1xl text-white 
+                    sm:text-titulo-xl  sm:mt-56">Alta de Maestros</h1>                    
         </article>
         <article class="bg-gradient-to-r from-green-50 to-green-50 col-span-2 h-full text-center fondologinright">
     
-          <h1 class="text-verde font-bold  text-titulo-min-xl mt-0
-                    sm:mt-20 sm:text-titulo-xl">Registrate</h1>
+          <h1 class="text-verde font-bold  text-titulo-min-xl
+                    sm:mt-12 sm:text-titulo-l">Registrar Maestros</h1>
     
           
           <!--{{form.as_p}}-->
           <form action="" method="POST"      
-                class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
+                class="bg-white mx-7 mt-3 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
                                 sm:w-1/2 sm:mx-auto sm:grid-cols-1">
             {% csrf_token %} 
 
@@ -41,7 +40,7 @@
             <select name="role_id" id="role_id" class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2
             sm:col-span-1 sm:w-full">
               <option value="0">Seleccionar</option>
-              <option value="2">Alumno</option>              
+              <option value="1">Maestro</option>
             
             </select>
              
@@ -55,22 +54,22 @@
             
             <input name="correo" id="correo" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="email" placeholder="Correo" required>
+                          type="email" placeholder="Correo (no obligatorio)">
             
             <input name="password" id="password" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="password" placeholder="Contraseña" required>
+                          type="password" placeholder="Contraseña (generica)" required>
             
             <input name="password_confirm" id="password_confirm" class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100
                           sm:w-full" 
-                          type="password" placeholder="Confirmar contraseña">
+                          type="password" placeholder="Confirmar contraseña (generica)">
              
                             
-            <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Registrarse</button>
+            <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2">Registrarse</button>
             <!--<button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Cancelar</button>-->
-            <a href="{% url 'Home' %}" class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer 
-              hover:bg-green-300 mt-4"><div>Cancelar</div></a>
-            <br>
+            <a href="{% url 'AdminInicio' %}" class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer 
+              hover:bg-green-300 mt-2"><div>Cancelar</div></a>
+            <br><br>
         
           </form>
         </article>

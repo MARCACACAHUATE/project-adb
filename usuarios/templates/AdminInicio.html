@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'styles/output.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link href="{% static '/Logo.png' %}" rel="shortcut icon">
+    <title>Menú</title>
+</head>
+
+<body class="h-screen fondoinicio">
+    <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4">
+      <div class="flex w-full flex-wrap items-center justify-between px-3">
+        <!-- Logo -->
+        <a
+          class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
+          href="index.html"
+        >
+          <img src="{% static 'img/Huella.png' %}" class="h-12 w-13" /> labs
+        </a>
+
+        <!-- Right elements -->
+        <div class="relative flex items-center">
+          <!-- Dropdown container -->
+          <div
+            class="relative"
+            data-te-dropdown-ref
+            data-te-dropdown-alignment="end"
+          >
+            <a
+              class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+              href="#"
+              id="dropdownMenuButton2"
+              role="button"
+              data-te-dropdown-toggle-ref
+              aria-expanded="false"
+            >
+              <img src="{% static 'img/campana.png' %}" class="w-6 h-6 mr-2" />
+              <!-- User avatar -->
+              <img
+                src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                class="rounded-full w-14 h-14"
+                alt=""
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="h-4/5 flex justify-center items-center">
+        <div class="w-2/3 h-5/6 text-center bg-white rounded-3xl grid grid-rows-5 shadow-2xl">
+            <h1 class="text-verde text-titulo-xl font-bold mt-12">Laboratorio Robótica</h1>
+            <div class="grid grid-cols-2 gap-4 justify-items-center row-span-4 content-center justify-center">
+                <a href="{% url 'RegistroMaestros' %}"
+                    class="bg-gris p-4 rounded-3xl text-xl w-36 h-36 font-bold hover:bg-verde hover:text-white">
+                    <br><div>Alta de Maestros</div>
+                </a>
+                <a href=""
+                    class="bg-gris p-4 rounded-3xl text-xl w-36 h-36 font-bold hover:bg-verde hover:text-white">
+                    <br><div>Crear Brigadas</div>
+                </a>             
+            </div>
+        </div>
+    </div>
+<!--Pie de pagina CAMBIO-->
+<footer class="center py-0">
+  <img src="{% static 'img/VLFIME.png'%}" class="w-25 h-14 absolute bottom-2 right-2" />
+</footer>
+
+</body>
+
+</html>
