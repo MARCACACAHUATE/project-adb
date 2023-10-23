@@ -1,0 +1,13 @@
+
+*{
+    font-family: 'Inter', sans-serif;
+}
+.fondologin{
+    background: linear-gradient(rgba(26,178,107,0.75),rgba(26,178,107,0.75)),url('../img/fondo.png');
+    background-size: cover;
+}
+
+.fondoinicio{
+    background: linear-gradient(rgba(213, 213, 213, 0.85),rgba(213, 213, 213, 0.85)),url('../img/fondo.png');
+    background-size: cover;
+}

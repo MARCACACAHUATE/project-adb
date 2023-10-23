@@ -27,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATICFILES_DIRS = [f'{BASE_DIR}/usuarios/templates/static']
+STATICFILES_DIRS = [
+    f'{BASE_DIR}/static',
+    f'{BASE_DIR}/usuarios/templates/static',
+    f'{BASE_DIR}/grupos/templates/static',
+    ]
 
 # Application definition
 
