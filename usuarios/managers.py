@@ -3,13 +3,14 @@ from django.utils.translation import gettext_lazy as _
 
 from usuarios.models import Role
 
+
 class CustomUserManager(BaseUserManager):
     """
         Custom manger donde la matricula es el campo para la
         authentificacion
     """
 
-    def create_user(self, matricula: str, password: str, **extra_fields):
+    def create_user(self, matricula: str, password: str, is_staff=False, **extra_fields):
         """
             Crea y guarda un usuario con la matricula y contraseña
         """
@@ -18,6 +19,14 @@ class CustomUserManager(BaseUserManager):
 
         user = self.model(matricula=matricula, **extra_fields)
         user.set_password(password)
+
+        if is_staff:
+            maestro_role = Role.objects.get(Role="Maestro")
+            user.role_id = maestro_role
+        else:
+            alumno_role = Role.objects.get(Role="Alumno")
+            user.role_id = alumno_role
+
         user.save()
         return user
     

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'styles/output.css' %}" rel="stylesheet">
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <link href="{% static '/Logo.png' %}" rel="shortcut icon">
+    <title>Verde fime</title>
+</head>
+<body>
+    <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4">
+        <div class="flex w-full flex-wrap items-center justify-between px-3">
+          <!-- Logo -->
+            <a href="{% url 'home' %}" class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0" >
+                <img src="img/Huella.png" class="h-12 w-13"" /> labs
+            </a>
+
+            <!-- Right elements -->
+            <div class="relative flex items-center">
+                <!-- Dropdown container -->
+                <div
+                    class="relative"
+                    data-te-dropdown-ref
+                    data-te-dropdown-alignment="end">
+                    <a
+                        class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                        href="#"
+                        id="dropdownMenuButton2"
+                        role="button"
+                        data-te-dropdown-toggle-ref
+                        aria-expanded="false">
+
+                        <img src="img/campana.png" class="w-6 h-6 mr-2" />
+                        <!-- User avatar -->
+                        <img
+                            src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg"
+                            class="rounded-full w-14 h-14"
+                            alt=""
+                            loading="lazy"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+      </nav>
+    {% block main %}
+    {% endblock%}
+</body>
+</html>

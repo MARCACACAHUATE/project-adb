@@ -22,7 +22,7 @@ from usuarios import views
 urlpatterns = [
     path('', views.home, name="Home"),
     path('registro', views.registro, name="Registro"),
-    path("grupos/", include('grupos.urls')),
+    path("grupos/", include('grupos.urls', namespace="grupos")),
     
     path('registro', views.registro, name="Registro"),   
     path('admininicio', views.admininicio, name="AdminInicio"),

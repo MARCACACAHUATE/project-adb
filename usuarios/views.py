@@ -9,10 +9,9 @@ from django.contrib.auth import login, authenticate
 from usuarios.models import Usuarios, Role
 
 def home(request):
+
     if request.method == 'POST':
-        print(request.POST["matricula"])
         matricula = request.POST["matricula"]
-        print(request.POST["password"])
         password = request.POST["password"]
         user = authenticate(request, matricula=matricula, password=password)
 
@@ -25,7 +24,7 @@ def home(request):
                 print("session iniciada")
                 return redirect("/maestroinicio")
             
-            elif user.role_id.Role == "Administrador":
+            elif user.role_id.Role == "Admin":
                 print("session iniciada")
                 return redirect("/admininicio")
         else:

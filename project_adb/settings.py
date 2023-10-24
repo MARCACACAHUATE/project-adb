@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +31,7 @@ ALLOWED_HOSTS = []
 STATICFILES_DIRS = [
     f'{BASE_DIR}/static',
     f'{BASE_DIR}/usuarios/templates/static',
-    f'{BASE_DIR}/grupos/templates/static',
+    #f'{BASE_DIR}/grupos/templates/static',
     ]
 
 # Application definition
@@ -64,7 +65,7 @@ ROOT_URLCONF = 'project_adb.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
