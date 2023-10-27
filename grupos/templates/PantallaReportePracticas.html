@@ -24,9 +24,11 @@
                 Contenido de BRIGADA {{ grupo.numero_brigada }}
             </div>
         </div>
-        {% endfor %}
-
+        {% endfor %}        
     </div>
+    <a href="{% url 'home' %}">
+        <div class="bg-verde w-15/18 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Regresar</div>
+    </a>
 </div>
 
 <script>
