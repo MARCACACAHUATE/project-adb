@@ -20,14 +20,18 @@ from django.urls import path, include
 from usuarios import views
 
 urlpatterns = [
-    path('', views.home, name="Home"),
+
+    path('', views.home, name="home"),
+    path('login/', views.login_user, name="login"),
+    path('logout/', views.logout_user, name="logout"),
     path('registro', views.registro, name="Registro"),
     path("grupos/", include('grupos.urls', namespace="grupos")),
     
     path('registro', views.registro, name="Registro"),   
-    path('admininicio', views.admininicio, name="AdminInicio"),
+    #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
+    #path('admininicio', views.admininicio, name="AdminInicio"),
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),
-    path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
-    path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
+    #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
+    #path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
     path('admin', admin.site.urls) 
 ]

@@ -1,14 +1,14 @@
 import traceback
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-
 from usuarios.forms.registrouser import CustomUserForm
 from usuarios.forms import FormularioRegistro
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
 
 from usuarios.models import Usuarios, Role
 
-def home(request):
+def login_user(request):
 
     if request.method == 'POST':
         matricula = request.POST["matricula"]
@@ -16,21 +16,18 @@ def home(request):
         user = authenticate(request, matricula=matricula, password=password)
 
         if user is not None:
-            if user.role_id.Role == "Alumno":
-                print("session iniciada")
-                return redirect("/alumnoinicio")
-            
-            elif user.role_id.Role == "Maestro":
-                print("session iniciada")
-                return redirect("/maestroinicio")
-            
-            elif user.role_id.Role == "Admin":
-                print("session iniciada")
-                return redirect("/admininicio")
+                request.session["role"] = user.role_id.Role
+                login(request, user)
+                return redirect("/")
         else:
             print("Credenciales invalidas")
 
     return render(request, "login.html")
+
+
+def logout_user(request):
+    logout(request)
+    return redirect("/login/")
 
 
 def registro(request):    
@@ -74,21 +71,20 @@ def registro(request):
     return render(request, 'registro.html')
 
 
-def alumnoinicio(request):
+@login_required(login_url="login/")
+def home(request):
+    print()
+    if request.session["role"] == "Alumno":
+        return render(request, "AlumnoInicio.html")
 
-    return render(request, "AlumnoInicio.html")
-
-
-def maestroinicio(request):
-
-    return render(request, "MaestroMenu.html")
-
-
-def admininicio(request):
+    if request.session["role"] == "Maestro":
+        return render(request, "MaestroMenu.html")
 
     return render(request, "AdminInicio.html")
 
+
 def registromaestros(request):
+    maestro_id = Role.objects.get(Role="Maestro")
 
     if request.method == 'POST':
 
@@ -126,6 +122,6 @@ def registromaestros(request):
                 "mensaje": 'error en el formulario'
             })
 
-    return render(request, "RegistroMaestros.html")
+    return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })
 
 # Create your views here.
