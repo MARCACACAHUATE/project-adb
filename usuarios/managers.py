@@ -10,7 +10,7 @@ class CustomUserManager(BaseUserManager):
         authentificacion
     """
 
-    def create_user(self, matricula: str, password: str, is_staff=False, **extra_fields):
+    def create_user(self, matricula: str, password: str, is_maestro=False, **extra_fields):
         """
             Crea y guarda un usuario con la matricula y contraseña
         """
@@ -20,7 +20,7 @@ class CustomUserManager(BaseUserManager):
         user = self.model(matricula=matricula, **extra_fields)
         user.set_password(password)
 
-        if is_staff:
+        if is_maestro:
             maestro_role = Role.objects.get(Role="Maestro")
             user.role_id = maestro_role
         else:
