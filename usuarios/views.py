@@ -94,18 +94,16 @@ def registromaestros(request):
 
             try:
 
-                #alumno = Usuarios.objects.get(matricula=formulario.cleaned_data["matricula"])
-                #alumno.is_verified = True
-
                 role_id = formulario.cleaned_data["role_id"]
                 role = Role.objects.get(pk=role_id)
 
                 Usuarios.objects.create_user(
+                    matricula = formulario.cleaned_data['matricula'],
+                    password = formulario.cleaned_data['password'],
+                    is_maestro=True,
                     correo=formulario.cleaned_data['correo'],
                     nombre = formulario.cleaned_data['nombre'],
                     role_id = role,
-                    matricula = formulario.cleaned_data['matricula'],
-                    password = formulario.cleaned_data['password']
                 )
 
                 return render(request, "AdminInicio.html")
@@ -123,5 +121,3 @@ def registromaestros(request):
             })
 
     return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })
-
-# Create your views here.
