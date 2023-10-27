@@ -1,109 +1,38 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'base.html' %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{% static 'styles/output.css' %}" rel="stylesheet">
-  <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
-  <link href="{% static 'img/Logo.png' %}" rel="shortcut icon">
-  <title>REPORTE DE PRÁCTICAS</title>
-</head>
-
-<body class="fondoinicio">
-  <!-- Main navigation container -->
-  <nav
-    class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4">
-    <div class="flex w-full flex-wrap items-center justify-between px-3">
-      <!-- Logo -->
-      <a class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
-        href="index.html">
-        <img src="img/Huella.png" class="h-12 w-13" /> labs
-      </a>
-
-      <!-- Right elements -->
-      <div class="relative flex items-center">
-        <!-- Dropdown container -->
-        <div class="relative" data-te-dropdown-ref data-te-dropdown-alignment="end">
-          <a class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
-            href="#" id="dropdownMenuButton2" role="button" data-te-dropdown-toggle-ref aria-expanded="false">
-            <img src="img/campana.png" class="w-6 h-6 mr-2" />
-            <!-- User avatar -->
-            <img src="https://tecdn.b-cdn.net/img/new/avatars/2.jpg" class="rounded-full w-14 h-14" alt=""
-              loading="lazy" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </nav>
-  <div class="flex flex-col justify-center items-center mt-14 p-4">
+{% block main %}
+<div class="flex flex-col justify-center items-center mt-14 p-4">
     <div class="bg-white text-black rounded-full p-4 w-5/6 max-w-screen-3xl text-center mb-8">
-      <h1 class="text-2xl font-bold text-green-500">REPORTE DE PRÁCTICAS</h1>
+        <h1 class="text-2xl font-bold text-green-500">REPORTE DE PRÁCTICAS</h1>
     </div>
 
     <div class="space-y-8 w-3/4 max-w-screen-lg">
-      <div class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
-        onclick="toggleSection('section1')">
-        <h2 class="text-lg font-bold text-center w-full">BRIGADA 301</h2>
-        <span class="text-3xl text-green-500">▼</span>
-      </div>
 
-      <div id="section1" class="hidden space-y-4">
-        <div class="bg-white rounded-full p-4">
-          Contenido de BRIGADA 301
+        {% for grupo in lista_grupos %}
+        <div class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
+            onclick="toggleSection('{{ grupo.id }}')">
+            <h2 class="text-lg font-bold text-center w-full">
+                <a href="{% url 'grupos:detail' grupo_id=grupo.id %}">
+                    BRIGADA {{ grupo.numero_brigada }}
+                </a>
+            </h2>
+            <span class="text-3xl text-green-500">▼</span>
         </div>
-      </div>
 
-      <div class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
-        onclick="toggleSection('section2')">
-        <h2 class="text-lg font-bold text-center w-full">BRIGADA 302</h2>
-        <span class="text-3xl text-green-500">▼</span>
-      </div>
-
-      <div id="section2" class="hidden space-y-4">
-        <div class="bg-white rounded-full p-4">
-          Contenido de BRIGADA 302
+        <div id="{{ grupo.id }}" class="hidden space-y-4">
+            <div class="bg-white rounded-full p-4">
+                Contenido de BRIGADA {{ grupo.numero_brigada }}
+            </div>
         </div>
-      </div>
+        {% endfor %}
 
-      <div class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
-        onclick="toggleSection('section3')">
-        <h2 class="text-lg font-bold text-center w-full">BRIGADA 303</h2>
-        <span class="text-3xl text-green-500">▼</span>
-      </div>
-
-      <div id="section3" class="hidden space-y-4">
-        <div class="bg-white rounded-full p-4">
-          Contenido de BRIGADA 303
-        </div>
-      </div>
-
-      <div class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
-        onclick="toggleSection('section4')">
-        <h2 class="text-lg font-bold text-center w-full">BRIGADA 304</h2>
-        <span class="text-3xl text-green-500">▼</span>
-      </div>
-
-      <div id="section4" class="hidden space-y-4">
-        <div class="bg-white rounded-full p-4">
-          Contenido de BRIGADA 304
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <script>
-    function toggleSection(sectionId) {
-      const section = document.getElementById(sectionId);
-      section.style.display = section.style.display === 'none' ? 'block' : 'none';
-    }
-  </script>
-
-  <!--Pie de pagina CAMBIO-->
-  <footer class="center py-0">
-    <img src="img/VLFIME.png" class="w-25 h-14 absolute bottom-2 right-2" />
-  </footer>
-
-</body>
-
-</html>
+<script>
+function toggleSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    section.style.display = section.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+{% endblock %}

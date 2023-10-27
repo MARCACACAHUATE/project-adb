@@ -16,8 +16,11 @@ class CreateBrigadaView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-        #list_alumno = Grupos.objects.get(pk=1).g
-        return render(request, self.template_name, { "form": form })
+        grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
+        return render(request, self.template_name, { 
+            "form": form,
+            "grupo": grupo
+        })
 
     def post(self, request, *args, **kwargs):
 
