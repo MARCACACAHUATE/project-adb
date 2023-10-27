@@ -4,15 +4,22 @@
 <div class="h-4/5 flex justify-center items-center">
     <div class="w-2/3 h-5/6 text-center bg-white rounded-3xl grid grid-rows-5 shadow-2xl">
         <h1 class="text-verde text-titulo-xl font-bold mt-12">Laboratorio Robótica</h1>
-        <div class="grid grid-cols-2 gap-4 justify-items-center row-span-4 content-center justify-center">
+        <div class="grid grid-cols-3 gap-4 justify-items-center row-span-4 content-center justify-center">
+
             <a href="{% url 'RegistroMaestros' %}"
                 class="bg-gris p-4 rounded-3xl text-xl w-36 h-36 font-bold hover:bg-verde hover:text-white">
                 <br><div>Alta de Maestros</div>
             </a>
+
+            <button class="bg-gris p-4 rounded-3xl text-xl w-36 h-36 font-bold hover:bg-verde hover:text-white">
+                <a href="{% url 'grupos:list' %}">Lista de Grupos (Brigadas)</a>
+            </button>
+
             <a href="{% url 'grupos:create_grupo' %}"
                 class="bg-gris p-4 rounded-3xl text-xl w-36 h-36 font-bold hover:bg-verde hover:text-white">
                 <br><div>Crear Brigadas</div>
             </a>             
+
         </div>
     </div>
 </div>
