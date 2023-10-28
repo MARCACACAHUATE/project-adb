@@ -21,7 +21,15 @@
 
         <div id="{{ grupo.id }}" class="hidden space-y-4">
             <div class="bg-white rounded-full p-4">
-                Contenido de BRIGADA {{ grupo.numero_brigada }}
+
+                <h3>Acciones</h3>
+                <button>
+                    <a href="{% url 'grupos:detail' grupo_id=grupo.id %}">Lista de estudiantes</a>
+                </button>
+
+                <button>
+                    <a>Practicas</a>
+                </button>
             </div>
         </div>
         {% endfor %}        
