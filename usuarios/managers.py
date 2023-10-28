@@ -23,9 +23,10 @@ class CustomUserManager(BaseUserManager):
         if is_maestro:
             maestro_role = Role.objects.get(Role="Maestro")
             user.role_id = maestro_role
-        elif extra_fields.get("is_superuser") is not True:
-                alumno_role = Role.objects.get(Role="Alumno")
-                user.role_id = alumno_role
+
+        if extra_fields.get("is_superuser") is not True:
+            alumno_role, created = Role.objects.get_or_create(Role="Alumno")
+            user.role_id = alumno_role
 
         user.save()
         return user

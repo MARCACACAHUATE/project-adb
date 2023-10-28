@@ -25,7 +25,7 @@
             <div>
                 <table class="container">
                     <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
-                        Lista de alumnos
+                        Estudiantes
                     </caption>
                     <tr class="bg-gris hover:bg-green-200">
                         <th class="border-t border-t-white px-4 py-2">No. de Lista</th>
@@ -34,34 +34,15 @@
                         <th class="border-t border-t-white px-4 py-2">Correo Universitario</th>
                         <th class="border-t border-t-white px-4 py-2">Brigada</th>
                     </tr>
+                    {% for alumno in lista_alumnos %}
                     <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">1</td>
-                        <td class="border-t border-t-white px-4 py-2">Alan Tadeo Montes Ovalle</td>
-                        <td class="border-t border-t-white px-4 py-2">1952618</td>
-                        <td class="border-t border-t-white px-4 py-2">tadeo.montesov@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.id }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.nombre }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.matricula }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.correo }}</td>
+                        <td class="border-t border-t-white px-4 py-2"></td>
                     </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">2</td>
-                        <td class="border-t border-t-white px-4 py-2">Alan Ramiro Gonzalez Reyes</td>
-                        <td class="border-t border-t-white px-4 py-2">1736076</td>
-                        <td class="border-t border-t-white px-4 py-2">alan.gonzalez@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">3</td>
-                        <td class="border-t border-t-white px-4 py-2">Juan Carlos Tapia Martinez</td>
-                        <td class="border-t border-t-white px-4 py-2">1896724</td>
-                        <td class="border-t border-t-white px-4 py-2">juan.tapia@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">4</td>
-                        <td class="border-t border-t-white px-4 py-2">Luis Gerardo Puente Garcia</td>
-                        <td class="border-t border-t-white px-4 py-2">1814176</td>
-                        <td class="border-t border-t-white px-4 py-2">luis.gerardo@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>
