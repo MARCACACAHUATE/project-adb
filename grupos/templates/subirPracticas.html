@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% block main %}
+<div class="h-5/6 flex justify-center items-center">
+  <div class="h-5/6 w-2/3 text-center bg-white rounded-3xl px-10">
+    <h1 class="text-titulo-xl font-bold mt-12">
+      Brigada {{ grupo.numero_brigada }}
+    </h1>
+    <form
+      method="post"
+      enctype="multipart/form-data"
+      class="grid grid-cols-3 w-full"
+    >
+      {% csrf_token %}
+      <a href="{% url 'grupos:list' %}">
+        <p class="w-5/6 bg-verde text-white rounded-lg py-2 hover-bg-green-900">
+          Regresar
+        </p>
+      </a>
+      <input type="file" name="pdf_file" {# Cambia el nombre del campo a
+      "pdf_file" #} required="" id="id_pdf_file" {# Cambia el id del campo #}
+      accept="application/pdf"> {# Acepta solo archivos PDF #}
+      <button class="w-5/6 bg-verde text-white rounded-lg hover-bg-green-900">
+        Añadir Brigada
+      </button>
+    </form>
+
+    <div>
+      <table class="container">
+        <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
+          Lista de alumnos
+        </caption>
+        <!-- ... Tu tabla de datos existente ... -->
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
