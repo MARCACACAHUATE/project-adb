@@ -1,7 +1,6 @@
 from django import forms
-from usuarios.models.usuarios import Usuarios 
-from grupos.models.grupos import Grupos 
-from usuarios.models.usuarios import Usuarios
+
+from grupos.models import Grupos 
 
 class CreatePracticasForm(forms.Form):
     titulo = forms.CharField(max_length=100)
@@ -10,7 +9,5 @@ class CreatePracticasForm(forms.Form):
     fecha_fin = forms.DateTimeField()
     is_valid = forms.BooleanField(initial=True)
     archivo = forms.CharField(max_length=250, required=False)
-
-    grupo_id = forms.ModelChoiceField(queryset=Grupos.objects.all(), required=False)
- 
-    maestro_id = forms.ModelChoiceField(queryset=Usuarios.objects.all(), required=False)
+    grupo_id = forms.ModelChoiceField(queryset=Grupos.objects.all(), empty_label=None)
+    maestro_id = forms.ModelChoiceField(queryset=Grupos.objects.all(), empty_label=None)
