@@ -11,29 +11,44 @@
 
       <label for="id_titulo">Título:</label>
       {{ form.titulo }}
+      <p>
+        <label for="id_descripcion">Descripción:</label>
+        {{ form.descripcion }}
+      </p>
 
-      <label for="id_descripcion">Descripción:</label>
-      {{ form.descripcion }}
+      <p>
+        <label for="id_fecha_inicio">Fecha de Inicio:</label>
+        {{ form.fecha_inicio }}
+      </p>
 
-      <label for="id_fecha_inicio">Fecha de Inicio:</label>
-      {{ form.fecha_inicio }}
+      <p>
+        <label for="id_fecha_fin">Fecha de Fin:</label>
+        {{ form.fecha_fin }}
+      </p>
 
-      <label for="id_fecha_fin">Fecha de Fin:</label>
-      {{ form.fecha_fin }}
+      <p>
+        <label for="id_is_valid">Válido:</label>
+        {{ form.is_valid }}
+      </p>
 
-      <label for="id_is_valid">Válido:</label>
-      {{ form.is_valid }}
+      <p>
+        <label for="id_archivo">Archivo:</label>
+        {{ form.archivo }}
+      </p>
 
-      <label for="id_archivo">Archivo:</label>
-      {{ form.archivo }}
+      <p>
+        <label for="id_grupo_id">Grupo:</label>
+        {{ form.grupo_id }}
+      </p>
 
-      <label for="id_grupo_id">Grupo:</label>
-      {{ form.grupo_id }}
+      <p>
+        <label for="id_maestro_id">Maestro:</label>
+        {{ form.maestro_id }}
+      </p>
 
-      <label for="id_maestro_id">Maestro:</label>
-      {{ form.maestro_id }}
-
-      <input type="submit" value="Guardar" />
+      <p>
+        <input type="submit" value="Guardar" />
+      </p>
     </form>
   </body>
 </html>
