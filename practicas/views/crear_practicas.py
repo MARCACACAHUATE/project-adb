@@ -1,12 +1,12 @@
 from django.http import HttpResponseRedirect
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from grupos.models.grupos import Grupos
+from grupos.models import Grupos
 from usuarios.models.usuarios import Usuarios
 from practicas.models import Practicas
 from practicas.forms import CreatePracticasForm
-from django import forms
-
+from django.core.exceptions import ObjectDoesNotExist
 
 class CreatePracticasView(View):
     form_class = CreatePracticasForm
@@ -14,30 +14,40 @@ class CreatePracticasView(View):
 
     def get(self, request, *args, **kwargs): 
         form = self.form_class()
-        grupos = Grupos.objects.all()
-        return render(request, self.template_name, {'form': form, 'grupos': grupos})
+        grupo = Grupos.objects.all()
+        return render(request, self.template_name, {'form': form, 'grupos': grupo})
     
 
     def post(self, request, *args, **kwargs):    
         form = CreatePracticasForm(request.POST)  
-
-        if form.is_valid():  
+        
+        try:
+                print(form.is_valid())
+                print(request.POST)
+                if form.is_valid():  
                     cleaned_data = form.cleaned_data 
 
-        # Convierte el valor del campo 'is_valid' a un valor booleano
-                    is_valid = cleaned_data.get("is_valid") == "on"
+                    isvalid = cleaned_data.get("is_valid") == "on"
+                 
+                    print(request.POST["maestro_id"])
+                    print(request.POST["grupo_id"])
 
+                    maestro = Usuarios.objects.get(pk=int(request.POST["maestro_id"]))
+                    grupo= Grupos.objects.get(pk=int(request.POST["grupo_id"]))
+            
                     Practicas.objects.create(
                     titulo = request.POST["titulo"],
                     descripcion = request.POST["descripcion"],
                     fecha_inicio = request.POST["fecha_inicio"],
                     fecha_fin = request.POST["fecha_fin"],
-                    is_valid = is_valid,
+                    is_valid = isvalid,
                     archivo = request.POST["archivo"],
-                    #no supe como conectar las fk con la tabla, osea tal cual si se las pongo no puedo insertar
-                   # maestro_id = request.POST["maestro_id"],
-                   # grupo_id = request.POST["grupo_id"],
-                    )
-                    return HttpResponseRedirect('/crear_practicascopy/')
-        else:
-                return render(request, self.template_name, {'form': form})
+                    maestro_id=maestro,
+                    grupo_id=grupo
+                    ).save()
+
+                mensaje = "Practica creada!"
+                return HttpResponse(mensaje)
+        except ObjectDoesNotExist:
+                mensaje = "No se encontró el maestro o el grupo en la base de datos."
+                return HttpResponse(mensaje)

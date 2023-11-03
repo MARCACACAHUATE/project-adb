@@ -1,2 +1,2 @@
 from .crear_practicas import CreatePracticasView
-from .crear_practicascopy import CreatePracticasView2
+from .upload_Act import UploadActView

@@ -18,12 +18,12 @@
 
       <p>
         <label for="id_fecha_inicio">Fecha de Inicio:</label>
-        {{ form.fecha_inicio }}
+        <input name="fecha_inicio" type="datetime-local"/>
       </p>
 
       <p>
         <label for="id_fecha_fin">Fecha de Fin:</label>
-        {{ form.fecha_fin }}
+        <input name="fecha_fin" type="datetime-local"/>
       </p>
 
       <p>
@@ -38,14 +38,22 @@
 
       <p>
         <label for="id_grupo_id">Grupo:</label>
-        {{ form.grupo_id }}
+
+        <select name="grupo_id">
+         
+          <option hidden="true"></option>
+          {% for Grupo in grupos %}</option>
+
+          <option value="{{Grupo.id}}">{{ Grupo.numero_brigada }}</option>
+          {% endfor %}
+         
+        </select>
       </p>
 
       <p>
         <label for="id_maestro_id">Maestro:</label>
         {{ form.maestro_id }}
       </p>
-
       <p>
         <input type="submit" value="Guardar" />
       </p>

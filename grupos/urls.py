@@ -1,7 +1,6 @@
 from django.urls import path
 from grupos.views import CreateBrigadaView, CreateGrupoView, ListGruposView
-from practicas.views import CreatePracticasView, CreatePracticasView2
-
+from practicas.views import CreatePracticasView, UploadActView
 app_name = 'grupos'  # Esto define un espacio de nombres para las URLs de la aplicación
 
 urlpatterns = [
@@ -10,4 +9,6 @@ urlpatterns = [
     path('create', CreateGrupoView.as_view(), name="create_grupo"),
     path('list', ListGruposView.as_view(), name="list"),
     path('crear_practicas/', CreatePracticasView.as_view(), name='crear_practicas'),
+    path('subir_practicas/', UploadActView.as_view(), name='upload_Act'),
+
 ]
