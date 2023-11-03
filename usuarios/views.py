@@ -86,6 +86,11 @@ def home(request):
     return render(request, "AdminInicio.html")
 
 
+#def perfil(request):
+
+    #return render(request, "perfil.html")
+
+
 def registromaestros(request):
     maestro_id = Role.objects.get(Role="Maestro")
 
