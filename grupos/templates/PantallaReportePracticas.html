@@ -22,14 +22,28 @@
         <div id="{{ grupo.id }}" class="hidden space-y-4">
             <div class="bg-white rounded-full p-4">
 
-                <h3>Acciones</h3>
-                <button>
-                    <a href="{% url 'grupos:detail' grupo_id=grupo.id %}">Lista de estudiantes</a>
-                </button>
+                <!--<h3 class="text-center" >Acciones</h3>-->
+                <table class="flex flex-col items-center">
+                    <tr class="caption-top bg-gris font-bold mt-8 px-4 py-2">
+                        <th class="text-center border-t rounded-full border-t-white px-4 py-2">Acciones</th>
+                    </tr>
 
-                <button>
-                    <a>Practicas</a>
-                </button>
+                    <tr class="bg-gris hover:bg-green-200">
+                        <td class="text-center border-t rounded-full border-t-white px-4 py-2">
+                            <button>
+                                <a href="{% url 'grupos:detail' grupo_id=grupo.id %}">Lista de estudiantes</a>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class="bg-gris hover:bg-green-200">
+                        <td class="text-center border-t rounded-full border-t-white px-4 py-2">   
+                            <button>
+                                <a>Practicas</a>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+
             </div>
         </div>
         {% endfor %}        
