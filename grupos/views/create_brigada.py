@@ -1,5 +1,6 @@
 import csv
 import io
+import requests
 from datetime import date
 from typing import Any
 from dateutil.relativedelta import relativedelta
@@ -16,8 +17,16 @@ class CreateBrigadaView(View):
     template_name = "MaestroAltaBrigada.html"
 
     def get(self, request, *args, **kwargs):
-        form = self.form_class()
         grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
+
+        response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
+
+        alumnos_siase: dict 
+        if response.status_code == 200:
+            alumnos_siase = response.json()["alumnos"]
+            print(alumnos_siase)
+
+        form = self.form_class()
 
         print(grupo.alumnos.all())
         lista_alumnos = grupo.alumnos.all()
@@ -29,9 +38,17 @@ class CreateBrigadaView(View):
 
     def post(self, request, *args, **kwargs):
 
+        grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
+
+        response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
+
+        alumnos_siase: dict = [] 
+        if response.status_code == 200:
+            alumnos_siase = response.json()["alumnos"]
+            print(alumnos_siase)
+
         inicio_semestre = date.today()
         fin_semestre = inicio_semestre + relativedelta(months=+2)
-        grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
 
         form = self.form_class(request.POST, request.FILES)
 
@@ -41,6 +58,8 @@ class CreateBrigadaView(View):
             reader = csv.DictReader(io.StringIO(csv_file.read().decode('utf-8-sig')))
             alumno_role = Role.objects.get(Role="Alumno")
             for row in reader:
+
+                #if row["matricula"] in 
 
                 alumno, created = Usuarios.objects.get_or_create(
                     matricula=row["matricula"],
