@@ -19,12 +19,12 @@ class CreateBrigadaView(View):
     def get(self, request, *args, **kwargs):
         grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
 
-        response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
+        #response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
 
         alumnos_siase: dict 
-        if response.status_code == 200:
-            alumnos_siase = response.json()["alumnos"]
-            print(alumnos_siase)
+        #if response.status_code == 200:
+        #    alumnos_siase = response.json()["alumnos"]
+        #    print(alumnos_siase)
 
         form = self.form_class()
 
@@ -40,12 +40,12 @@ class CreateBrigadaView(View):
 
         grupo = Grupos.objects.get(pk=self.kwargs["grupo_id"])
 
-        response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
+        #response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
 
         alumnos_siase: dict = [] 
-        if response.status_code == 200:
-            alumnos_siase = response.json()["alumnos"]
-            print(alumnos_siase)
+        #if response.status_code == 200:
+        #    alumnos_siase = response.json()["alumnos"]
+        #    print(alumnos_siase)
 
         inicio_semestre = date.today()
         fin_semestre = inicio_semestre + relativedelta(months=+2)
