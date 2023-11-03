@@ -1,0 +1,85 @@
+<!--
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="styles/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+  <link rel="shortcut icon" href="img/Logo.png">
+  <title>Perfil</title>
+</head>
+
+<body class="h-screen fondoinicio">
+  <nav class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4"
+    >
+      <div class="flex w-full flex-wrap items-center justify-between px-3">
+        
+        <a
+          class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
+          href="index.html"
+        >
+          <img src="img/Huella.png" class="h-12 w-13" /> labs
+        </a>
+
+-->
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+        <!-- Right elements -->
+        <div class="relative flex items-center">
+          <!-- Dropdown container -->
+          <div
+            class="relative"
+            data-te-dropdown-ref
+            data-te-dropdown-alignment="end"
+          >
+            <a
+              class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+              href="#"
+              id="dropdownMenuButton2"
+              role="button"
+              data-te-dropdown-toggle-ref
+              aria-expanded="false"
+            >
+              <img src="{% static 'img/campana.png' %}" class="w-6 h-6 mr-2" />
+              <!-- User avatar -->
+              <img
+                src="{% static 'img/Logo.png' %}"
+                class="rounded-full w-14 h-14"
+                alt=""
+                loading="lazy"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  
+  <div class="flex justify-center items-center mt-10">
+    <div class="w-2/4 text-center bg-white rounded-3xl pb-12">
+      <h1 class="text-verde text-titulo-xl font-bold mt-8">Perfil</h1>
+      <div class="grid justify-items-center mt-8">
+        <img src="{% static 'img/Logo.png' %}" alt="" class="w-32 h-32 rounded-full">
+      </div>
+      <!--<p class="text-xl mt-4"><b>Nombre:</b> Alan Ramiro Gonzalez Reyes</p>
+      <p class="text-xl mt-4"><b>Matricula:</b> 1736076</p>
+      <p class="text-xl mt-4"><b>Carrera:</b> IAS</p>
+      <p class="text-xl mt-4"><b>Correo:</b> alangzz@uanl.com.mx</p>
+      <p class="text-xl mt-4"><b>Tipo de cuenta:</b> Alumno</p>-->
+    </div>
+  </div>
+
+  <!--Pie de pagina CAMBIO-->
+  <footer class="center py-0">
+    <img src="{% static 'img/VLFIME.png' %}" class="w-25 h-14 absolute bottom-2 right-2" />
+  </footer>
+  {% endblock %}
+
+  <!--
+</body>
+
+</html>
+-->
