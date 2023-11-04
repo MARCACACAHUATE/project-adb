@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cambiar Reservación</title>
+</head>
+
+<body>
+    <h1>Cambiar Reservación</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_practica_id">Selecciona un nuevo horario:</label>
+        <select id="id_practica_id" name="practica_id">
+            <option value="">---------</option>
+            {% for practica in practicas %}
+            <option value="{{ practica.id }}">{{ practica.titulo }} - {{ practica.fecha_inicio }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Guardar cambios">
+        <a href="{% url 'sessiones:reservaciones' %}" class="btn btn-danger btn-sm">Regresar</a>
+    </form>
+
+    <p>{{ mensaje }}</p>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Crear Reservación</title>
+</head>
+
+<body>
+    <h1>Crear Reservación</h1>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_practica_id">Selecciona un horario:</label>
+        <select id="id_practica_id" name="practica_id">
+            <option value="">---------</option>
+            {% for practica in practicas %}
+            <option value="{{ practica.id }}">{{ practica.titulo }} - {{ practica.fecha_inicio }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="submit" value="Crear Reservación">
+    </form>
+
+    <p>{{ mensaje }}</p>
+
+</body>
+
+</html>

@@ -33,5 +33,6 @@ urlpatterns = [
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),
     #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
     #path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
-    path('admin', admin.site.urls) 
+    path('admin', admin.site.urls),
+    path('sessiones/', include('sessiones.urls', namespace="sessiones"))
 ]

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block main %}
+{% load static %}
+  <body class="fondoinicio">
+    <header>
+      <!-- Main navigation container -->
+      <nav
+        class="flex-no-wrap relative flex w-full items-center justify-between bg-[#1ab26b] py-4 shadow-md lg:flex-wrap lg:justify-start lg:py-4"
+      >
+        <div class="flex w-full flex-wrap items-center justify-between px-3">
+          <!-- Logo -->
+          <a
+            class="mb-4 ml-2 mr-5 flex items-center font-bold text-white sm:text-titulo-xl lg:mb-0 lg:mt-0"
+            href="index.html"
+          >
+            <img src="img/Huella.png" class="h-12 w-13" /> labs
+          </a>
+
+          <!-- Right elements -->
+          <div class="relative flex items-center">
+            <!-- Dropdown container -->
+            <div
+              class="relative"
+              data-te-dropdown-ref
+              data-te-dropdown-alignment="end"
+            >
+              <a
+                class="hidden-arrow flex items-center whitespace-nowrap transition duration-150 ease-in-out motion-reduce:transition-none"
+                href="#"
+                id="dropdownMenuButton2"
+                role="button"
+                data-te-dropdown-toggle-ref
+                aria-expanded="false"
+              >
+                <img src="img/campana.png" class="w-6 h-6 mr-2" />
+                <!-- User avatar -->
+                <img
+                  src="img/Logo.png"
+                  class="rounded-full w-14 h-14"
+                  alt=""
+                  loading="lazy"
+                />
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <h1
+      class="text-gray-700 font-bold text-titulo-min-xl sm:mt-32 sm:text-titulo-xl text-center"
+    >
+      Reagendar o Cancelar Cita
+    </h1>
+    <table class="bg-white border-collapse border-gray-600 text-center mx-auto">
+      <thead>
+        <tr>
+          <th class="border py-2 px-4">Materia</th>
+          <th class="border py-2 px-4">Brigada</th>
+          <th class="border py-2 px-4">Practica</th>
+          <th class="border py-2 px-4">Fecha</th>
+          <th class="border py-2 px-4">Hora</th>
+          <th class="border py-2 px-4">Accion</th>
+          <!-- Agrega más encabezados según sea necesario -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="border py-2 px-4">Laboratorio de Robotica</td>
+          <td class="border py-2 px-4">001</td>
+          <td class="border py-2 px-4">{{reservacion.practica_id.titulo}}</td>
+          <td class="border py-2 px-4">{{reservacion.practica_id.fecha_inicio|date:'d/F'}}</td>
+          <td class="border py-2 px-4">{{reservacion.practica_id.fecha_inicio|date:'h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}}</td>
+          <td class="border py-2 px-4">
+            <button
+              class="bg-verde w-full py-1 px-1 text-white rounded-full cursor-pointer hover:bg-green-300"
+            >
+              <a href="{% url 'sessiones:reagendar' reservacion.id %}">Regendar</a>
+            </button>
+            <button
+              class="bg-red-600 w-full py-1 px-1 text-white rounded-full cursor-pointer hover:bg-red-300"
+            >
+              <a href="{% url 'sessiones:reservaciones' %}">Regresar</a>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!--Pie de pagina CAMBIO-->
+    <footer class="center py-0">
+      <img src="img/VLFIME.png" class="w-25 h-14 absolute bottom-2 right-2" />
+    </footer>
+
+  </body>
+</html>
+
+{% endblock %}

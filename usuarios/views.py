@@ -17,6 +17,7 @@ def login_user(request):
 
         if user is not None:
                 request.session["role"] = user.role_id.Role
+                request.session["user_id"] = user.id
                 login(request, user)
                 return redirect("/")
         else:

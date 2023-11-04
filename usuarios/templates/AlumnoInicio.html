@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block main %}
+{% load static %}
         <!--Boton -->
 <div>
     <div class="flex items-center mx-2 my-10">
@@ -95,7 +96,7 @@
                 <div class="p-5 flex items-center">
                     <img src="{% static 'img/Calendario.png' %}" class="mr-5" width="10" height="10">
                 <button class="bg-verde text-white py-2 px-20 rounded-lg">
-                    Reservar</button>
+                    <a href="{% url 'sessiones:reservaciones' %}">reservaciones</a></button>
                 </div>
 
         </div>
