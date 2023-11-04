@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Subir Práctica</title>
+  </head>
+  <body>
+    <h1>Subir Práctica</h1>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %} {{ form.as_p }}
+      <label for="pdf_file">Selecciona un archivo PDF:</label>
+      <input type="file" name="pdf_file" accept=".pdf" />
+      <button type="submit">Subir Práctica</button>
+    </form>
+
+    {% if error_message %}
+    <p>{{ error_message }}</p>
+    {% endif %}
+  </body>
+</html>

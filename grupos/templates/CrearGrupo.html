@@ -1,35 +1,74 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="{% static 'styles/output.css' %}" rel="stylesheet" />
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'img/Logo.png' %}" rel="shortcut icon" />
+    <title>Crear Brigadas</title>
+  </head>
 
-{% block main %}
-<div>
-    <h2>Crear Nuevo Grupo</h2>
-    <div class="w-80">
-        <form method="post" autocomplete="off">
-            {% csrf_token %} 
-            <label>Número de brigada</label>
-            <input class="border border-gray-300 w-full h-6 px-3 py-2 mb-4 rounded-md bg-gray-100"
-                type="text"
-                name="numero_brigada"/>
+  <body class="h-screen fondologin">
+    <section class="grid grid-cols-2 h-full sm:grid-cols-3">
+      <article class="text-center w-screen mt-2 sm:w-full">
+        <h2
+          class="font-bold text-titulo-min-xl text-white sm:text-titulo-xl sm:mt-56"
+        >
+          Brigadas
+        </h2>
+      </article>
 
-            <label>Maestro</label>
-            <select class="border border-gray-300 w-full h-12 px-3 rounded-md bg-gray-100"
-                type="number"
-                name="maestro_id">
-                <option value="0" selected></option>
-                {% for maestro in maestros_list%}
-                <option value="{{ maestro.id }}">{{ maestro.nombre }}</option>
-                {% endfor %}
-            </select>
+      <article
+        class="bg-gradient-to-r from-green-50 to-green-50 col-span-2 h-full text-center fondologinright"
+      >
+        <h1
+          class="text-verde font-bold text-titulo-min-xl mt-0 sm:mt-20 sm:text-titulo-xl"
+        >
+          Crear Brigada
+        </h1>
 
-            <button class="bg-verde w-36 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">
-                Crear Grupo
-            </button>
-            <button class="bg-verde w-36 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">
-                <a href="{% url 'home' %}">
-                    Regresar
-                </a>
-            </button>
+        <form
+          method="post"
+          autocomplete="off"
+          class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center sm:w-1/2 sm:mx-auto sm:grid-cols-1"
+        >
+          {% csrf_token %}
+          <label>Número de brigada</label>
+          <input
+            class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
+            placeholder="Numero de Brigada"
+            type="text"
+            name="numero_brigada"
+          />
+
+          <label>Seleccionar Maestro</label>
+          <select
+            class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
+            placeholder="Maestro"
+            type="number"
+            name="maestro_id"
+          >
+            <option value="0" selected>Seleccionar</option>
+            {% for maestro in maestros_list%}
+            <option value="{{ maestro.id }}">{{ maestro.nombre }}</option>
+            {% endfor %}
+          </select>
+          <br /><br /><br /><br /><br /><br />
+          <button
+            class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4"
+          >
+            Crear Grupo
+          </button>
+          <a
+            href="{% url 'home' %}"
+            class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4"
+            ><div>Regresar</div></a
+          >
+          <br />
         </form>
-    </div>
-</div>
-{% endblock%}
+      </article>
+    </section>
+  </body>
+</html>

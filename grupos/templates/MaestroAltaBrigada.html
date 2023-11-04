@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="h-5/6 flex justify-center items-center">
-        <div class="h-5/6 w-2/3 text-center bg-white rounded-3xl px-10">
+        <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
 
             <h1 class=" text-titulo-xl font-bold mt-12">Brigada {{ grupo.numero_brigada }}</h1>
             <form method="post" enctype="multipart/form-data" class="grid grid-cols-3 w-full">
@@ -16,16 +16,17 @@
                   type="file" 
                   name="csv_file" 
                   required="" 
-                  id="id_csv_file">
-                <button class="w-5/6 bg-verde text-white rounded-lg hover:bg-green-900">
-                    Añadir Brigada
+                  id="id_csv_file"
+                  class="w-full">
+                <button class="w-5/6 bg-verde text-white rounded-lg py-2 hover:bg-green-900">
+                    <div>Añadir Brigada</div>
                 </button>
             </form>
 
             <div>
                 <table class="container">
                     <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
-                        Lista de alumnos
+                        Estudiantes
                     </caption>
                     <tr class="bg-gris hover:bg-green-200">
                         <th class="border-t border-t-white px-4 py-2">No. de Lista</th>
@@ -34,34 +35,15 @@
                         <th class="border-t border-t-white px-4 py-2">Correo Universitario</th>
                         <th class="border-t border-t-white px-4 py-2">Brigada</th>
                     </tr>
+                    {% for alumno in lista_alumnos %}
                     <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">1</td>
-                        <td class="border-t border-t-white px-4 py-2">Alan Tadeo Montes Ovalle</td>
-                        <td class="border-t border-t-white px-4 py-2">1952618</td>
-                        <td class="border-t border-t-white px-4 py-2">tadeo.montesov@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.id }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.nombre }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.matricula }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ alumno.correo }}</td>
+                        <td class="border-t border-t-white px-4 py-2"></td>
                     </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">2</td>
-                        <td class="border-t border-t-white px-4 py-2">Alan Ramiro Gonzalez Reyes</td>
-                        <td class="border-t border-t-white px-4 py-2">1736076</td>
-                        <td class="border-t border-t-white px-4 py-2">alan.gonzalez@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">3</td>
-                        <td class="border-t border-t-white px-4 py-2">Juan Carlos Tapia Martinez</td>
-                        <td class="border-t border-t-white px-4 py-2">1896724</td>
-                        <td class="border-t border-t-white px-4 py-2">juan.tapia@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
-                    <tr class="bg-gris hover:bg-green-200">
-                        <td class="border-t border-t-white px-4 py-2">4</td>
-                        <td class="border-t border-t-white px-4 py-2">Luis Gerardo Puente Garcia</td>
-                        <td class="border-t border-t-white px-4 py-2">1814176</td>
-                        <td class="border-t border-t-white px-4 py-2">luis.gerardo@uanl.com.mx</td>
-                        <td class="border-t border-t-white px-4 py-2">401</td>
-                    </tr>
+                    {% endfor %}
                 </table>
             </div>
         </div>

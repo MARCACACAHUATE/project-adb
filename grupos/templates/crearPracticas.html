@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Crear Prácticas</title>
+  </head>
+  <body>
+    <h1>Crear Prácticas</h1>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <label for="id_titulo">Título:</label>
+      {{ form.titulo }}
+      <p>
+        <label for="id_descripcion">Descripción:</label>
+        {{ form.descripcion }}
+      </p>
+
+      <p>
+        <label for="id_fecha_inicio">Fecha de Inicio:</label>
+        <input name="fecha_inicio" type="datetime-local"/>
+      </p>
+
+      <p>
+        <label for="id_fecha_fin">Fecha de Fin:</label>
+        <input name="fecha_fin" type="datetime-local"/>
+      </p>
+
+      <p>
+        <label for="id_is_valid">Válido:</label>
+        {{ form.is_valid }}
+      </p>
+
+      <p>
+        <label for="id_archivo">Archivo:</label>
+        {{ form.archivo }}
+      </p>
+
+      <p>
+        <label for="id_grupo_id">Grupo:</label>
+
+        <select name="grupo_id">
+         
+          <option hidden="true"></option>
+          {% for Grupo in grupos %}</option>
+
+          <option value="{{Grupo.id}}">{{ Grupo.numero_brigada }}</option>
+          {% endfor %}
+         
+        </select>
+      </p>
+
+      <p>
+        <label for="id_maestro_id">Maestro:</label>
+        {{ form.maestro_id }}
+      </p>
+      <p>
+        <input type="submit" value="Guardar" />
+      </p>
+    </form>
+  </body>
+</html>

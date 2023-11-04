@@ -27,4 +27,3 @@ class CustomUserForm(UserCreationForm):
     class Meta:
         model = Usuarios
         fields = ['nombre','matricula','correo','password']
- 

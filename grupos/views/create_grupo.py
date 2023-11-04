@@ -23,7 +23,7 @@ class CreateGrupoView(View):
                 numero_brigada=request.POST["numero_brigada"],
                 maestro_id=maestro
             )
-            return redirect("/admininicio")
+            return redirect("grupos:list")
 
-        return redirect("/admininicio")
+        return redirect("grupos:list")
         

@@ -6,7 +6,7 @@ from usuarios.forms import FormularioRegistro
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
-from usuarios.models import Usuarios, Role
+from usuarios.models import Usuarios, Role, Registro_Semestre
 
 def login_user(request):
 
@@ -21,7 +21,9 @@ def login_user(request):
                 login(request, user)
                 return redirect("/")
         else:
-            print("Credenciales invalidas")
+            return render(request, "login.html", {
+                "mensaje": "Credenciales invalidas"
+            })
 
     return render(request, "login.html")
 
@@ -36,24 +38,21 @@ def registro(request):
     if request.method == 'POST':
 
         formulario = FormularioRegistro(request.POST)
-        print(formulario.is_valid())
+
         if formulario.is_valid():
 
             try:
 
-                #alumno = Usuarios.objects.get(matricula=formulario.cleaned_data["matricula"])
-                #alumno.is_verified = True
+                alumno = Usuarios.objects.get(matricula=formulario.cleaned_data["matricula"])
+                registro_semestre = Registro_Semestre.objects.get(alumno_id=alumno)
 
-                role_id = formulario.cleaned_data["role_id"]
-                role = Role.objects.get(pk=role_id)
+                alumno.is_verified = True
+                registro_semestre.is_valid = True
 
-                Usuarios.objects.create_user(
-                    correo=formulario.cleaned_data['correo'],
-                    nombre = formulario.cleaned_data['nombre'],
-                    role_id = role,
-                    matricula = formulario.cleaned_data['matricula'],
-                    password = formulario.cleaned_data['password']
-                )
+                alumno.correo= formulario.cleaned_data['correo']
+                alumno.nombre = formulario.cleaned_data['nombre']
+                alumno.set_password(formulario.cleaned_data['password'])
+                alumno.save()
 
                 return redirect("/")
 
@@ -61,12 +60,16 @@ def registro(request):
                 print(error)
                 print(type(error).__name__)
                 traceback.print_exc()
+                return render(request, 'registro.html', {
+                    "form": formulario,
+                    "mensaje": 'El estudiante no tiene un pre registro previo'
+                })
 
         else:
             print("Formulario Invalido")
             return render(request, 'registro.html', {
                 "form": formulario,
-                "mensaje": 'error en el formulario'
+                "mensaje": 'Error en los datos del formulario'
             })
 
     return render(request, 'registro.html')
@@ -82,6 +85,11 @@ def home(request):
         return render(request, "MaestroMenu.html")
 
     return render(request, "AdminInicio.html")
+
+
+#def perfil(request):
+
+    #return render(request, "perfil.html")
 
 
 def registromaestros(request):
