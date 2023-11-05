@@ -28,7 +28,7 @@ urlpatterns = [
     path("grupos/", include('grupos.urls', namespace="grupos")),
     
     path('registro', views.registro, name="Registro"),   
-    #path('perfil/', views.perfil, name="Perfil"),
+    path('perfil/', views.perfil, name="Perfil"),
     #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
     #path('admininicio', views.admininicio, name="AdminInicio"),
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),

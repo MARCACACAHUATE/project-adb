@@ -2,22 +2,49 @@
 {% load static %}
 {% block main %}
         
-
+{% csrf_token %}
   <div class="flex justify-center items-center mt-10">
     <div class="w-2/4 text-center bg-white rounded-3xl pb-12">
-      <h1 class="text-verde text-titulo-xl font-bold mt-8">Perfil Alumno</h1>
+      <h1 class="text-verde text-titulo-xl font-bold mt-8">Perfil Maestro</h1>
       <div class="grid justify-items-center mt-8">
         <img src="{% static 'img/Logo.png' %}" alt="" class="w-32 h-32 rounded-full">
       </div>
-      <!--<p class="text-xl mt-4"><b>Alumno</b></p>
+      <!--<p class="text-xl mt-4"><b>Maestro</b></p>
       <p class="text-xl mt-4"><b>Matricula:</b> 1736076</p>
       <p class="text-xl mt-4"><b>Carrera:</b> IAS</p>
       <p class="text-xl mt-4"><b>Correo:</b> alangzz@uanl.com.mx</p>
       <p class="text-xl mt-4"><b>Tipo de cuenta:</b> Alumno</p>-->
-    </div>    
+
+      <table class="container">      
+        <tr>            
+          <th class="border-t border-t-white px-4 py-2">Nombre</th>
+        </tr>
+        <tr>
+          <th class="border-t border-t-white px-4 py-2">Matricula</th>
+        </tr>
+        <tr>    
+          <th class="border-t border-t-white px-4 py-2">Correo Universitario</th>
+        </tr>
+        
+        <tr>          
+          <td class="border-t border-t-white px-4 py-2">{{ maestro.nombre }}</td>
+        </tr>
+        <tr>
+          <td class="border-t border-t-white px-4 py-2">{{ maestro.matricula }}</td>
+        </tr>
+        <tr>
+            <td class="border-t border-t-white px-4 py-2">{{ maestro.correo }}</td>
+        </tr>    
+      </table>
+
+
+  
+    </div>
+    
   </div>
+
   <form method="post" class="grid grid-cols-2 justify-center items-center">
-    {% csrf_token %}
+    
     <a class="flex justify-center" href="{% url 'home' %}">
       <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300 mt-6">Regresar</div>
     </a>

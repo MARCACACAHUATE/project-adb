@@ -18,6 +18,7 @@ def login_user(request):
         if user is not None:
                 request.session["role"] = user.role_id.Role
                 request.session["user_id"] = user.id
+
                 login(request, user)
                 return redirect("/")
         else:
@@ -85,6 +86,20 @@ def home(request):
         return render(request, "MaestroMenu.html")
 
     return render(request, "AdminInicio.html")
+
+def perfil(request):
+    
+    if request.session["role"] == "Alumno":
+        return render(request, "Perfil.html")
+    
+    if request.session["role"] == "Maestro":
+        return render(request, "PerfilMaestro.html")    
+    
+    if request.session["role"] == "Admin":
+        return render(request, "PerfilAdmin.html")    
+
+    
+    return redirect("home")
 
 
 #def perfil(request):
