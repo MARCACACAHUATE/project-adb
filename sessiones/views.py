@@ -70,7 +70,7 @@ def crear(request):
     
             
     practicas = Practicas.objects.filter(is_valid= True)
-    return render(request, 'alumnoAgendar.html', {'practicas': practicas})
+    return render(request, 'AlumnoAgendar.html', {'practicas': practicas})
 
 #-------------------------------------------------------------------------------------------------------------------------
 
