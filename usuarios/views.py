@@ -87,24 +87,21 @@ def home(request):
 
     return render(request, "AdminInicio.html")
 
+
 def perfil(request):
-    
+    usuario = request.user
+
     if request.session["role"] == "Alumno":
-        return render(request, "Perfil.html")
+        return render(request, "Perfil.html", {'usuario': usuario})
     
     if request.session["role"] == "Maestro":
-        return render(request, "PerfilMaestro.html")    
+        return render(request, "PerfilMaestro.html", {'usuario': usuario})    
     
     if request.session["role"] == "Admin":
-        return render(request, "PerfilAdmin.html")    
-
+        return render(request, "PerfilAdmin.html", {'usuario': usuario})
     
     return redirect("home")
 
-
-#def perfil(request):
-
-    #return render(request, "perfil.html")
 
 
 def registromaestros(request):
