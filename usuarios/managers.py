@@ -20,13 +20,14 @@ class CustomUserManager(BaseUserManager):
         user = self.model(matricula=matricula, **extra_fields)
         user.set_password(password)
 
-        if is_maestro:
-            maestro_role = Role.objects.get(Role="Maestro")
-            user.role_id = maestro_role
-
         if extra_fields.get("is_superuser") is not True:
-            alumno_role, created = Role.objects.get_or_create(Role="Alumno")
-            user.role_id = alumno_role
+            if is_maestro:
+                maestro_role, created = Role.objects.get_or_create(Role="Maestro")
+                user.role_id = maestro_role
+
+            else:
+                alumno_role, created = Role.objects.get_or_create(Role="Alumno")
+                user.role_id = alumno_role
 
         user.save()
         return user
