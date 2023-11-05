@@ -1,58 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-</head>
+{% block main %}
+    <div class="h-5/6 flex justify-center items-center">
+        <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
 
-<body>
-<main>
-    <div class="container">
-        <h2>Lista de reservaciones</h2>
+            <h1 class=" text-titulo-xl font-bold mt-12">Lista Reservaciones</h1>
+            <form method="post" enctype="multipart/form-data" class="grid grid-cols-2 w-full gap-8 justify-items-center">
+                {% csrf_token %}
+                <a class="w-2/3 bg-verde text-white rounded-lg py-2 hover:bg-green-900" href="{% url 'home' %}">
+                    <p>
+                        Regresar
+                    </p>
+                </a>             
+                <a class="w-2/3 bg-verde text-white rounded-lg py-2 hover:bg-green-900" href="{% url 'sessiones:crear' %}" >
+                    Hacer Reservación
+                </a>
+            </form>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>id</th>
-                    <th>fecha_reservacion</th>
-                    <th>Hora de la practica</th>
-                    <th>created_at</th>
-                    <th>alumno_id</th>
-                    <th>practica_id</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for reservacion in reservaciones %}
-                <tr>
-                    <td>{{reservacion.id}}</td>
-                    <td>{{reservacion.fecha_reservacion}}</td>
-                    <td>{{reservacion.practica_id.fecha_inicio|date:'d/F h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}} </td>
-                    <td>{{reservacion.created_at}}</td>
-                    <td>{{reservacion.alumno_id_id}}</td>
-                    <td>{{reservacion.practica_id.titulo}}</d>
-                    <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
-                    <td>
-                        <a href="{% url 'sessiones:eliminar' reservacion.id %}" class="btn btn-danger btn-sm">Eliminar</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <a href="{% url 'sessiones:crear' %}" class="btn btn-primary">Hacer Reservación</a>
-        <a href="{% url 'home' %}" class="btn btn-secondary">Regresar</a>
+            <div>
+                <table class="container">
+                    <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
+                        Estudiantes - Reservaciones
+                    </caption>
+                    <tr class="bg-gris hover:bg-green-200">
+                        <!--<th class="border-t border-t-white px-4 py-2">id</th>-->
+                        <th class="border-t border-t-white px-4 py-2">Fecha Reservación</th>
+                        <th class="border-t border-t-white px-4 py-2">Hora de la Práctica</th>
+                        <th class="border-t border-t-white px-4 py-2">created_at</th>
+                        <th class="border-t border-t-white px-4 py-2">Alumno - Matricula</th>
+                        <th class="border-t border-t-white px-4 py-2">Numero Practica</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for reservacion in reservaciones %}
+                    <tr class="bg-gris hover:bg-green-200">
+                        <!--<td class="border-t border-t-white px-4 py-2">{{reservacion.id}}</td>-->            
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.fecha_reservacion}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.fecha_inicio|date:'d/F h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}} </td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.created_at}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id_id}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.titulo}}</td>
+                        <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
+                        <td>
+                            <a href="{% url 'sessiones:eliminar' reservacion.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {{ mensaje }}
+        </div>
     </div>
-    {{ mensaje }}
-</main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-</body>
-
-</html>
+{% endblock %}

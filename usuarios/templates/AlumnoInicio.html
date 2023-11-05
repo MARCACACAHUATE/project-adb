@@ -4,10 +4,10 @@
 {% load static %}
         <!--Boton -->
 <div>
-    <div class="flex items-center mx-2 my-10">
+    <div class="flex items-center mx-4 my-12">
         <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
             <img src="{% static 'img/Herramienta.png' %}" class="w-8 h-8 absolute left-12 top-55">
-            Ir a la prática
+            &nbsp &nbsp &nbsp &nbsp &nbsp Ir a la prática
         </button>
 
 
@@ -86,10 +86,14 @@
         <div class="w-px bg-gray-300 my-4 mx-6"></div>
 
         <!-- Calendario -->
-        <div class="w-1/2 p-4">
-            <div class="bg-white rounded-lg p-4 mb-4 shadow-md">
-            <!-- JS para mostrar el calendario -->
-            <h3 class="text-lg font-semibold">Calendario</h3>
+        <div class="w-1/2 p-4 grid justify-items-center">
+            <div>
+              <div class="flex justify-center items-center">
+                <div class="bg-white rounded-lg p-8 mb-2 shadow-sm">
+                  <div class="calendar-container"></div>
+                </div>
+      
+              </div>
             </div>
 
             <!-- Botón Reservar -->
@@ -99,6 +103,19 @@
                     <a href="{% url 'sessiones:reservaciones' %}">reservaciones</a></button>
                 </div>
 
+        </div>
+        <div class="p-8 mb-8 w-1 shadow-md ">
+        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var calendarEl = document.querySelector('.calendar-container');
+                    var calendar = new FullCalendar.Calendar(calendarEl, {
+                        initialView: 'dayGridMonth',
+                        height: 250,
+                    });
+                    calendar.render();
+                });
+        </script>
         </div>
     </div>  
 </div>

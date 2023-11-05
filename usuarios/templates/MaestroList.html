@@ -3,25 +3,27 @@
 {% block main %}
 <div class="h-5/6 flex justify-center items-center">
     <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
-        <div class="grid grid-cols-3 w-full gap-8 justify-items-center">
-            <a class="w-full bg-verde text-white rounded-lg py-2 hover:bg-green-900" 
-                href="{% url 'home' %}">
-                <p>
-                    Regrear
-                </p>
-            </a>
-        </div>
+        <!--<div class="grid grid-cols-3 w-full gap-8 justify-items-center">-->
         <h1 class="text-titulo-xl font-bold">
             Lista de maestros registrados en el sistema
         </h1>
-        <div class="grid grid-cols-3 w-full gap-8 justify-items-center">
-            <a class="w-5/6 bg-verde text-white rounded-lg py-2 hover:bg-green-900" 
+        <form method="post" enctype="multipart/form-data" class="grid grid-cols-2 w-full gap-8 justify-items-center">
+        {% csrf_token %}
+            <a class="w-1/2 bg-verde text-white rounded-lg py-2 hover:bg-green-900" 
+                href="{% url 'home' %}">
+                <p>
+                    Regresar
+                </p>
+            </a>
+        <!--</div>-->
+            <a class="w-1/2 bg-verde text-white rounded-lg py-2 hover:bg-green-900" 
                 href="{% url 'RegistroMaestros' %}">
                 <p>
                     Registrar Maestro
                 </p>
             </a>
-        </div>
+        
+        </form>
 
         <div>
             <table class="container">
