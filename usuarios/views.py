@@ -1,6 +1,7 @@
 import traceback
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.views import View
 from usuarios.forms.registrouser import CustomUserForm
 from usuarios.forms import FormularioRegistro
 from django.contrib.auth import login, authenticate, logout
@@ -142,3 +143,27 @@ def registromaestros(request):
             })
 
     return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })
+
+
+
+class MaestroListView(View):
+    template_name = "MaestroList.html"
+
+    def get(self, request, *args, **kwargs):
+        role_maestro = Role.objects.get(Role="Maestro")
+        maestro_list = Usuarios.objects.filter(role_id=role_maestro)
+
+        return render(request, self.template_name, { "maestro_list": maestro_list })
+
+
+class MaestroDetailView(View):
+    template_name = "MaestroDetail.html"
+
+    def get(self, request, *args, **kwargs):
+
+        try:
+            maestro = Usuarios.objects.get(pk=self.kwargs.get("maestro_id"))
+            return render(request, self.template_name, { "maestro": maestro })
+
+        except Usuarios.DoesNotExist:
+            return render(request, self.template_name, { "error_message": "hola" })

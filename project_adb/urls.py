@@ -26,14 +26,11 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
     path('registro', views.registro, name="Registro"),
     path("grupos/", include('grupos.urls', namespace="grupos")),
-    
     path('registro', views.registro, name="Registro"),   
     path('perfil/', views.perfil, name="Perfil"),
-    #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
-    #path('admininicio', views.admininicio, name="AdminInicio"),
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),
-    #path('alumnoinicio', views.alumnoinicio, name="AlumnoInicio"),
-    #path('maestroinicio', views.maestroinicio, name="MaestroInicio"),
     path('admin', admin.site.urls),
-    path('sessiones/', include('sessiones.urls', namespace="sessiones"))
+    path('sessiones/', include('sessiones.urls', namespace="sessiones")),
+    path("maestros/", views.MaestroListView.as_view(), name="maestros_list"),
+    path("maestros/<int:maestro_id>", views.MaestroDetailView.as_view(), name="maestros_detail"),
 ]
