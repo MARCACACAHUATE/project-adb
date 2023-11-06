@@ -27,9 +27,13 @@
           <a href="{% url 'grupos:detail' grupo_id=grupo.id %}"
             >Lista de estudiantes</a
           >
+          
         </button>
       </div>
-
+    </div>
+      {% endfor %} 
+    </div>
+  </div>
       <script>
         function toggleSection(sectionId) {
           const section = document.getElementById(sectionId);

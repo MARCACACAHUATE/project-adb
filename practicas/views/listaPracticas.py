@@ -1,20 +1,21 @@
 from django.shortcuts import render
 from django.views import View
-
-from practicas.models import Practicas  # Asegúrate de importar el modelo correcto
+from grupos.models import Grupos
+from practicas.models import PracticasAlumnos
+from practicas.models.practicas import Practicas
 from usuarios.models import Usuarios
-class ListPracticasView(View):
-    template_name = "practicas.html"
+
+
+class ListaPracticasView(View):
+    template_name = "AlumnoInicio.html"
 
     def get(self, request, *args, **kwargs):
+             if request.user.is_authenticated:
+                usuario_id = request.user.id
+                #alumno = Usuarios.objects.get(pk=self.kwargs["alumno_id"])
+                #practica = Practicas.objects.get(pk=self.kwargs["practica_id"]) 
+                print(usuario_id)
+                print(PracticasAlumnos)
+             return render(request, "AlumnoInicio.html")
 
-        if request.session.get("role") == "Admin":
-            lista_practicas = Practicas.objects.filter(
-                practica_id = Usuarios.objects.get(pk=request.user.id)
-            )
-        else:
-            lista_practicas = PracticasAlumnos.objects.all()
-
-        print(lista_practicas)
-
-        return render(request, self.template_name, { "lista_practicas": lista_practicas })
+        
