@@ -1,13 +1,12 @@
-{% extends 'base.html' %} {% load static %} {% block main %}
+{% extends 'base.html' %} {% load static %} {% block main %} {% load static %}
 <!--Boton -->
 <div>
-  <div class="flex items-center mx-2 my-10">
+  <div class="flex items-center mx-2 my-12">
     <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
       <img
         src="{% static 'img/Herramienta.png' %}"
-        class="w-8 h-8 absolute left-12 top-55"
-      />
-      Ir a la prática
+        class="w-8 h-8 absolute left-12 top-55">
+        &nbsp &nbsp &nbsp &nbsp &nbsp Ir a la prática
     </button>
 
     <!--Informacipon de la Brigada-->
@@ -25,14 +24,10 @@
       <div class="bg-black rounded-lg p-8 mb-8 shadow-md">
         <!-- Contenido del Recuadro 1 -->
         <p class="text-white">Práctica 1</p>
-        {% with idp="1" %}
+        
         <p class="text-white text-center"><strong>Completada</strong></p>
-        <h3>Acciones</h3>
-        <button>
-          <a href="{% url 'grupos:upload_Act' idp=practicas.id %}"
-            >subir practicas</a
-          >
-        </button>
+        
+        
         <!-- Icono -->
         <!--<div class="absolute top-0 right-0 p-2">
                 <img src="{$ static 'img/Check.png' %}" class="w-4">
@@ -88,11 +83,14 @@
     <div class="w-px bg-gray-300 my-4 mx-6"></div>
 
     <!-- Calendario -->
-    <div class="w-1/2 p-4">
-      <div class="bg-white rounded-lg p-4 mb-4 shadow-md">
-        <!-- JS para mostrar el calendario -->
-        <h3 class="text-lg font-semibold">Calendario</h3>
-      </div>
+    <div class="w-1/2 p-4 grid justify-items-center">
+      <div>
+        <div class="flex justify-center items-center">
+          <div class="bg-white rounded-lg p-8 mb-2 shadow-sm">
+            <div class="calendar-container"></div>
+          </div>
+
+        </div>
 
       <!-- Botón Reservar -->
       <div class="p-5 flex items-center">
@@ -102,10 +100,23 @@
           width="10"
           height="10"
         />
-        <button class="bg-verde text-white py-2 px-20 rounded-lg">
+        <button class=" w-5/6 bg-verde text-white py-2 px-20 rounded-lg">
           Reservar
         </button>
       </div>
+    </div>
+    <div class="p-8 mb-8 w-1 shadow-md ">
+      <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
+      <script>
+          document.addEventListener('DOMContentLoaded', function () {
+              var calendarEl = document.querySelector('.calendar-container');
+                  var calendar = new FullCalendar.Calendar(calendarEl, {
+                      initialView: 'dayGridMonth',
+                      height: 250,
+                  });
+                  calendar.render();
+              });
+      </script>
     </div>
   </div>
 </div>

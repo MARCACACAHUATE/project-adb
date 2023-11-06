@@ -81,12 +81,13 @@ def registro(request):
 def home(request):
     print()
     if request.session["role"] == "Alumno":
-        return render(request, "AlumnoInicios.html")
+        return render(request, "AlumnoInicio.html")
 
     if request.session["role"] == "Maestro":
-        return render(request, "AdminInicio.html")
+        return render(request, "MaestroMenu.html")
 
-    return render(request, "AdminInicio.html")
+    if request.session["role"] == "Admin":
+        return render(request, "AdminInicio.html")
 
 
 def perfil(request):
