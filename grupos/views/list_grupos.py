@@ -18,3 +18,19 @@ class ListGruposView(View):
         print(lista_grupos)
 
         return render(request, self.template_name, { "lista_grupos": lista_grupos })
+
+
+class GruposListRegisterView(View):
+    template_name = "GruposList.html"
+
+    def get(self, request, *args, **kwargs):
+
+        if request.session.get("role") == "Maestro":
+            lista_grupos = Grupos.objects.filter(
+                maestro_id__pk=request.session.get("_auth_user_id")
+            )
+            return render(request, "PantallaReportePracticas.html", { "lista_grupos": lista_grupos })
+
+        else:
+            lista_grupos = Grupos.objects.all()
+            return render(request, self.template_name, { "lista_grupos": lista_grupos })
