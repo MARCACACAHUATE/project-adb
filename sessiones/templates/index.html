@@ -38,7 +38,7 @@
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.fecha_reservacion}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.fecha_inicio|date:'d/F h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}} </td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.created_at}}</td>
-                        <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id_id}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id.matricula}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.titulo}}</td>
                         <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
                         <td>
@@ -48,7 +48,7 @@
                     {% endfor %}
                 </table>
             </div>
-            {{ mensaje }}
+            <h3>{{ mensaje }}</h3>
         </div>
     </div>
 

@@ -14,29 +14,22 @@
       class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-96 sm:mx-auto"
     >
     {% csrf_token %}
-      <label for="materia">Materia</label>
+      
+      <label for="horario">Horario Disponible</label>
       <select
         class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
-        name=""
-        id="materia"
+        name="practica_id"
+        id="id_practica_id"
       >
-        <option value="0">Seleccionar...</option>
-        <option value="1">Laboratorio de Robótica</option>
+        <option value="">Selecciona el horario</option>
+        {% for practica in practicas %}
+        <option value="{{ practica.id }}">{{ practica.fecha_inicio|date:'h:i:s' }} - {{practica.fecha_fin|date:'h:i:s'}}</option>
+        {% endfor %}
       </select>
-      <label for="fecha">Seleccionar Día</label>
-      <input
-        class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
-        type="date"
-        name="fecha"
-        min="{{primera_practica|date:'Y'}}-{{primera_practica|date:'m'}}-{{primera_practica|date:'d'}}"
-
-        max="{{ultima_practica|date:'Y'}}-{{ultima_practica|date:'m'}}-{{ultima_practica|date:'d'}}"
-        id="fecha"
-      />
       <button  open-modal-dialog
         class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14"
       >
-       Ver horarios disponibles
+        Agendar
       </button>
       
       <a class="flex justify-center" href="{% url 'sessiones:reservaciones' %}">
@@ -47,12 +40,12 @@
 
       <dialog modal>
           <div class="modal-content bg-verde p-8 shadow-lg rounded-lg">
-              <h2 class="text-xl text-white font-semibold mb-4"></h2>
+              <h2 class="text-xl text-white font-semibold mb-4">Confrimación de reserva</h2>
               <p>Su practica a quedado agendada para el día.</p>
               <button id="closeModal" class="mt-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded">Cerrar</button>
           </div>
       </dialog>
-    <!--
+      
       <script>
         const openModalButton = document.querySelector("[open-modal-dialog]");
         const closeModalButton = document.querySelector("[closeModal]");
@@ -66,7 +59,7 @@
             modal.close();
         });
     </script>
-    -->
+      
     </form>
 
 

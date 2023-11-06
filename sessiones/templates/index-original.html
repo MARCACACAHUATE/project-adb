@@ -34,7 +34,7 @@
                     <td>{{reservacion.fecha_reservacion}}</td>
                     <td>{{reservacion.practica_id.fecha_inicio|date:'d/F h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}} </td>
                     <td>{{reservacion.created_at}}</td>
-                    <td>{{reservacion.alumno_id_id}}</td>
+                    <td>{{reservacion.alumno_id.nombre}}</td>
                     <td>{{reservacion.practica_id.titulo}}</d>
                     <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
                     <td>
