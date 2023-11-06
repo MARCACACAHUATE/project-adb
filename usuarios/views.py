@@ -64,7 +64,7 @@ def registro(request):
                 traceback.print_exc()
                 return render(request, 'registro.html', {
                     "form": formulario,
-                    "mensaje": 'El estudiante no tiene un pre registro previo'
+                    "mensaje": 'El estudiante no tiene un registro previo'
                 })
 
         else:
@@ -139,7 +139,7 @@ def registromaestros(request):
             print("Formulario Invalido")
             return render(request, 'RegistroMaestros.html', {
                 "form": formulario,
-                "mensaje": 'error en el formulario'
+                "mensaje": 'Error en el formulario'
             })
 
     return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })
