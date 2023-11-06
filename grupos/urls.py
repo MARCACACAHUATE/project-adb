@@ -1,8 +1,7 @@
 from django.urls import path
+
 from grupos.views import CreateBrigadaView, CreateGrupoView, ListGruposView, GruposListRegisterView
 from practicas.views import CreatePracticasView, UploadActView, activate_practicas
-
-
 
 app_name = 'grupos'  # Esto define un espacio de nombres para las URLs de la aplicación
 

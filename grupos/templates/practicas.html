@@ -1,0 +1,20 @@
+<!-- ListaPracticas.html -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Prácticas</title>
+  </head>
+  <body>
+    <h1>Lista de Prácticas</h1>
+    <ul>
+      {% for practica in lista_practicas %}
+      <li>
+        <strong>Práctica ID:</strong> {{ practica.practica_id.id }}<br />
+        <strong>Alumno ID:</strong> {{ practica.alumno_id.id }}<br />
+        <!-- Agrega otros campos de la práctica que deseas mostrar -->
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>

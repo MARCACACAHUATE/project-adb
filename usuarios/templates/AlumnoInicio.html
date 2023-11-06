@@ -1,122 +1,112 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block main %}
-{% load static %}
-        <!--Boton -->
+{% extends 'base.html' %} {% load static %} {% block main %}
+<!--Boton -->
 <div>
-    <div class="flex items-center mx-4 my-12">
-        <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
-            <img src="{% static 'img/Herramienta.png' %}" class="w-8 h-8 absolute left-12 top-55">
-            &nbsp &nbsp &nbsp &nbsp &nbsp Ir a la prática
-        </button>
+  <div class="flex items-center mx-2 my-10">
+    <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
+      <img
+        src="{% static 'img/Herramienta.png' %}"
+        class="w-8 h-8 absolute left-12 top-55"
+      />
+      Ir a la prática
+    </button>
 
-
-        <!--Informacipon de la Brigada--> 
-        <div class="ml-60">
-            <p>
-                <strong>Brigada:</strong>116
-            </p>
-            <p>
-                <strong>Instructor:</strong>Dra. Norma Edith Marín Martínez
-            </p>
-        </div>
+    <!--Informacipon de la Brigada-->
+    <div class="ml-60">
+      <p><strong>Brigada:</strong>116</p>
+      <p><strong>Instructor:</strong>Dra. Norma Edith Marín Martínez</p>
     </div>
+  </div>
 
-    <!--Información de las practicas-->
-    <div class="flex my-12">
-        <!-- Recuadros con informacion de las citas-->
-        <div class="w-1/3 p-4 ml-8">
-            <!-- Recuadro 1 -->
-            <div class="bg-black rounded-lg p-8 mb-8 shadow-md">
-            <!-- Contenido del Recuadro 1 -->
-            <p class="text-white">Práctica 1</p>
-            <p class="text-white text-center"><strong>Completada</strong></p>
-            <!-- Icono -->
-            <!--<div class="absolute top-0 right-0 p-2">
+  <!--Información de las practicas-->
+  <div class="flex my-12">
+    <!-- Recuadros con informacion de las citas-->
+    <div class="w-1/3 p-4 ml-8">
+      <!-- Recuadro 1 -->
+      <div class="bg-black rounded-lg p-8 mb-8 shadow-md">
+        <!-- Contenido del Recuadro 1 -->
+        <p class="text-white">Práctica 1</p>
+        {% with idp="1" %}
+        <p class="text-white text-center"><strong>Completada</strong></p>
+        <h3>Acciones</h3>
+        <button>
+          <a href="{% url 'grupos:upload_Act' idp=practicas.id %}"
+            >subir practicas</a
+          >
+        </button>
+        <!-- Icono -->
+        <!--<div class="absolute top-0 right-0 p-2">
                 <img src="{$ static 'img/Check.png' %}" class="w-4">
                 </div>-->
-            </div>
+      </div>
 
-            <!-- Recuadro 4 (debajo del primero) -->
-            <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-            <!-- Contenido del Recuadro 4 -->
-            <p class="text-black">Práctica 3</p>
-            <p class="text-black text-center"><strong>Sin agendar</strong></p>
-            </div>
-        </div>
+      <!-- Recuadro 4 (debajo del primero) -->
+      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
+        <!-- Contenido del Recuadro 4 -->
+        <p class="text-black">Práctica 3</p>
+        <p class="text-black text-center"><strong>Sin agendar</strong></p>
+      </div>
+    </div>
 
-        <div class="w-1/3 p-4">
-            <!-- Recuadro 2 -->
-            <div class="bg-verde rounded-lg p-5 mb-5 shadow-md">
-            <!-- Contenido del Recuadro 2 -->
-            <p class="text-black">Práctica 2</p>
-            <p class="text-black"><strong>Septiembre 30</strong></p>
-            <p class="text-black"><strong>12:00 a 13:40</strong></p>
-            <!-- Icono -->
-            <!--<div class="absolute top-0 right-0 p-2">
+    <div class="w-1/3 p-4">
+      <!-- Recuadro 2 -->
+      <div class="bg-verde rounded-lg p-5 mb-5 shadow-md">
+        <!-- Contenido del Recuadro 2 -->
+        <p class="text-black">Práctica 2</p>
+        <p class="text-black"><strong>Septiembre 30</strong></p>
+        <p class="text-black"><strong>12:00 a 13:40</strong></p>
+        <!-- Icono -->
+        <!--<div class="absolute top-0 right-0 p-2">
                 <img src="{% static 'img/Reloj.png' %}" class="w-4">
             </div>-->
-            </div>
+      </div>
 
-            <!-- Recuadro 5 -->
-            <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-            <!-- Contenido del Recuadro 5 -->
-            <p class="text-black">Práctica 5</p>
-            <p class="text-black text-center"><strong>Sin agendar</strong></p>
-            </div>
-        </div>
+      <!-- Recuadro 5 -->
+      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
+        <!-- Contenido del Recuadro 5 -->
+        <p class="text-black">Práctica 5</p>
+        <p class="text-black text-center"><strong>Sin agendar</strong></p>
+      </div>
+    </div>
 
-        <div class="w-1/3 p-4">
-            <!-- Recuadro 3 -->
-            <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md">
-            <!-- Contenido del Recuadro 3 -->
-            <p class="text-black">Práctica 3</p>
-            <p class="text-black text-center"><strong>Sin agendar</strong></p>
-            </div>
+    <div class="w-1/3 p-4">
+      <!-- Recuadro 3 -->
+      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md">
+        <!-- Contenido del Recuadro 3 -->
+        <p class="text-black">Práctica 3</p>
+        <p class="text-black text-center"><strong>Sin agendar</strong></p>
+      </div>
 
-            <!-- Recuadro 6 -->
-            <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-            <!-- Contenido del Recuadro 6 -->
-            <p class="text-black">Práctica 6</p>
-            <p class="text-black text-center"><strong>Sin agendar</strong></p>
-            </div>
-        </div>
+      <!-- Recuadro 6 -->
+      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
+        <!-- Contenido del Recuadro 6 -->
+        <p class="text-black">Práctica 6</p>
+        <p class="text-black text-center"><strong>Sin agendar</strong></p>
+      </div>
+    </div>
 
-        <!-- Línea divisora -->
-        <div class="w-px bg-gray-300 my-4 mx-6"></div>
+    <!-- Línea divisora -->
+    <div class="w-px bg-gray-300 my-4 mx-6"></div>
 
-        <!-- Calendario -->
-        <div class="w-1/2 p-4 grid justify-items-center">
-            <div>
-              <div class="flex justify-center items-center">
-                <div class="bg-white rounded-lg p-8 mb-2 shadow-sm">
-                  <div class="calendar-container"></div>
-                </div>
-      
-              </div>
-            </div>
+    <!-- Calendario -->
+    <div class="w-1/2 p-4">
+      <div class="bg-white rounded-lg p-4 mb-4 shadow-md">
+        <!-- JS para mostrar el calendario -->
+        <h3 class="text-lg font-semibold">Calendario</h3>
+      </div>
 
-            <!-- Botón Reservar -->
-                <div class="p-5 flex items-center">
-                    <img src="{% static 'img/Calendario.png' %}" class="mr-5" width="10" height="10">
-                <button class="bg-verde text-white py-2 px-20 rounded-lg">
-                    <a href="{% url 'sessiones:reservaciones' %}">reservaciones</a></button>
-                </div>
-
-        </div>
-        <div class="p-8 mb-8 w-1 shadow-md ">
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                var calendarEl = document.querySelector('.calendar-container');
-                    var calendar = new FullCalendar.Calendar(calendarEl, {
-                        initialView: 'dayGridMonth',
-                        height: 250,
-                    });
-                    calendar.render();
-                });
-        </script>
-        </div>
-    </div>  
+      <!-- Botón Reservar -->
+      <div class="p-5 flex items-center">
+        <img
+          src="{% static 'img/Calendario.png' %}"
+          class="mr-5"
+          width="10"
+          height="10"
+        />
+        <button class="bg-verde text-white py-2 px-20 rounded-lg">
+          Reservar
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
