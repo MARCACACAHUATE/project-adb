@@ -1,4 +1,5 @@
 from enum import global_enum_repr
+import re
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from requests import session
@@ -29,21 +30,28 @@ def crear(request):
         form = FechaForm(request.POST)
     
         if form.is_valid():
-            practicas = Practicas.objects.filter(fecha_inicio__date=form.cleaned_data["fecha"])
-            request.session["fecha"] = form.cleaned_data["fecha"]
-            if len(practicas) > 0:
-                print(practicas)
-                return redirect('sessiones:horario')   
-            else:
-                return render(request, 'index.html', { "mensaje": f"No hay practicas disponibles este dia: {form.cleaned_data['fecha']}"})
+            try:
+                practicas = Practicas.objects.filter(fecha_inicio__date=form.cleaned_data["fecha"])
+                request.session["fecha"] = form.cleaned_data["fecha"]
+                if len(practicas) > 0:
+                    print(practicas)
+                    return redirect('sessiones:horario')   
+                else:
+                    return render(request, 'index.html', { "mensaje": f"No hay practicas disponibles este dia: {form.cleaned_data['fecha']}"})
+            except Practicas.DoesNotExist:
+                user = request.session.get("user_id")
+                reservaciones = Reservaciones.objects.filter(alumno_id= user )
+                return render(request, 'index.html', {'reservaciones': reservaciones})
     
+    try: 
+        numero_practicas = (len(Practicas.objects.filter(is_valid=True)) - 1)
+        primera_practica = Practicas.objects.order_by('fecha_inicio')[0].fecha_inicio  
+        ultima_pracica = Practicas.objects.order_by('fecha_inicio')[numero_practicas].fecha_inicio     
+        practicas = Practicas.objects.filter(is_valid= True)
 
-    numero_practicas = (len(Practicas.objects.filter(is_valid=True)) - 1)
-    primera_practica = Practicas.objects.order_by('fecha_inicio')[0].fecha_inicio  
-    ultima_pracica = Practicas.objects.order_by('fecha_inicio')[numero_practicas].fecha_inicio     
-    practicas = Practicas.objects.filter(is_valid= True)
-
-    return render(request, 'AlumnoAgendar.html', {'practicas': practicas, 'primera_practica': primera_practica, 'ultima_practica': ultima_pracica} )
+        return render(request, 'AlumnoAgendar.html', {'practicas': practicas, 'primera_practica': primera_practica, 'ultima_practica': ultima_pracica} )
+    except IndexError:
+         return render(request, 'index.html', { "mensaje": f"No hay prácticas disponibles"})
 
 
 #-------------------------------------------------------------------------------------------------------------------------
