@@ -8,6 +8,8 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 from usuarios.models import Usuarios, Role, Registro_Semestre
+from grupos.models import Grupos
+from practicas.models import Practicas
 
 def login_user(request):
 
@@ -79,9 +81,23 @@ def registro(request):
 
 @login_required(login_url="login/")
 def home(request):
-    print()
+    print("arriba las pinches chivas")
+
     if request.session["role"] == "Alumno":
-        return render(request, "AlumnoInicio.html")
+        alumno = Usuarios.objects.get(pk=request.session.get("user_id"))
+        grupo_default = Grupos.objects.filter(alumnos=alumno)[0]
+
+        list_practicas = Practicas.objects.filter(grupo_id=grupo_default)
+
+        grupo_data = {
+            "numero_brigada": grupo_default.numero_brigada,
+            "nombre_maestro": grupo_default.maestro_id.nombre,
+        }
+
+        return render(request, "AlumnoInicio.html", {
+            "grupo_data": grupo_data,
+            "list_practicas": list_practicas
+        })
 
     if request.session["role"] == "Maestro":
         return render(request, "AdminInicio.html")

@@ -1,83 +1,57 @@
-{% extends 'base.html' %} {% load static %} {% block main %}
-<!--Boton -->
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block main %}
 <div>
-  <div class="flex items-center mx-2 my-10">
-    <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
-      <img
-        src="{% static 'img/Herramienta.png' %}"
-        class="w-8 h-8 absolute left-12 top-55"
-      />
-      Ir a la prática
-    </button>
+    <div class="flex items-center mx-2 my-10">
+        <button class="bg-gray-200 text-verde py-4 px-20 rounded-lg ml-10">
+        <img
+            src="{% static 'img/Herramienta.png' %}"
+            class="w-8 h-8 absolute left-12 top-55"
+        />
+        Ir a la prática
+        </button>
 
-    <!--Informacipon de la Brigada-->
-    <div class="ml-60">
-      <p><strong>Brigada:</strong>116</p>
-      <p><strong>Instructor:</strong>Dra. Norma Edith Marín Martínez</p>
+        <!--Informacipon de la Brigada-->
+        <div class="ml-60">
+        <p><strong>Brigada:</strong>{{ grupo_data.numero_brigada }}</p>
+        <p><strong>Instructor:</strong>{{ grupo_data.nombre_maestro }}</p>
+        </div>
     </div>
-  </div>
 
-  <!--Información de las practicas-->
-  <div class="flex my-12">
-    <!-- Recuadros con informacion de las citas-->
+    <div class="flex my-12">
+
     <div class="w-1/3 p-4 ml-8">
-      <!-- Recuadro 1 -->
-      <div class="bg-black rounded-lg p-8 mb-8 shadow-md">
-        <!-- Contenido del Recuadro 1 -->
-        <p class="text-white">Práctica 1</p>
+        {% if  list_practicas|length > 0 %}
 
-        <p class="text-white text-center"><strong>Completada</strong></p>
-        <h3>Acciones</h3>
-        <button></button>
-        <!-- Icono -->
-        <!--<div class="absolute top-0 right-0 p-2">
-                        <img src="{$ static 'img/Check.png' %}" class="w-4">
-                        </div>-->
-      </div>
+            {% for practica in list_practicas %}
+                {% if practica.is_valid %}
 
-      <!-- Recuadro 4 (debajo del primero) -->
-      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-        <!-- Contenido del Recuadro 4 -->
-        <p class="text-black">Práctica 3</p>
-        <p class="text-black text-center"><strong>Sin agendar</strong></p>
-      </div>
-    </div>
+                <div class="bg-black rounded-lg p-8 mb-8 shadow-md">
+                    <p class="text-white"><strong>{{ practica.titulo }}</strong></p>
+                    <p class="text-white">empieza: {{practica.fecha_inicio}}</p>
+                    <p class="text-white">termina: {{practica.fecha_fin}}</p>
+                    <p class="text-white text-center"><strong>Completada</strong></p>
+                    <h3>Acciones</h3>
+                    <button></button>
+                </div>
 
-    <div class="w-1/3 p-4">
-      <!-- Recuadro 2 -->
-      <div class="bg-verde rounded-lg p-5 mb-5 shadow-md">
-        <!-- Contenido del Recuadro 2 -->
-        <p class="text-black">Práctica 2</p>
-        <p class="text-black"><strong>Septiembre 30</strong></p>
-        <p class="text-black"><strong>12:00 a 13:40</strong></p>
-        <!-- Icono -->
-        <!--<div class="absolute top-0 right-0 p-2">
-                        <img src="{% static 'img/Reloj.png' %}" class="w-4">
-                    </div>-->
-      </div>
+                {% else %}
 
-      <!-- Recuadro 5 -->
-      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-        <!-- Contenido del Recuadro 5 -->
-        <p class="text-black">Práctica 5</p>
-        <p class="text-black text-center"><strong>Sin agendar</strong></p>
-      </div>
-    </div>
+                <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
+                    <p class="text-black">{{ practica.titulo }}</p>
+                    <p class="text-black text-center"><strong>Sin agendar</strong></p>
+                </div>
 
-    <div class="w-1/3 p-4">
-      <!-- Recuadro 3 -->
-      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md">
-        <!-- Contenido del Recuadro 3 -->
-        <p class="text-black">Práctica 3</p>
-        <p class="text-black text-center"><strong>Sin agendar</strong></p>
-      </div>
+                {% endif %}
+            {% endfor %}
 
-      <!-- Recuadro 6 -->
-      <div class="bg-gray-300 rounded-lg p-8 mb-8 shadow-md my-20">
-        <!-- Contenido del Recuadro 6 -->
-        <p class="text-black">Práctica 6</p>
-        <p class="text-black text-center"><strong>Sin agendar</strong></p>
-      </div>
+        {% else %}
+            <p class="text-black text-center"><strong>No hay Practicas Activadas</strong></p>
+        {% endif %}
+
+
     </div>
 
     <!-- Línea divisora -->
@@ -99,7 +73,7 @@
           height="10"
         />
         <button class="bg-verde text-white py-2 px-20 rounded-lg">
-          Reservar
+            <a href="{% url 'sessiones:reservaciones' %}">reservaciones</a>
         </button>
       </div>
     </div>
