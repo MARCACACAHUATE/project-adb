@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # packages
+    'tailwind',
+    'theme',
+    'django_browser_reload',
     # custom apps
     'usuarios',
     'practicas',
@@ -60,6 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # packages
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = 'project_adb.urls'
@@ -156,3 +162,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "usuarios.Usuarios"
 
 AUTHENTICATION_BACKENDS = ['project_adb.custom_auth.MatriculaBackend']
+
+# Custom configs
+TAILWIND_APP_NAME = 'theme'
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

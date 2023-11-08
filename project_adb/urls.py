@@ -33,4 +33,6 @@ urlpatterns = [
     path('sessiones/', include('sessiones.urls', namespace="sessiones")),
     path("maestros/", views.MaestroListView.as_view(), name="maestros_list"),
     path("maestros/<int:maestro_id>", views.MaestroDetailView.as_view(), name="maestros_detail"),
+    # develop urls
+    path("__reload__/", include("django_browser_reload.urls")),
 ]
