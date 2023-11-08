@@ -100,7 +100,7 @@ def home(request):
         })
 
     if request.session["role"] == "Maestro":
-        return render(request, "AdminInicio.html")
+        return render(request, "MaestroMenu.html")
 
     return render(request, "AdminInicio.html")
 

@@ -1,0 +1,59 @@
+{% extends 'base.html' %} 
+
+{% block main %}
+<div class="flex flex-col justify-center items-center mt-14 p-4">
+    <div class="bg-white text-black rounded-full p-4 w-5/6 max-w-screen-3xl text-center mb-8">
+        <div class="grid grid-cols-3 w-full gap-8 justify-items-center">
+            <a class="w-5/6 bg-verde text-white rounded-full py-1 hover:bg-green-900" 
+                href="{% url 'grupos:detail' grupo_id=grupo_data.grupo_id%}">
+                <p>Regresar</p>
+            </a>
+            <button class="col-start-3 w-5/6 bg-verde text-white rounded-full py-1 hover:bg-green-900">
+                <a class="w-5/6 bg-verde text-white rounded-full py-1 hover:bg-green-900" 
+                    href="{% url 'practicas:crear' grupo_id=grupo_data.grupo_id %}">
+                    <p>Activar Practica</p>
+                </a>
+            </button>
+        </div>
+        <h1 class="text-2xl font-bold text-green-500">
+            Grupo {{ grupo_data.numero_brigada }} - Prácticas
+        </h1>
+    </div>
+
+  <div class="space-y-8 w-3/4 max-w-screen-lg">
+    {% for practica in practicas_list %}
+    <div
+      class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
+      onclick="toggleSection('{{ grupo.id }}')">
+      <h2 class="text-lg font-bold text-center w-full">
+        <a href="#">
+          {{ practica.titulo }}
+        </a>
+      </h2>
+      <span class="text-3xl text-green-500">▼</span>
+    </div>
+
+    <div id="{{ practica.id }}" class="hidden space-y-4">
+      <div class="bg-white rounded-full p-4">
+        <h3>Acciones</h3>
+        <button>
+            <a href="#">
+                Lista de estudiantes
+            </a>
+        </button>
+      </div>
+    </div>
+      {% endfor %} 
+    </div>
+  </div>
+      <script>
+        function toggleSection(sectionId) {
+          const section = document.getElementById(sectionId);
+          section.style.display =
+            section.style.display === "none" ? "block" : "none";
+        }
+      </script>
+      {% endblock %}
+    </div>
+  </div>
+</div>

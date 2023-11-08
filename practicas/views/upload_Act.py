@@ -19,14 +19,13 @@ class UploadActView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
-
     
         if request.user.is_authenticated:
-         usuario_id = request.user.id
-         practicas = Practicas.objects.filter(usuario_id=user)
+            usuario_id = request.user.id
+            #practicas = Practicas.objects.filter(usuario_id=user)
 
-         print(usuario_id)
-         print(PracticasAlumnos)
+            print(usuario_id)
+            print(PracticasAlumnos)
         else:
             message="q paso"
         

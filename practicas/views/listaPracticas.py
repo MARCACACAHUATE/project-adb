@@ -5,18 +5,26 @@ from grupos.models import Grupos
 from practicas.models import PracticasAlumnos
 from practicas.models.practicas import Practicas
 from usuarios.models import Usuarios
+from grupos.models import Grupos
 
 
 class ListaPracticasView(LoginRequiredMixin, View):
-   login_url = "login/"
-   template_name = "AlumnoInicio.html"
+    login_url = "login/"
+    template_name = "ListPracticas.html"
 
-   def get(self, request, *args, **kwargs):
-            if request.user.is_authenticated:
-               usuario_id = request.user.id
-               #alumno = Usuarios.objects.get(pk=self.kwargs["alumno_id"])
-               #practica = Practicas.objects.get(pk=self.kwargs["practica_id"]) 
-               print("PITO")
-            return render(request, "AlumnoInicio.html")
+    def get(self, request, *args, **kwargs):
+        grupo_id = self.kwargs["grupo_id"]
+        grupo = Grupos.objects.get(pk=grupo_id)
+
+        grupo_data = {
+            "grupo_id": grupo_id,
+            "numero_brigada": grupo.numero_brigada
+        }
+        practicas_list = Practicas.objects.filter(grupo_id=grupo)
+
+        return render(request, self.template_name, {
+            "grupo_data": grupo_data,
+            "practicas_list": practicas_list
+        })
 
         

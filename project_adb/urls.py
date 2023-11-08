@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
     path('registro', views.registro, name="Registro"),
     path("grupos/", include('grupos.urls', namespace="grupos")),
+    path("practicas/", include('practicas.urls', namespace="practicas")),
     path('registro', views.registro, name="Registro"),   
     path('perfil/', views.perfil, name="Perfil"),
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),

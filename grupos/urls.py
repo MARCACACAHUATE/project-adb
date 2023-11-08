@@ -11,10 +11,5 @@ urlpatterns = [
     path('create', CreateGrupoView.as_view(), name="create_grupo"),
     #path('list', ListGruposView.as_view(), name="list"),
     path('list', GruposListRegisterView.as_view(), name="list"),
-    path('crear_practicas/', CreatePracticasView.as_view(), name='crear_practicas'),
-    path('subir_practicas/', UploadActView.as_view(), name='upload_Act'),
-    path('ver/', UploadActView.as_view(), name='upload_Act'),
-    path('maestrospracticas/', activate_practicas.maestropracticas, name="MaestroPracticas"),
-    path("hola/<int:practica_id>", ListaPracticasView.as_view(), name="detail")
 
 ]

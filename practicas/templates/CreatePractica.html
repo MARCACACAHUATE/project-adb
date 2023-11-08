@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1 class="text-gray-700 font-bold text-titulo-min-xl 
+        sm:mt-10 sm:text-titulo-xl text-center">
+        Grupo {{ grupo_data.brigada }} - Activar Práctica
+    </h1>
+
+    <form class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-1/2 sm:mx-auto"
+        method="post">
+        {% csrf_token %}
+
+        <label for="titulo">Titulo de Práctica</label>
+        <input
+            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            name="titulo"
+            type="text"
+            id="titulo">
+        </input>
+
+        <label for="fecha_inicio">Fecha Inicio</label>
+        <input
+            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            type="datetime-local"
+            name="fecha_inicio"
+            id="fecha_inicio"/>
+
+        <label for="fecha_fin">Fecha Fin</label>
+        <input
+            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            type="datetime-local"
+            name="fecha_fin"
+            id="fecha_fin"/>
+
+        <label for="descripcion">Descripción</label>
+        <input
+            class="flex left-0 border border-gray-300 w-3/4 h-24 px-3 py-2 rounded-md bg-gray-100"
+            name="descripcion"
+            type="text"
+            id="descripcion">
+        </input>
+
+        <div class="flex flex-row gap-3">
+            <div class="text-center bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14">
+                <a href="{% url 'practicas:list' grupo_id=grupo_data.grupo_id %}">
+                    Regresar
+                </a>
+            </div>
+            <button class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14"
+                open-modal-dialog>
+                Activar
+            </button>
+        </div>
+
+        <dialog modal>
+            <div class="modal-content bg-verde p-4 shadow-lg rounded-lg">
+                <h2 class="text-xl text-white font-semibold mb-4">Confrimación de reserva</h2>
+                <p>Su practica a quedado agendada para el día.</p>
+                <button id="closeModal" class="mt-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded">Cerrar</button>
+            </div>
+        </dialog>
+        
+        <script>
+            const openModalButton = document.querySelector("[open-modal-dialog]");
+            const closeModalButton = document.querySelector("[closeModal]");
+            const modal = document.querySelector ("[modal]");
+
+            openModalButton.addEventListener('click', () => {
+                modal.showModal();
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                modal.close();
+            });
+        </script>
+        
+    </form>
+
+{% endblock %}
