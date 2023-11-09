@@ -6,13 +6,17 @@
         Grupo {{ grupo_data.brigada }} - Activar Práctica
     </h1>
 
+
     <form class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-1/2 sm:mx-auto"
         method="post">
         {% csrf_token %}
+        {% if mensaje %}
+        <p class="text-center text-red-400 font-bold">{{ mensaje }}</p>
+        {% endif %}
 
         <label for="titulo">Titulo de Práctica</label>
         <input
-            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            class="flex left-0 border border-gray-300 w-3/4 px-3 py-2 rounded-md bg-gray-100"
             name="titulo"
             type="text"
             id="titulo">
@@ -20,14 +24,14 @@
 
         <label for="fecha_inicio">Fecha Inicio</label>
         <input
-            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            class="flex left-0 border border-gray-300 w-3/4 px-3 py-2 rounded-md bg-gray-100"
             type="datetime-local"
             name="fecha_inicio"
             id="fecha_inicio"/>
 
         <label for="fecha_fin">Fecha Fin</label>
         <input
-            class="flex left-0 border border-gray-300 w-1/4 px-3 py-2 rounded-md bg-gray-100"
+            class="flex left-0 border border-gray-300 w-3/4 px-3 py-2 rounded-md bg-gray-100"
             type="datetime-local"
             name="fecha_fin"
             id="fecha_fin"/>
@@ -41,11 +45,11 @@
         </input>
 
         <div class="flex flex-row gap-3">
-            <div class="text-center bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14">
-                <a href="{% url 'practicas:list' grupo_id=grupo_data.grupo_id %}">
+            <a class="text-center bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14"
+                href="{% url 'practicas:list' grupo_id=grupo_data.grupo_id %}">
                     Regresar
-                </a>
-            </div>
+            </a>
+
             <button class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14"
                 open-modal-dialog>
                 Activar
