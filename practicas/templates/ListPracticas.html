@@ -25,11 +25,11 @@
     <div
       class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
       onclick="toggleSection('{{ grupo.id }}')">
-      <h2 class="text-lg font-bold text-center w-full">
-        <a href="#">
-          {{ practica.titulo }}
-        </a>
-      </h2>
+        <h2 class="text-lg font-bold text-center w-full">
+          <a href="{% url 'practicas:detail' grupo_id=grupo_data.grupo_id practica_id=practica.id %}">
+            {{ practica.titulo }}
+          </a>
+        </h2>
       <span class="text-3xl text-green-500">▼</span>
     </div>
 

@@ -45,11 +45,12 @@
       </div>      
       
     </div>
+  {% endfor %}
     <a class="flex justify-center" href="{% url 'home' %}">
       <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
     </a>
   </div>
-  {% endfor %}
+
   <script>
     function toggleSection(sectionId) {
       const section = document.getElementById(sectionId);
