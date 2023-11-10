@@ -7,29 +7,33 @@
   <h1 class="text-gray-700 font-bold text-titulo-min-xl sm:mt-32 sm:text-titulo-xl text-center">
     Cambiar Cita de Laboratorio
   </h1>
-  <form method="post" action="" class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-96 sm:mx-auto">
-    {% csrf_token %}
-    <label for="materia">Materia</label>
-    <select class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" name="" id="materia">
-      <option value="0">Seleccionar...</option>
-      <option value="1">Laboratorio de Robótica</option>
-    </select>
-    <label for="fecha">Seleccionar Día</label>
-    <input class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" type="date" name="fecha"
-      id="fecha" />
-    <label for="horario">Horario Disponible</label>
-    <select class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" name="practica_id"
-      id="id_practica_id">
-      <option value="">Selecciona el horario</option>
-      {% for practica in practicas %}
-      <option value="{{ practica.id }}">{{ practica.titulo }} - {{ practica.fecha_inicio }}</option>
-      {% endfor %}
-    </select>
-    <button open-modal-dialog
-      class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14">
-      Agendar
-    </button>
+<form method="post" action="" class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-96 sm:mx-auto">
+  {% csrf_token %}
+  <label for="materia">Materia</label>
+  <select class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" name="" id="materia">
+    <option value="0">Seleccionar...</option>
+    <option value="1">Laboratorio de Robótica</option>
+  </select>
+  <label for="fecha">Seleccionar Día</label>
+  <input class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" type="date" name="fecha"
+  {% if practica.fecha_inicio < hoy %}
+  min="{{hoy|date:'Y'}}-{{hoy|date:'m'}}-{{hoy|date:'d'}}"
+  {% else %}
+  min="{{practica.fecha_inicio|date:'Y'}}-{{practica.fecha_inicio|date:'m'}}-{{practica.fecha_inicio|date:'d'}}"
+  {% endif %}
+  max="{{practica.fecha_fin|date:'Y'}}-{{practica.fecha_fin|date:'m'}}-{{practica.fecha_fin|date:'d'}}"
+  id="fecha" />
+  <button open-modal-dialog
+    class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14">
+    Ver horarios disponibles
+  </button>
 
+  <a class="flex justify-center" href="{% url 'sessiones:reservaciones' %}">
+    <div
+      class="text-center sm:py-32 bg-verde py-2 mt-4 w-full p-8 text-white rounded-full cursor-pointer hover:bg-green-300">
+      Regresar
+    </div>
+  </a>
     <dialog modal>
       <div class="modal-content bg-verde p-4 shadow-lg rounded-lg">
         <h2 class="text-xl text-white font-semibold mb-4">Confrimación de reserva</h2>
@@ -38,7 +42,7 @@
           class="mt-4 bg-gray-300 hover:bg-gray-400 text-gray-700 font-semibold py-2 px-4 rounded">Cerrar</button>
       </div>
     </dialog>
-
+<!--
     <script>
       const openModalButton = document.querySelector("[open-modal-dialog]");
       const closeModalButton = document.querySelector("[closeModal]");
@@ -52,6 +56,7 @@
         modal.close();
       });
     </script>
+  -->
 
   </form>
 

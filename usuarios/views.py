@@ -116,7 +116,8 @@ def home(request):
     if request.session["role"] == "Maestro":
         return render(request, "MaestroMenu.html")
 
-    return render(request, "AdminInicio.html")
+    if request.session["role"] == "Admin":
+        return render(request, "AdminInicio.html")
 
 
 def perfil(request):
@@ -158,7 +159,7 @@ def registromaestros(request):
                     role_id = role,
                 )
 
-                return render(request, "AdminInicio.html")
+                return render(request, "MaestroList.html")
 
             except Exception as error:
                 print(error)
@@ -169,7 +170,7 @@ def registromaestros(request):
             print("Formulario Invalido")
             return render(request, 'RegistroMaestros.html', {
                 "form": formulario,
-                "mensaje": 'Error en el formulario'
+                "mensaje": 'Algún dato ingresado es incorrecto. Favor de llenar nuevamente los campos.'
             })
 
     return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })

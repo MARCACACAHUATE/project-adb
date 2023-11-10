@@ -26,7 +26,7 @@
                         <!--<th class="border-t border-t-white px-4 py-2">id</th>-->
                         <th class="border-t border-t-white px-4 py-2">Fecha Reservación</th>
                         <th class="border-t border-t-white px-4 py-2">Hora de la Práctica</th>
-                        <th class="border-t border-t-white px-4 py-2">created_at</th>
+                        <th class="border-t border-t-white px-4 py-2">Datos de Creación</th>
                         <th class="border-t border-t-white px-4 py-2">Alumno - Matricula</th>
                         <th class="border-t border-t-white px-4 py-2">Número Practica</th>
                         <th></th>
@@ -35,10 +35,10 @@
                     {% for reservacion in reservaciones %}
                     <tr class="bg-gris hover:bg-green-200">
                         <!--<td class="border-t border-t-white px-4 py-2">{{reservacion.id}}</td>-->            
-                        <td class="border-t border-t-white px-4 py-2">{{reservacion.fecha_reservacion}}</td>
-                        <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.fecha_inicio|date:'d/F h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}} </td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.fecha_reservacion|date:'d/F'}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.fecha_reservacion|date:'H:i:s'}} - {{reservacion.fecha_reservacion|date:'H'}}:59:59 </td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.created_at}}</td>
-                        <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id_id}}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id.matricula}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.titulo}}</td>
                         <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
                         <td>
@@ -48,7 +48,7 @@
                     {% endfor %}
                 </table>
             </div>
-            {{ mensaje }}
+            <h3>{{ mensaje }}</h3>
         </div>
     </div>
 

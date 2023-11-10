@@ -1,7 +1,11 @@
 #from django.forms import forms
+import datetime
 from django import forms
 
 class ReservacionForm(forms.Form):
-    practica_id = forms.IntegerField()
+    fecha_reservacion = forms.CharField()
+
+class FechaForm(forms.Form):
+    fecha = forms.CharField()
     
    

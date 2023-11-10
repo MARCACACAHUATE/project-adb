@@ -4,7 +4,7 @@
 {% block main %}
 <div class="flex justify-center items-center mt-10">
     <div class="w-2/4 text-center bg-white rounded-3xl pb-12">
-        <h1 class="text-verde text-titulo-xl font-bold mt-8">Detalles Usuario {{ maestro.id }}</h1>
+        <h1 class="text-verde text-titulo-xl font-bold mt-8">Detalles Usuario {{ maestro.matricula }}</h1>
         <div class="grid justify-items-center mt-8">
             <img src="{% static 'img/Logo.png' %}" alt="" class="w-32 h-32 rounded-full">
         </div>
@@ -20,7 +20,7 @@
                 <td class="text-xl mt-4 px-4 py-2"><b>Correo Universitario:</b> {{ maestro.correo }}</td>
             </tr> 
             <tr>
-                <td class="text-xl mt-4 px-4 py-2"><b>Role:</b> {{ maestro.role_id.Role }}</td>
+                <td class="text-xl mt-4 px-4 py-2"><b>Rol:</b> {{ maestro.role_id.Role }}</td>
             </tr> 
         </table>
 

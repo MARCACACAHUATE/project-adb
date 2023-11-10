@@ -3,7 +3,7 @@ from django.utils import timezone
 
 
 class Reservaciones(models.Model):
-    fecha_reservacion = models.DateTimeField(default=timezone.now)
+    fecha_reservacion = models.DateTimeField()
     is_valid = models.BooleanField(default=True)
     reagendar = models.BooleanField(default=True)
     created_at = models.DateTimeField(default=timezone.now)
