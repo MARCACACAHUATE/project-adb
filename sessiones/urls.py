@@ -4,7 +4,7 @@ from . import views
 app_name = "sessiones"
 
 urlpatterns = [
-    path('', views.inicio),
+    path('', views.SessionRedirectView.as_view(), name="session_redirect"),
     path('reservaciones', views.reservaciones, name='reservaciones'),
     path('reservaciones/crear/', views.crear, name='crear'),
     path('reservaciones/crear/horario', views.horario, name='horario'),

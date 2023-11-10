@@ -2,6 +2,7 @@ import traceback
 from datetime import datetime
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
+from django.contrib.messages import get_messages
 from django.views import View
 from usuarios.forms.registrouser import CustomUserForm
 from usuarios.forms import FormularioRegistro
@@ -82,7 +83,6 @@ def registro(request):
 
 @login_required(login_url="login/")
 def home(request):
-    print("arriba las pinches chivas")
 
     if request.session["role"] == "Alumno":
         alumno = Usuarios.objects.get(pk=request.session.get("user_id"))
@@ -111,8 +111,7 @@ def home(request):
         return render(request, "AlumnoInicio.html", {
             "grupo_data": grupo_data,
             "list_practicas": list_practicas,
-            "practica_activa": practica_activa
-
+            "practica_activa": practica_activa,
         })
 
     if request.session["role"] == "Maestro":
