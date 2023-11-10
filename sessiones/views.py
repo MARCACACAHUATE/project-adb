@@ -57,7 +57,7 @@ def crear(request):
 
 def horario(request):
     user = request.session.get("user_id")
-    request.session['horas'] = ['00','01','02', '03', '04', '05','06', '07', '09', '10','11', '12', '13', '14','15', '16', '17', '18','19', '20', '21', '22','23', '24' ]
+    request.session['horas'] = ['00','01','02', '03', '04', '05','06', '07', '09', '10','11', '12', '13', '14','15', '16', '17', '18','19', '20', '21', '22','23']
     #ultima_practica = Practicas.objects.latest('fecha_inicio')
     ultima_practica = Practicas.objects.get(pk=request.session.get("practica_activa"))   
 

@@ -44,17 +44,17 @@
         <div>
             <table class="container">
                 <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
-                    Grupos Pito
+                    Grupos
                 </caption>
                 <tr class="bg-gris hover:bg-green-200">
-                    <th class="border-t border-t-white px-4 py-2">Id</th>
-                    <th class="border-t border-t-white px-4 py-2">Numero de Brigada</th>
-                    <th class="border-t border-t-white px-4 py-2">Maestro encargado</th>
+                    <th class="border-t border-t-white px-2 py-2">Número de Grupo</th>
+                    <th class="border-t border-t-white px-4 py-2">Número de Brigada</th>
+                    <th class="border-t border-t-white px-4 py-2">Maestro Encargado</th>
                     <th class="border-t border-t-white px-4 py-2">Detalles</th>
                 </tr>
                 {% for grupo in lista_grupos %}
                 <tr class="bg-gris hover:bg-green-200">
-                    <td class="border-t border-t-white px-4 py-2">{{ grupo.id }}</td>
+                    <td class="border-t border-t-white px-2 py-2">{{ grupo.id }}</td>
                     <td class="border-t border-t-white px-4 py-2">{{ grupo.numero_brigada }}</td>
                     <td class="border-t border-t-white px-4 py-2">{{ grupo.maestro_id.nombre }}</td>
                     <td class="border-t border-t-white px-4 py-2">

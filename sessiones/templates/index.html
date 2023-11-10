@@ -40,13 +40,13 @@
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.created_at}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id.matricula}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.titulo}}</td>
-                        <td class="border-t border-t-white px-4 py-2">
+                        <td class="">
                             <a href="{% url 'sessiones:editar' reservacion.id %}" 
                                 class="btn btn-warning btn-sm">
                                 Editar
                             </a>
                         </td>
-                        <td class="border-t border-t-white px-4 py-2">
+                        <td class="">
                             <a href="{% url 'sessiones:eliminar' reservacion.id %}" 
                                 class="btn btn-danger btn-sm">
                                 Cancelar

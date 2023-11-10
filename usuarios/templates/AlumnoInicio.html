@@ -26,8 +26,8 @@
 
         <!--Informacipon de la Brigada-->
         <div class="ml-60">
-            <p><strong>Brigada:</strong>{{ grupo_data.numero_brigada }}</p>
-            <p><strong>Instructor:</strong>{{ grupo_data.nombre_maestro }}</p>
+            <p><strong>Brigada: </strong>{{ grupo_data.numero_brigada }}</p>
+            <p><strong>Instructor: </strong>{{ grupo_data.nombre_maestro }}</p>
         </div>
     </div>
 
@@ -103,16 +103,16 @@
 
             <!-- Botón Reservar -->
             <div class="p-5 flex items-center">
-                <img
+                <!--<img
                 src="{% static 'img/Calendario.png' %}"
                 class="mr-5"
                 width="10"
                 height="10"
-                />
-                <button class="bg-verde text-white py-2 px-20 rounded-lg">
-                    <a href="{% url 'sessiones:reservaciones' %}">reservaciones</a>
-                </button>
+                />-->                                
             </div>
+            <a class="flex justify-center" href="{% url 'sessiones:reservaciones' %}">
+                <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Reservaciones</div>
+            </a>
         </div>
     </div>
     <div class="p-8 mb-8 w-1 shadow-md ">

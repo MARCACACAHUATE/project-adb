@@ -1,11 +1,9 @@
 {% extends 'base.html' %} {% block main %}
 <div class="flex flex-col justify-center items-center mt-14 p-4">
-  <div
-    class="bg-white text-black rounded-full p-4 w-5/6 max-w-screen-3xl text-center mb-8"
-  >
+  <div class="bg-white text-black rounded-full p-4 w-5/6 max-w-screen-3xl text-center mb-8">
     <h1 class="text-2xl font-bold text-green-500">GRUPOS</h1>
-
-  <div class="space-y-8 w-3/4 max-w-screen-lg">
+  </div>
+    <div class="space-y-8 w-3/4 max-w-screen-lg">
     {% for grupo in lista_grupos %}
     <div
       class="flex items-center justify-between p-4 bg-white rounded-full cursor-pointer"
@@ -32,7 +30,14 @@
                       <a href="{% url 'grupos:detail' grupo_id=grupo.id %}">Lista de estudiantes</a>
                   </button>
               </td>
-          </tr>          
+          </tr>
+          <!--<tr class="bg-gris hover:bg-green-200">
+              <td class="text-center border-t rounded-full border-t-white px-4 py-2">
+                <button>
+                    <a href="{% url 'practicas:list' grupo_id=grupo.id %}">Prácticas</a>
+                </button>
+              </td>
+          </tr>-->         
         </table>
       </div>      
       
@@ -41,7 +46,7 @@
     <a class="flex justify-center" href="{% url 'home' %}">
       <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
     </a>
-  </div>
+  
   <script>
     function toggleSection(sectionId) {
       const section = document.getElementById(sectionId);
