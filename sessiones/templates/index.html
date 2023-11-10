@@ -4,7 +4,7 @@
     <div class="h-5/6 flex justify-center items-center">
         <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
 
-            <h1 class=" text-titulo-xl font-bold mt-12">Lista Reservaciones</h1>
+            <h1 class=" text-titulo-xl font-bold mt-12">Lista de Reservaciones</h1>
             <form method="post" enctype="multipart/form-data" class="grid grid-cols-2 w-full gap-8 justify-items-center">
                 {% csrf_token %}
                 <a class="w-2/3 bg-verde text-white rounded-lg py-2 hover:bg-green-900" href="{% url 'home' %}">
@@ -20,7 +20,7 @@
             <div>
                 <table class="container">
                     <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
-                        Estudiantes - Reservaciones
+                        Reservaciones
                     </caption>
                     <tr class="bg-gris hover:bg-green-200">
                         <!--<th class="border-t border-t-white px-4 py-2">id</th>-->
@@ -29,8 +29,8 @@
                         <th class="border-t border-t-white px-4 py-2">Datos de Creación</th>
                         <th class="border-t border-t-white px-4 py-2">Alumno - Matricula</th>
                         <th class="border-t border-t-white px-4 py-2">Número Practica</th>
-                        <th></th>
-                        <th></th>
+                        <th class="border-t border-t-white px-4 py-2"></th>
+                        <th class="border-t border-t-white px-4 py-2"></th>
                     </tr>
                     {% for reservacion in reservaciones %}
                     <tr class="bg-gris hover:bg-green-200">
@@ -40,9 +40,17 @@
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.created_at}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.alumno_id.matricula}}</td>
                         <td class="border-t border-t-white px-4 py-2">{{reservacion.practica_id.titulo}}</td>
-                        <td><a href="{% url 'sessiones:editar' reservacion.id %}" class="btn btn-warning btn-sm">Editar</a></td>
-                        <td>
-                            <a href="{% url 'sessiones:eliminar' reservacion.id %}" class="btn btn-danger btn-sm">Eliminar</a>
+                        <td class="border-t border-t-white px-4 py-2">
+                            <a href="{% url 'sessiones:editar' reservacion.id %}" 
+                                class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+                        </td>
+                        <td class="border-t border-t-white px-4 py-2">
+                            <a href="{% url 'sessiones:eliminar' reservacion.id %}" 
+                                class="btn btn-danger btn-sm">
+                                Cancelar
+                            </a>
                         </td>
                     </tr>
                     {% endfor %}

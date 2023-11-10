@@ -3,11 +3,12 @@
 {% block main %}
 {% load static %}
 
-    <h1
-      class="text-gray-700 font-bold text-titulo-min-xl sm:mt-32 sm:text-titulo-xl text-center"
-    >
-      Agendar Cita de Laboratorio
-    </h1>
+    <div class="text-gray-700 text-center">
+      <h1 class="font-bold text-titulo-min-xl sm:mt-32 sm:text-titulo-xl">
+        Agendar Cita de Laboratorio
+      </h1>
+      <p class="text-3xl">{{ practica.titulo }}</p>
+    </div>
     <form
     method="post"
       action=""
@@ -18,10 +19,9 @@
       <select
         class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
         name=""
-        id="materia"
-      >
+        id="materia">
         <option value="0">Seleccionar...</option>
-        <option value="1">Laboratorio de Robótica</option>
+        <option value="1" selected>Laboratorio de Robótica</option>
       </select>
       <label for="fecha">Seleccionar Día</label>
       <input
@@ -43,7 +43,7 @@
       </button>
       
       <a class="flex justify-center" href="{% url 'sessiones:reservaciones' %}">
-        <div class="text-center sm:py-32 bg-verde py-2 mt-4 w-full p-8 text-white rounded-full cursor-pointer hover:bg-green-300">
+        <div class="text-center bg-verde py-2 mt-4 w-full p-8 text-white rounded-full cursor-pointer hover:bg-green-300">
           Regresar
         </div>
       </a>

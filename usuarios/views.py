@@ -106,6 +106,8 @@ def home(request):
             "titulo": practica.titulo
         }
 
+        request.session["practica_activa"] = practica.id
+
         return render(request, "AlumnoInicio.html", {
             "grupo_data": grupo_data,
             "list_practicas": list_practicas,
