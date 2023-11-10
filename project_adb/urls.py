@@ -26,6 +26,7 @@ urlpatterns = [
     path('logout/', views.logout_user, name="logout"),
     path('registro', views.registro, name="Registro"),
     path("grupos/", include('grupos.urls', namespace="grupos")),
+    path("practicas/", include('practicas.urls', namespace="practicas")),
     path('registro', views.registro, name="Registro"),   
     path('perfil/', views.perfil, name="Perfil"),
     path('registromaestros', views.registromaestros, name="RegistroMaestros"),
@@ -33,4 +34,6 @@ urlpatterns = [
     path('sessiones/', include('sessiones.urls', namespace="sessiones")),
     path("maestros/", views.MaestroListView.as_view(), name="maestros_list"),
     path("maestros/<int:maestro_id>", views.MaestroDetailView.as_view(), name="maestros_detail"),
+    # develop urls
+    path("__reload__/", include("django_browser_reload.urls")),
 ]

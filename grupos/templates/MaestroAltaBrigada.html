@@ -3,13 +3,22 @@
 {% block main %}
     <div class="h-5/6 flex justify-center items-center">
         <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
-
-            <h1 class=" text-titulo-xl font-bold mt-12">Brigada {{ grupo.numero_brigada }}</h1>
+            <div class="flex justify-startp-2">
+                <button class="bg-verde hover:bg-green-900 rounded-full my-3 mx-5">
+                    <a href="{% url 'grupos:list' %}">
+                        <div class="w-8 h-6 text-white font-bold">
+                            <p><-</p>
+                        </div>
+                    </a>
+                </button>
+            </div>
+            <h1 class=" text-titulo-xl font-bold mt-1">Brigada {{ grupo.numero_brigada }}</h1>
             <form method="post" enctype="multipart/form-data" class="grid grid-cols-3 w-full gap-8 justify-items-center">
                 {% csrf_token %}
-                <a class="w-5/6 bg-verde text-white rounded-lg py-2 hover:bg-green-900" href="{% url 'grupos:list' %}">
+                <a class="w-5/6 bg-verde text-white rounded-lg py-2 hover:bg-green-900" 
+                    href="{% url 'practicas:list' grupo_id=grupo.id%}">
                     <p>
-                        Regresar
+                        Practica
                     </p>
                 </a>
                 <input 
@@ -23,9 +32,9 @@
                 </button>
             </form>
 
-            <div>
+            <div class="overflow-auto h-80 mt-8">
                 <table class="container">
-                    <caption class="caption-top bg-gris font-bold mt-8 px-4 py-2">
+                    <caption class="caption-top bg-gris font-bold px-4 py-2">
                         Estudiantes
                     </caption>
                     <tr class="bg-gris hover:bg-green-200">
