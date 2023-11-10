@@ -1,4 +1,5 @@
 import traceback
+from datetime import datetime
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from django.views import View
@@ -93,10 +94,23 @@ def home(request):
             "numero_brigada": grupo_default.numero_brigada,
             "nombre_maestro": grupo_default.maestro_id.nombre,
         }
+        today = datetime.now()
+
+        practica = Practicas.objects.filter(
+            fecha_inicio__lte=today,
+            fecha_fin__gte=today
+        )[0]
+
+        practica_activa = {
+            "id": practica.id, 
+            "titulo": practica.titulo
+        }
 
         return render(request, "AlumnoInicio.html", {
             "grupo_data": grupo_data,
-            "list_practicas": list_practicas
+            "list_practicas": list_practicas,
+            "practica_activa": practica_activa
+
         })
 
     if request.session["role"] == "Maestro":
