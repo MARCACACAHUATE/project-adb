@@ -1,5 +1,6 @@
 import datetime
 from enum import global_enum_repr
+import re
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from requests import session
@@ -39,13 +40,11 @@ def crear(request):
             request.session["fecha"] = form.cleaned_data["fecha"]
             return redirect('sessiones:horario')   
 
-
     try: 
         practica = Practicas.objects.get(is_valid=True)   
         return render(request, 'AlumnoAgendar.html', {'practica': practica, 'hoy': now} )
     except Practicas.DoesNotExist:
         return render(request, 'index.html', { "mensaje": f"No hay prácticas disponibles"})
-    
 
 #-------------------------------------------------------------------------------------------------------------------------
 
