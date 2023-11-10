@@ -25,8 +25,8 @@
           <td class="border py-2 px-4">Laboratorio de Robotica</td>
           <td class="border py-2 px-4">001</td>
           <td class="border py-2 px-4">{{reservacion.practica_id.titulo}}</td>
-          <td class="border py-2 px-4">{{reservacion.practica_id.fecha_inicio|date:'d/F'}}</td>
-          <td class="border py-2 px-4">{{reservacion.practica_id.fecha_inicio|date:'h:i:s'}} - {{reservacion.practica_id.fecha_fin|date:'h:i:s'}}</td>
+          <td class="border py-2 px-4">{{reservacion.fecha_reservacion|date:'d/F'}}</td>
+          <td class="border py-2 px-4">{{reservacion.fecha_reservacion|date:'h:i:s'}} - {{reservacion.fecha_reservacion|date:'h'}}:59:59</td>
           <td class="border py-2 px-4">
             <button
               class="bg-verde w-full py-1 px-1 text-white rounded-full cursor-pointer hover:bg-green-300"

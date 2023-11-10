@@ -18,12 +18,12 @@
       <label for="horario">Horario Disponible</label>
       <select
         class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
-        name="practica_id"
+        name="fecha_reservacion"
         id="id_practica_id"
       >
         <option value="">Selecciona el horario</option>
-        {% for practica in practicas %}
-        <option value="{{ practica.id }}">{{ practica.fecha_inicio|date:'h:i:s' }}</option>
+        {% for hora in horas %}
+        <option value="{{ hora }}">{{ hora }}:00 - {{ hora }}:59 </option>
         {% endfor %}
       </select>
       <button  open-modal-dialog
@@ -32,7 +32,7 @@
         Agendar
       </button>
       
-      <a class="flex justify-center" href="{% url 'sessiones:reservaciones' %}">
+      <a class="flex justify-center" href="{% url 'sessiones:crear' %}">
         <div class="text-center sm:py-32 bg-verde py-2 mt-4 w-full p-8 text-white rounded-full cursor-pointer hover:bg-green-300">
           Regresar
         </div>

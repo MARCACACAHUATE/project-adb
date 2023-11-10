@@ -16,8 +16,13 @@
   </select>
   <label for="fecha">Seleccionar Día</label>
   <input class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100" type="date" name="fecha"
-    min="{{primera_practica|date:'Y'}}-{{primera_practica|date:'m'}}-{{primera_practica|date:'d'}}"
-    max="{{ultima_practica|date:'Y'}}-{{ultima_practica|date:'m'}}-{{ultima_practica|date:'d'}}" id="fecha" />
+  {% if practica.fecha_inicio < hoy %}
+  min="{{hoy|date:'Y'}}-{{hoy|date:'m'}}-{{hoy|date:'d'}}"
+  {% else %}
+  min="{{practica.fecha_inicio|date:'Y'}}-{{practica.fecha_inicio|date:'m'}}-{{practica.fecha_inicio|date:'d'}}"
+  {% endif %}
+  max="{{practica.fecha_fin|date:'Y'}}-{{practica.fecha_fin|date:'m'}}-{{practica.fecha_fin|date:'d'}}"
+  id="fecha" />
   <button open-modal-dialog
     class="bg-verde w-full py-2 text-white rounded-full cursor-pointer hover:bg-green-300 mt-4 sm:mt-14">
     Ver horarios disponibles
