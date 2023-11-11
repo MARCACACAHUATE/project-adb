@@ -134,6 +134,7 @@ def reagendar(request):
 
 
 def reagendarHorario(request):
+    
     id_reservacion = request.session.get("reservacion_id")
     user = request.session.get("user_id")
     reagendar = Reservaciones.objects.get(pk= id_reservacion)
@@ -180,8 +181,13 @@ def reagendarHorario(request):
     reservaciones = Reservaciones.objects.filter(fecha_reservacion__date=request.session["fecha"])
 
     for reservacion in reservaciones:
-            hora = reservacion.fecha_reservacion.hour
-            request.session['horas'].remove(str(hora))
+        hora = reservacion.fecha_reservacion.hour
+        hora_formateada = hora 
+        if len(str(hora)) < 2:
+            print(f"0{hora}")
+            hora_formateada = f"0{hora}"
+
+        request.session['horas'].remove(str(hora_formateada))
 
     return render(request, "AlumnoModificarHora.html", {'horas': request.session['horas']})
 
