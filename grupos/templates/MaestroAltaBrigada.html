@@ -2,7 +2,7 @@
 
 {% block main %}
     <div class="h-5/6 flex justify-center items-center">
-        <div class="h-5/6 w-5/6 text-center bg-white rounded-3xl px-10">
+        <div class="w-5/6 text-center bg-white rounded-3xl px-10 ">
             <h1 class=" text-titulo-xl font-bold mt-1">Brigada {{ grupo.numero_brigada }}</h1>
             <form method="post" enctype="multipart/form-data" class="grid grid-cols-3 w-full gap-8 justify-items-center">
                 {% csrf_token %}
@@ -46,11 +46,11 @@
                         <td class="border-t border-t-white px-4 py-2">{{ alumno.nombre }}</td>
                         <td class="border-t border-t-white px-4 py-2">{{ alumno.matricula }}</td>
                         <td class="border-t border-t-white px-4 py-2">{{ alumno.correo }}</td>
-                        <td class="border-t border-t-white px-4 py-2"></td>
+                        <td class="border-t border-t-white px-4 py-2"> {{ grupo.numero_brigada }}</td>
                     </tr>
                     {% endfor %}
                 </table>
-            </div>
+            </div><br>
         </div>
     </div>
 {% endblock %}
