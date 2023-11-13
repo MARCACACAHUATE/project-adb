@@ -123,7 +123,8 @@ def reagendar(request):
             request.session["fecha"] = form.cleaned_data["fecha"]
             return redirect('sessiones:reagendarHorario')  
     try: 
-        practica = Practicas.objects.get(is_valid=True)   
+        #practica = Practicas.objects.get(is_valid=True)   
+        practica = Practicas.objects.get(pk=request.session["practica_activa"])   
         return render(request, 'AlumnoReagendar.html', {'practica': practica, 'hoy': now} )
     except Practicas.DoesNotExist:
         return render(request, 'index.html', { "mensaje": f"No hay prácticas disponibles"})

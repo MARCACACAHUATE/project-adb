@@ -1,0 +1,1 @@
+from .session_redirect import SessionRedirectView
