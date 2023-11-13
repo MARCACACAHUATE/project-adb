@@ -10,67 +10,67 @@
     <title>Crear Brigadas</title>
   </head>
 
-  <body class="h-screen fondologin">
-    <section class="grid grid-cols-2 h-full sm:grid-cols-3">
-      <article class="text-center w-screen mt-2 sm:w-full">
-        <h2
-          class="font-bold text-titulo-min-xl text-white sm:text-titulo-xl sm:mt-56"
-        >
-          Brigadas
-        </h2>
-      </article>
+    <body class="h-screen fondologin">
+        <section class="grid grid-cols-2 h-full sm:grid-cols-3">
+        <article class="text-center w-screen mt-2 sm:w-full">
+            <h2
+            class="font-bold text-titulo-min-xl text-white sm:text-titulo-xl sm:mt-56"
+            >
+            Brigadas
+            </h2>
+        </article>
 
-      <article
-        class="bg-gradient-to-r from-green-50 to-green-50 col-span-2 h-full text-center fondologinright"
-      >
-        <h1
-          class="text-verde font-bold text-titulo-min-xl mt-0 sm:mt-20 sm:text-titulo-xl"
-        >
-          Crear Brigada
-        </h1>
+        <article class="bg-gradient-to-r from-green-50 to-green-50 col-span-2 h-full text-center fondologinright">
+            <h1 class="text-verde font-bold text-titulo-min-xl mt-0 sm:mt-20 sm:text-titulo-xl">
+                Crear Brigada
+            </h1>
 
-        <form
-          action="" 
-          method="post"
-          autocomplete="off"
-          class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center sm:w-1/2 sm:mx-auto sm:grid-cols-1"
-        >
-          {% csrf_token %}
-          <label>Número de Brigada</label>
-          <input
-            class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
-            placeholder="Numero de Brigada"
-            type="number"
-            name="numero_brigada"
-            required
-          />
+            <form class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center sm:w-1/2 sm:mx-auto sm:grid-cols-1"
+                action="" 
+                method="post"
+                autocomplete="off">
+                {% csrf_token %}
 
-          <label>Seleccionar Maestro</label>
-          <select
-            class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
-            placeholder="Maestro"
-            type="number"
-            name="maestro_id"required
-          >
-            <option value="0" selected>Seleccionar</option>
-            {% for maestro in maestros_list%}
-            <option value="{{ maestro.id }}">{{ maestro.nombre }}</option>
-            {% endfor %}
-          </select>
-          <br /><br /><br /><br /><br /><br />
-          <button
-            class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4"
-          >
-            Crear Grupo
-          </button>
-          <a
-            href="{% url 'home' %}"
-            class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4"
-            ><div>Regresar</div></a
-          >
-          <br />
-        </form>
-      </article>
-    </section>
-  </body>
+                <label>Número de Brigada</label>
+                <input class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
+                    placeholder="Numero de Brigada"
+                    type="number"
+                    name="numero_brigada"
+                    required/>
+
+                <label>Seleccionar Maestro</label>
+                <select class="border border-gray-300 w-11/12 px-3 py-2 mb-4 rounded-md bg-gray-100 col-span-2 sm:col-span-1 sm:w-full"
+                    placeholder="Maestro"
+                    type="number"
+                    name="maestro_id"
+                    required>
+                        <option value="0" selected>Seleccionar</option>
+                        {% for maestro in maestros_list%}
+                        <option value="{{ maestro.id }}">{{ maestro.nombre }}</option>
+                        {% endfor %}
+                </select>
+
+                <div class="w-full">
+                    <label class="align-middle">Crear prácticas automáticamente</label>
+                    <input class="align-middle" 
+                        name="gen_practicas"
+                        type="checkbox" 
+                        checked />
+                </div>
+
+                <br /><br /><br /><br /><br /><br />
+
+                <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4">
+                    Crear Grupo
+                </button>
+
+                <a class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-4"
+                    href="{% url 'grupos:list' %}">
+                    <div>Regresar</div>
+                </a>
+                <br />
+            </form>
+        </article>
+        </section>
+    </body>
 </html>
