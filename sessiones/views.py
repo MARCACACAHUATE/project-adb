@@ -135,12 +135,11 @@ def reagendar(request):
 
 
 def reagendarHorario(request):
-    
+    request.session['horas'] = ['00','01','02', '03', '04', '05','06', '07', '09', '10','11', '12', '13', '14','15', '16', '17', '18','19', '20', '21', '22','23']
     id_reservacion = request.session.get("reservacion_id")
     user = request.session.get("user_id")
     reagendar = Reservaciones.objects.get(pk= id_reservacion)
     editar = reagendar.reagendar
-    ultima_practica = Practicas.objects.latest('fecha_inicio')
 
     if request.method == 'POST':
                 form = ReservacionForm(request.POST)
@@ -149,29 +148,19 @@ def reagendarHorario(request):
                 if form.is_valid() and editar:
                     try:
                         reservacion = Reservaciones.objects.get(pk= id_reservacion)
-                        practica_id = reservacion.practica_id_id
-                        practica = Practicas.objects.get(pk= practica_id)
                         
-                        
-                        #Valida que el cambio sea de la misma práctica
-                        if practica.titulo == ultima_practica.titulo:
+                        #Cambia el campo "is_valid" de la práctica antigua para que alguien más la pueda reservar
+                        hora = reservacion.fecha_reservacion.hour
+                        request.session['horas'].append(str(hora))
 
-                            #Cambia el campo "is_valid" de la práctica antigua para que alguien más la pueda reservar
-                            hora = reservacion.fecha_reservacion.hour
-                            request.session['horas'].append(str(hora))
-
-                            #Agrega la nueva práctica a la reservación y cambia el campo "reagendar" a False para que no pueda volver a reagendar 
-                            fecha = request.session["fecha"] + ' ' + form.cleaned_data["fecha_reservacion"]
-                        
-                            request.session['horas'].remove(str(form.cleaned_data["fecha_reservacion"]))
-                            #Crea la reservación con el id del usuario y la fecha seleccionada 
-                            reservacion = Reservaciones.objects.filter(pk= reservacion.pk).update(fecha_reservacion= fecha, reagendar=False)
-                            print(reservacion)
-                            return redirect("sessiones:reservaciones")
-                        else: 
-                            reservaciones = Reservaciones.objects.filter(alumno_id= user )
-                            return render(request, 'index.html', {'reservaciones': reservaciones, 'mensaje': f"No puedes reagendar una práctica diferente"})
-                            
+                        #Agrega la nueva práctica a la reservación y cambia el campo "reagendar" a False para que no pueda volver a reagendar 
+                        fecha = request.session["fecha"] + ' ' + form.cleaned_data["fecha_reservacion"]
+                    
+                        request.session['horas'].remove(str(form.cleaned_data["fecha_reservacion"]))
+                        #Crea la reservación con el id del usuario y la fecha seleccionada 
+                        reservacion = Reservaciones.objects.filter(pk= reservacion.pk).update(fecha_reservacion=fecha, reagendar=False)
+                        print(reservacion)
+                        return redirect("sessiones:reservaciones")
                     
                     except Reservaciones.DoesNotExist:
                         return render(request, 'AlumnoAgendar.html', { "mensaje": f"La reservación no existe"})
