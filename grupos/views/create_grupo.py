@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
 from grupos.forms import CreateGrupoForm
@@ -7,7 +8,8 @@ from grupos.models import Grupos
 from practicas.models import Practicas
 
 
-class CreateGrupoView(View):
+class CreateGrupoView(LoginRequiredMixin, View):
+    login_url = "login/"
     form_class = CreateGrupoForm
     template_name = "CrearGrupo.html"
 

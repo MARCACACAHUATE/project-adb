@@ -13,3 +13,4 @@ class Grupos(models.Model):
         "usuarios.Usuarios", 
         related_name="alumnos"
     )
+    is_active = models.BooleanField(default=True)
