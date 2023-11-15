@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+<div class="flex justify-center items-center mt-10">
+
+    <form class="w-2/4 text-center bg-white rounded-3xl p-6"
+        method="post">
+        {% csrf_token %}
+
+        {% if mensaje %}
+        <p>{{ error_message }}</p>
+        {% endif %}
+
+        <div class="flex">
+            <lable>Titulo</lable>
+            <input 
+                name="titulo"
+                value="{{ practica.titulo }}"/>
+        </div>
+
+        <div class="flex">
+            <lable>Descripción</lable>
+            <textarea 
+                name="descripcion">
+                {{ practica.descripcion }}
+            </textarea>
+        </div>
+
+        <!--
+        <div class="flex">
+            <lable>Activar Práctica</lable>
+            <select
+                class="tu-clase-css"
+                name="is_valid">
+                <option 
+                    {% if practica.is_valid %} selected {% endif %}
+                    value="True">Activa Práctica</option>
+                <option 
+                    {% if not practica.is_valid %} selected {% endif %}
+                    value="False">Desactiva Práctica</option>
+            </select>
+        </div>
+        -->
+
+        <div class="flex">
+            <lable>Fecha de Inicio</lable>
+            <input 
+                type="datetime-local"
+                name="fecha_inicio"
+                value="{{ practica.fecha_inicio }}"/>
+        </div>
+
+        <div class="flex">
+            <lable>Fecha de Cierre</lable>
+            <input 
+                type="datetime-local"
+                name="fecha_fin"
+                value="{{ practica.fecha_fin }}"/>
+        </div>
+
+        <div class="flex gap-3 justify-center m-4">  
+            <a href="{% url 'practicas:detail' grupo_id=grupo_id practica_id=practica_id %}">
+                <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
+            </a>
+
+            <button class="w-32 text-center bg-[#1ab26b] py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300"
+                type="submit">
+                <div>Guardar</div>
+            </button>
+        </div>
+
+    </form>
+
+    <div class="grid grid-cols-1 justify-items-center">
+    </div>
+</div>
+{% endblock %}
