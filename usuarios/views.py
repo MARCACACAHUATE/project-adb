@@ -39,6 +39,13 @@ def logout_user(request):
     return redirect("/login/")
 
 
+def validar_dominio_correo(correo):
+    # Validar que el dominio sea "example.com"
+    dominio_permitido = "uanl.edu.mx"
+    _, dominio = correo.split('@')
+    return dominio == dominio_permitido
+
+
 def registro(request):    
 
     if request.method == 'POST':
@@ -58,6 +65,14 @@ def registro(request):
                 alumno.correo= formulario.cleaned_data['correo']
                 alumno.nombre = formulario.cleaned_data['nombre']
                 alumno.set_password(formulario.cleaned_data['password'])
+
+                if not validar_dominio_correo(alumno.correo):
+                    return render(request, 'registro.html', {
+                    "form": formulario,
+                    "mensaje": 'El dominio del correo electrónico no es válido. Favor de ingresar el dominio @uanl.edu.mx'
+                })
+                    
+
                 alumno.save()
 
                 return redirect("/")

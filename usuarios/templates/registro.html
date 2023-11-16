@@ -12,6 +12,7 @@
 </head>
 
 <body class="h-screen fondologin">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <section class="grid grid-cols-2 h-full
                     sm:grid-cols-3">
         <article class="text-center w-screen mt-2
@@ -28,7 +29,7 @@
     
           
           <!--{{form.as_p}}-->
-          <form action="" method="POST"      
+          <form action="" method="POST" id="myForm"   
                 class="bg-white mx-7 mt-2 h-3/4 rounded-lg p-6 shadow-2xl shadow-gray-600 grid grid-cols-2 justify-items-center
                                 sm:w-1/2 sm:mx-auto sm:grid-cols-1">
             {% csrf_token %} 
@@ -67,13 +68,38 @@
                           type="password" placeholder="Confirmar contraseña">
              
                             
-            <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Registrarse</button>
+            <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6"
+                    onclick="validatePassword()">
+                    Registrarse
+            </button>
             <!--<button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-6">Cancelar</button>-->
             <a href="{% url 'login' %}" class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer 
               hover:bg-green-300 mt-4"><div>Cancelar</div></a>
             <br>
         
           </form>
+          
+          <script>
+            $(document).ready(function validatePassword() {
+                $('#myForm').submit(function (event) {
+                    var password = document.getElementById("password").value;
+                    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+                        if (!passwordRegex.test(password)) {
+                            alert("La contraseña no cumple con los requisitos mínimos:\n" +
+                                "- Al menos 8 caracteres\n" +
+                                "- Al menos una letra minúscula\n" +
+                                "- Al menos una letra mayúscula\n" +
+                                "- Al menos un número\n" +
+                                "- Al menos un carácter especial (@ $ ! % * ? &)");
+                            event.preventDefault();
+                        } else {
+                            //alert("¡Contraseña válida!");
+                        }
+                });
+            });
+          </script>
+
         </article>
         
       </section>

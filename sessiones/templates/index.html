@@ -30,7 +30,7 @@
                         <th class="border-t border-t-white px-4 py-2">Alumno - Matricula</th>
                         <th class="border-t border-t-white px-4 py-2">Número Practica</th>
                         <th class="border-t border-t-white px-4 py-2"></th>
-                        <th class="border-t border-t-white px-4 py-2"></th>
+                        <!--<th class="border-t border-t-white px-4 py-2"></th>-->
                     </tr>
                     {% for reservacion in reservaciones %}
                     <tr class="bg-gris hover:bg-green-200">
@@ -46,12 +46,12 @@
                                 Editar
                             </a>
                         </td>
-                        <td class="">
+                        <!--<td class="">
                             <a href="{% url 'sessiones:eliminar' reservacion.id %}" 
                                 class="btn btn-danger btn-sm">
                                 Cancelar
                             </a>
-                        </td>
+                        </td>-->
                     </tr>
                     {% endfor %}
                 </table>
