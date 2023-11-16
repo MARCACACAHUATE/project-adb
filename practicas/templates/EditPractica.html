@@ -2,30 +2,55 @@
 {% load static %}
 
 {% block main %}
-<div class="flex justify-center items-center mt-10">
+    <h1 class="text-gray-700 font-bold text-titulo-min-xl 
+        sm:mt-10 sm:text-titulo-xl text-center">
+        Editar {{ practica.titulo }}
+    </h1>
 
-    <form class="w-2/4 text-center bg-white rounded-3xl p-6"
-        method="post">
+    <form class="bg-white mx-7 mt-2 rounded-lg p-6 sm:w-1/2 sm:mx-auto"
+    method="post">
         {% csrf_token %}
 
         {% if mensaje %}
         <p>{{ error_message }}</p>
         {% endif %}
 
-        <div class="flex">
-            <lable>Titulo</lable>
-            <input 
-                name="titulo"
-                value="{{ practica.titulo }}"/>
-        </div>
+        
+        <lable for="titulo">Titulo de Práctica:</lable>
+        <input 
+            class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
+            name="titulo"
+            type="text"
+            id="titulo"
+            value="{{ practica.titulo }}"/>
+        
+        
+        <br><lable for="fecha_inicio">Fecha de Inicio:</lable>
+        <input 
+            class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
+            type="datetime-local"
+            name="fecha_inicio"
+            id="fecha_inicio"
+            value="{{ practica.fecha_inicio }}"/>
+        
 
-        <div class="flex">
-            <lable>Descripción</lable>
-            <textarea 
-                name="descripcion">
-                {{ practica.descripcion }}
-            </textarea>
-        </div>
+        <br><lable for="fecha_fin">Fecha de Fin:</lable>
+        <input 
+            class="flex left-0 border border-gray-300 w-full px-3 py-2 rounded-md bg-gray-100"
+            type="datetime-local"
+            name="fecha_fin"
+            id="fecha_fin"
+            value="{{ practica.fecha_fin }}"/>    
+
+
+        <br><lable for="descripcion">Descripción:</lable>
+        <textarea 
+            class="flex left-0 border border-gray-300 w-full h-24 px-3 py-2 rounded-md bg-gray-100"
+            name="descripcion"
+            type="text"
+            id="descripcion">
+            {{ practica.descripcion }}
+        </textarea>
 
         <!--
         <div class="flex">
@@ -41,23 +66,7 @@
                     value="False">Desactiva Práctica</option>
             </select>
         </div>
-        -->
-
-        <div class="flex">
-            <lable>Fecha de Inicio</lable>
-            <input 
-                type="datetime-local"
-                name="fecha_inicio"
-                value="{{ practica.fecha_inicio }}"/>
-        </div>
-
-        <div class="flex">
-            <lable>Fecha de Cierre</lable>
-            <input 
-                type="datetime-local"
-                name="fecha_fin"
-                value="{{ practica.fecha_fin }}"/>
-        </div>
+        -->        
 
         <div class="flex gap-3 justify-center m-4">  
             <a href="{% url 'practicas:detail' grupo_id=grupo_id practica_id=practica_id %}">
@@ -72,7 +81,5 @@
 
     </form>
 
-    <div class="grid grid-cols-1 justify-items-center">
-    </div>
-</div>
+
 {% endblock %}
