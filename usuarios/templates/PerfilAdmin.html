@@ -21,9 +21,12 @@
         </tr>
       </table>
 
-      <form method="post" class="grid grid-cols-2 justify-center">  
+      <form method="post" class="grid grid-cols-3 justify-center">  
         <a class="flex justify-center" href="{% url 'home' %}">
           <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
+        </a>
+        <a class="flex justify-center" href="{% url 'cambio-contraseña' %}">
+          <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Cambiar Contraseña</div>
         </a>
         <a class="flex justify-center" href="{% url 'logout' %}">
           <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Cerrar Sesión</div>

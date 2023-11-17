@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block main %}
+        
+{% csrf_token %}
+<div class="flex justify-center items-center mt-10">
+  <div class="w-2/4 text-center bg-white rounded-3xl pb-12">
+    <div class="flex justify-center items-center">
+      <div class="w-3/4 text-center">
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+          <h1 class="text-verde font-bold text-titulo-min-xl mt-8
+            md:text-titulo ">Cambio de Contraseña</h1><br>
+            <form action="" id="myForm"
+              method="post">
+              {% csrf_token %}
+              {% if mensaje %}
+              <p class="text-center text-red-400 font-bold">{{ mensaje }}</p>
+              {% endif %}
+
+              <label for="old_password">Contraseña Actual:</label>      
+              <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100 sm:w-full" 
+                  name="password_anterior" 
+                  id="password_anterior" 
+                  type="password" 
+                  placeholder="Contraseña Actual" 
+                  required>
+              </input>
+
+              <label for="new_password1">Contraseña Nueva:</label>      
+              <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100 sm:w-full" 
+                  name="password" 
+                  id="password" 
+                  type="password" 
+                  placeholder="Contraseña Nueva" 
+                  required>
+              </input>
+
+              <label for="new_password2">Confirmar Contraseña Nueva:</label>
+              <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100 sm:w-full" 
+                  name="password_confirm" 
+                  id="password_confirm" 
+                  type="password" 
+                  placeholder="Confirmar Contraseña Nueva">
+              </input>
+
+              <div class="flex flex-row gap-3">
+                <a href="{% url 'Perfil' %}"
+                  class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2">
+                    <div>Regresar</div>
+                </a>
+                  
+                <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2">
+                  Guardar Cambio
+                </button>                  
+              </div>
+
+            </form>
+
+            <script>
+              $(document).ready(function validatePassword() {
+                $('#myForm').submit(function (event) {
+                  var password = document.getElementById("password").value;
+                  var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    
+                  if (!passwordRegex.test(password)) {
+                    alert("La contraseña no cumple con los requisitos mínimos:\n" +
+                          "- Al menos 8 caracteres\n" +
+                          "- Al menos una letra minúscula\n" +
+                          "- Al menos una letra mayúscula\n" +
+                          "- Al menos un número\n" +
+                          "- Al menos un carácter especial (@ $ ! % * ? &)");
+                    event.preventDefault();
+                  } else {
+                    //alert("¡Contraseña válida!");
+                  }
+                });
+              });
+            </script>
+   
+        </div>
+      
+    </div>
+  </div>
+
+
+  {% endblock %}

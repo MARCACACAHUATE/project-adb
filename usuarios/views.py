@@ -39,6 +39,11 @@ def logout_user(request):
     return redirect("/login/")
 
 
+def cambiopassword(request):
+
+    return render(request, "CambioContrasena.html")
+
+
 def validar_dominio_correo(correo):
     # Validar que el dominio sea "example.com"
     dominio_permitido = "uanl.edu.mx"
@@ -214,3 +219,5 @@ class MaestroDetailView(View):
 
         except Usuarios.DoesNotExist:
             return render(request, self.template_name, { "error_message": "hola" })
+        
+

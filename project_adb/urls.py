@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('login/', views.login_user, name="login"),
     path('logout/', views.logout_user, name="logout"),
+    path('cambio-contraseña', views.cambiopassword, name="cambio-contraseña"),
     path('registro', views.registro, name="Registro"),
     path("grupos/", include('grupos.urls', namespace="grupos")),
     path("practicas/", include('practicas.urls', namespace="practicas")),

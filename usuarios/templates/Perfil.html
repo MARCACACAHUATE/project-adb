@@ -9,12 +9,7 @@
       <div class="grid justify-items-center mt-8">
         <img src="{% static 'img/Logo.png' %}" alt="" class="w-32 h-32 rounded-full">
       </div>
-      <!--<p class="text-xl mt-4"><b>Alumno</b></p>
-      <p class="text-xl mt-4"><b>Matricula:</b> 1736076</p>
-      <p class="text-xl mt-4"><b>Carrera:</b> IAS</p>
-      <p class="text-xl mt-4"><b>Correo:</b> alangzz@uanl.com.mx</p>
-      <p class="text-xl mt-4"><b>Tipo de cuenta:</b> Alumno</p>-->
-      
+
       <table class="container">      
         <tr>            
           <td class="text-xl mt-4 px-4 py-2"><b>Nombre:</b> {{ usuario.nombre }}</td>
@@ -27,9 +22,12 @@
         </tr> 
       </table>
 
-      <form method="post" class="grid grid-cols-2 justify-center">  
+      <form method="post" class="grid grid-cols-3 justify-center">  
         <a class="flex justify-center" href="{% url 'home' %}">
           <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
+        </a>
+        <a class="flex justify-center" href="{% url 'cambio-contraseña' %}">
+          <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Cambiar Contraseña</div>
         </a>
         <a class="flex justify-center" href="{% url 'logout' %}">
           <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Cerrar Sesión</div>
