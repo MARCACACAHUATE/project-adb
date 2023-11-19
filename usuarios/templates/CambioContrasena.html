@@ -10,13 +10,19 @@
         <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
           <h1 class="text-verde font-bold text-titulo-min-xl mt-8
             md:text-titulo ">Cambio de Contraseña</h1><br>
-            <form action="" id="myForm"
+            <form action="" id="myForm" 
               method="post">
               {% csrf_token %}
-              {% if mensaje %}
-              <p class="text-center text-red-400 font-bold">{{ mensaje }}</p>
+              {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    <p class="font-semibold text-red-500 ml-10 my-1">{{ message }}</p>
+                </li>
+                {% endfor %}
+              </ul>
               {% endif %}
-
+              <!--
               <label for="old_password">Contraseña Actual:</label>      
               <input class="border border-gray-300 w-10/12 px-3 py-2 mb-4 rounded-md bg-gray-100 sm:w-full" 
                   name="password_anterior" 
@@ -49,9 +55,24 @@
                     <div>Regresar</div>
                 </a>
                   
-                <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2">
+                <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2" 
+                  onclick="validatePassword()">
                   Guardar Cambio
                 </button>                  
+              </div>
+              -->
+              {{ form.as_p }}
+                            
+              
+              <div class="flex flex-row gap-3">
+                <a href="{% url 'Perfil' %}"
+                  class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2">
+                  <div>Regresar</div>
+                </a>
+                <button class="bg-verde w-10/12 py-2 text-white font-bold rounded-full cursor-pointer hover:bg-green-300 mt-2"
+                  onclick="validatePassword()">
+                  Guardar Cambio
+                </button>
               </div>
 
             </form>

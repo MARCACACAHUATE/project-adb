@@ -13,6 +13,9 @@ from usuarios.models import Usuarios, Role, Registro_Semestre
 from grupos.models import Grupos
 from practicas.models import Practicas
 
+from usuarios.forms.passwordchangeform import CustomPasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 def login_user(request):
 
     if request.method == 'POST':
@@ -37,11 +40,6 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect("/login/")
-
-
-def cambiopassword(request):
-
-    return render(request, "CambioContrasena.html")
 
 
 def validar_dominio_correo(correo):
@@ -155,6 +153,21 @@ def perfil(request):
     
     return redirect("home")
 
+def cambiopassword(request):
+    if request.method == 'POST':
+        form = CustomPasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important for maintaining the user's session
+            messages.success(request, 'Tu contraseña se actualizo satisfactoriamente!')
+            print("Formulario valido")
+            return redirect('CambioContraseña')
+        else:
+            print("Formulario invalido")
+            messages.error(request, 'Error en el formulario.')
+    else:
+        form = CustomPasswordChangeForm(request.user)
+    return render(request, 'CambioContrasena.html', {'form': form})
 
 
 def registromaestros(request):
@@ -193,7 +206,7 @@ def registromaestros(request):
                 "form": formulario,
                 "mensaje": 'Algún dato ingresado es incorrecto. Favor de llenar nuevamente los campos.'
             })
-
+    
     return render(request, "RegistroMaestros.html", { "maestro_id": maestro_id.id })
 
 
