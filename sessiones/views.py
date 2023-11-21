@@ -1,7 +1,8 @@
-import datetime
+from datetime import datetime
 from enum import global_enum_repr
 import re
 from django.shortcuts import render, redirect
+from django.utils import timezone
 from django.http import HttpResponse
 from requests import session
 from .models import Reservaciones
@@ -199,13 +200,33 @@ class SessionRedirectView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         try:
+            validacion: bool = True
+            message: str = ""
             practica_activa = Practicas.objects.get(pk=request.session["practica_activa"])
             reservacion = Reservaciones.objects.get(practica_id=practica_activa)
+
+            # valicaion reservacion es valida
+            if reservacion.is_valid is not True:
+                validacion = False
+                message = "La reservacion ya no es valida"
+
+            # validacion fecha y hora
+            actual = datetime.now()
+            if reservacion.fecha_reservacion.day is not actual.day or reservacion.fecha_reservacion.hour is not actual.hour:
+                validacion = False
+                message = "Aún no es hora para su reservación"
+
+            # verifica que la practica sigue activa
+            if practica_activa.is_valid is not True:
+                validacion = False
+                message = "La práctica ya no esta activa"
 
         except Reservaciones.DoesNotExist:
             messages.info(request, "No tiene una reservacion para esta práctica.")
             return redirect("home")
 
         return render(request, self.template_name, { 
-            "reservacion": reservacion
+            "reservacion": reservacion,
+            "validacion": validacion,
+            "message": message
         })

@@ -1,4 +1,7 @@
+from datetime import datetime
 from django import forms
+#from django.utils import timezone
+from pytz import timezone
 
 class EditPracticaForm(forms.Form):
     OPCIONES = (
@@ -14,3 +17,8 @@ class EditPracticaForm(forms.Form):
     #    choices=OPCIONES,
     #    widget=forms.Select(attrs={'class': 'tu-clase-css'}),
     #)
+
+    def clean_fecha_inicio(self):
+        fecha_inicio: datetime = self.cleaned_data["fecha_inicio"]
+        zona_horaria = timezone('America/Mexico_City')
+        return fecha_inicio.replace(tzinfo=zona_horaria) 

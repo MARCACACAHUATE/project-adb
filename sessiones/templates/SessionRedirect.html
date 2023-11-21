@@ -10,9 +10,30 @@
             <p class="font-medium text-gray-800">Reservación válida: {{ reservacion.is_valid }}</p>
             <p class="font-medium text-gray-800">Fecha de la reservación: {{ reservacion.fecha_reservacion }}</p>
             <p class="font-medium text-gray-800">Práctica: {{ reservacion.practica_id.titulo }}<p>
-            <br><a class="flex justify-center" href="{% url 'home' %}">
-                <div class="text-center bg-verde py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300">Regresar</div>
-            </a>
+            {% if not validacion %}
+            <p class="text-center font-semibold text-red-500">{{ message }}<p>
+            {% endif %}
+            <br>
+
+            <div class="flex gap-3 justify-center">
+                <button 
+                    {% if not validacion %} 
+                    class="text-center bg-green-900 opacity-50 py-2 p-8 text-white rounded-full cursor-pointer"
+                    disabled
+                    {% else %}
+                    class="text-center bg-[#1ab26b] py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300"
+                    {% endif %}
+                    type="button">
+                    Ingresar a la práctica
+                </button>
+
+                <a href="{% url 'home' %}">
+                    <button class="text-center bg-[#1ab26b] py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300"
+                        type="button">
+                        Regresar
+                    </button>
+                </a>
+            </div>
         </div>
     </div>
 </div>

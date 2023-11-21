@@ -39,15 +39,27 @@ class EditarPracticaView(LoginRequiredMixin, View):
             practicas_creadas = Practicas.objects.filter(
                 fecha_inicio__gte=data["fecha_inicio"],
                 fecha_fin__lte=data["fecha_fin"]
-            ).count()
+            )
 
-            if practicas_creadas > 0:
-                message = "Una práctica ya ha sido creada esta semana."      
-                print(message)
-                print("hola")
-                return render(request, self.template_name, { 
+            if practicas_creadas.count() > 0:
+                if practicas_creadas.count() is not 1 and practicas_creadas.filter(pk=self.kwargs["practica_id"]).exists() is not True:
+                    message = "Una práctica ya ha sido creada esta semana."      
+                    print(message)
+                    return render(request, self.template_name, { 
+                        "practica_id": practica_id,
+                        "grupo_id": grupo_id,
+                        "practica": practica_data,
+                        "error_message": message
+                    })
+            
+            # Validacion de la duracion de la practica
+            day_diff = data["fecha_fin"] - data["fecha_inicio"]
+            if  day_diff.days is not 6:
+                message = "La duracion de la practica tiene que ser de 1 semana"      
+                return render(request, self.template_name, {
                     "practica_id": practica_id,
                     "grupo_id": grupo_id,
+                    "practica": practica_data,
                     "error_message": message
                 })
 
@@ -57,6 +69,8 @@ class EditarPracticaView(LoginRequiredMixin, View):
                 practica.descripcion = data["descripcion"]
                 practica.fecha_inicio = data["fecha_inicio"]
                 practica.fecha_fin = data["fecha_fin"]
+                print(practica.fecha_inicio)
+                print(practica.fecha_fin)
 
                 #if data["is_valid"] == "True":
                 #    practica.is_valid = True
