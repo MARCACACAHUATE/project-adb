@@ -5,6 +5,7 @@ app_name = "sessiones"
 
 urlpatterns = [
     path('', views.SessionRedirectView.as_view(), name="session_redirect"),
+    path('<int:session_id>', views.SessionRegisterView.as_view(), name="session_register"),
     path('reservaciones', views.reservaciones, name='reservaciones'),
     path('reservaciones/crear/', views.crear, name='crear'),
     path('reservaciones/crear/horario', views.horario, name='horario'),

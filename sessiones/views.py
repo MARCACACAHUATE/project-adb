@@ -16,6 +16,7 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from sessiones.models import Sessiones
 
 def inicio(request):
     return HttpResponse("<h1>Hola</h1>")
@@ -221,6 +222,12 @@ class SessionRedirectView(LoginRequiredMixin, View):
                 validacion = False
                 message = "La práctica ya no esta activa"
 
+            # Crea o trae el registro de sesion
+            session, created = Sessiones.objects.get_or_create(
+                reservacion_id = reservacion,
+                defaults = { "fecha_inicio": datetime.now() }
+            )
+
         except Reservaciones.DoesNotExist:
             messages.info(request, "No tiene una reservacion para esta práctica.")
             return redirect("home")
@@ -228,5 +235,73 @@ class SessionRedirectView(LoginRequiredMixin, View):
         return render(request, self.template_name, { 
             "reservacion": reservacion,
             "validacion": validacion,
+            "session": session,
             "message": message
         })
+
+
+class SessionRegisterView(LoginRequiredMixin, View):
+    login_url = "login/"
+    template_name = "SessionRegister.html"
+
+    # Se muestra que se tiene que iniciar o terminar la sesion
+    # Al iniciar la sesion (ingresar a esta vista), se creara el registro de la sesion
+    # Al marcar como termianda se actualizara la fecha de fin
+    # y hara el calculo de la duracion de la sesion.
+    def get(self, request, *args, **kwargs):
+        try:
+            session = Sessiones.objects.get(pk=self.kwargs["session_id"])
+
+            if(session.is_active):
+                estado = "Activa"
+            else:
+                estado = "Finalizada"
+
+            session_data = {
+                "id": session.id,
+                "fecha_inicio": session.fecha_inicio,
+                "fecha_fin": session.fecha_fin,
+                "duracion": session.duracion,
+                "is_active": estado,
+                "reservacion_id": session.reservacion_id
+            }
+
+        except Sessiones.DoesNotExist:
+            print(f"Session con id {self.kwargs['session_id']} no existe")
+
+        return render(request, self.template_name, {
+            "session": session_data
+        })
+
+    def post(self, request, *args, **kwargs):
+
+        try:
+            session = Sessiones.objects.get(pk=self.kwargs["session_id"])
+            session.fecha_fin = datetime.now()
+
+            diff_time = session.fecha_fin - session.fecha_inicio
+            print(diff_time)
+            hora = diff_time.seconds // 3600
+            minutos = (diff_time.seconds % 3600) // 60
+            session.duracion = self.format_diff_time(str(hora), str(minutos))
+            session.is_active = False
+
+            session.save()
+
+        except Sessiones.DoesNotExist:
+            print(f"Session con id {self.kwargs['session_id']} no existe")
+
+        return redirect("sessiones:session_register", session_id=session.id)
+    
+    def format_diff_time(self, hora: str, minutos: str) -> str:
+        if len(hora) < 2:
+            hora_formateada = f"0{hora}"
+        else:
+            hora_formateada = f"{hora}"
+
+        if len(minutos) < 2:
+            minutos_formateada = f"0{minutos}"
+        else:
+            minutos_formateada = f"{minutos}"
+        
+        return f"{hora_formateada}:{minutos_formateada}"

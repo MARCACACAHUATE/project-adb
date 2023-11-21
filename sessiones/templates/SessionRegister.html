@@ -1,0 +1,56 @@
+{% extends 'base.html' %} 
+
+{% load static %} 
+
+{% block main %}
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <div class="flex flex-col items-center mx-2 my-10">
+            <h1 class="font-bold text-xl text-gray-800">Session {{ session.id }}</h1>
+            <p class="font-medium text-gray-800">Inicio: {{ session.fecha_inicio }}<p>
+
+            {% if session.fecha_fin %}
+            <p class="font-medium text-gray-800">Termino: {{ session.fecha_fin }}<p></p>
+            {% else %}
+            <p class="font-medium text-gray-800">Termino: <span class="italic">Aún no termina</span></p>
+            {% endif %}
+
+            {% if session.duracion %}
+            <p class="font-medium text-gray-800">Duracion: {{ session.duracion }}<p></p>
+            {% else %}
+            <p class="font-medium text-gray-800">Duracion: <span class="italic">Aún no termina</span><p></p>
+            {% endif %}
+
+            <p class="font-medium text-gray-800">Estado: {{ session.is_active }}<p></p>
+            <button 
+                {% if session.fecha_inicio %} 
+                class="text-gray-200 bg-slate-400 w-36 my-2 py-1 rounded-full"
+                disabled
+                {% else %}
+                class="text-gray-200 bg-slate-800 w-36 my-2 py-1 rounded-full"
+                {% endif %}
+                type="button">
+                Iniciar session
+            </button>
+            <button
+                {% if session.fecha_fin %} 
+                class="text-gray-200 bg-red-400 w-36 my-2 py-1 rounded-full"
+                disabled
+                {% else %}
+                class="text-gray-200 bg-red-700 w-36 my-2 py-1 rounded-full"
+                {% endif %}
+                type="submit">
+                Terminar session
+            </button>
+            <a href="{% url 'home'%}">
+                <button
+                    class="text-gray-200 bg-emerald-700 w-36 my-2 py-1 rounded-full"
+                    type="button">
+                    Salir de la Sesión
+                </button>
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

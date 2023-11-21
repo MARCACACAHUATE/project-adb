@@ -31,6 +31,15 @@ class EditarPracticaView(LoginRequiredMixin, View):
         practica_id = self.kwargs["practica_id"]
         grupo_id = self.kwargs["grupo_id"]
 
+        practica_data = {
+            "id": practica.id,
+            "titulo": practica.titulo,
+            "descripcion": practica.descripcion,
+            "is_valid": practica.is_valid,
+            "fecha_inicio": practica.fecha_inicio.strftime("%Y-%m-%dT%H:%M"),
+            "fecha_fin": practica.fecha_fin.strftime("%Y-%m-%dT%H:%M")
+        }
+
         print(form.is_valid())
         if form.is_valid():
             data = form.cleaned_data
