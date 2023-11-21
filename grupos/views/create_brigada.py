@@ -79,7 +79,7 @@ class CreateBrigadaView(View):
                 print("El alumno ya fue creado")
                 print(alumno.matricula)
     
-            return redirect(f"/grupos/{self.kwargs["grupo_id"]}")
+            return redirect(f"/grupos/{self.kwargs['grupo_id']}")
 
         else:
             form = self.form_class()
@@ -88,4 +88,4 @@ class CreateBrigadaView(View):
 
     def verify_alumnos(alumno):
         #response = requests.get()
-        print("validando la chingadera")
+        print("validando alumnos")

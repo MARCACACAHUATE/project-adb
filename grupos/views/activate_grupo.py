@@ -13,6 +13,6 @@ class ActivateGrupoView(LoginRequiredMixin, View):
             grupo.save()
 
         except Grupos.DoesNotExist:
-            print(f"Grupo con id {self.kwargs["grupo_id"]} no existe")
+            print(f"Grupo con id {self.kwargs['grupo_id']} no existe")
             return redirect('grupos:list')
         return redirect('grupos:list')
