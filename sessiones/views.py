@@ -249,6 +249,7 @@ class SessionRedirectView(LoginRequiredMixin, View):
             "reservacion": reservacion,
             "validacion": validacion,
             "session": session,
+            "session_estatus": session.is_active,
             "message": message
         })
 

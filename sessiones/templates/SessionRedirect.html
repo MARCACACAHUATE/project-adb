@@ -16,22 +16,17 @@
             <br>
 
             <div class="flex gap-3 justify-center">
-                {% if validacion %} 
                 <a href="{% url 'sessiones:session_register' session_id=session.id %}">
                     <button 
                         class="text-center bg-[#1ab26b] py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300"
                         type="button">
+                        {% if validacion %} 
                         Ingresar a la práctica
+                        {% else %}
+                        Detalles de la sesión
+                        {% endif %}
                     </button>
                 </a>
-                {% else %}
-                <button 
-                    class="text-center bg-green-900 opacity-50 py-2 p-8 text-white rounded-full cursor-pointer"
-                    disabled
-                    type="button">
-                    Ingresar a la práctica
-                </button>
-                {% endif %}
 
                 <a href="{% url 'home' %}">
                     <button class="text-center bg-[#1ab26b] py-2 p-8 text-white rounded-full cursor-pointer hover:bg-green-300"

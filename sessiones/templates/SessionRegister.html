@@ -7,7 +7,13 @@
     <form method="post">
         {% csrf_token %}
         <div class="flex flex-col items-center mx-2 my-10">
-            <h1 class="font-bold text-xl text-gray-800">Session {{ session.id }}</h1>
+            <h1 class="font-bold text-xl text-gray-800">
+                {% if session_estatus %}
+                Session {{ session.id }}
+                {% else %}
+                Session {{ session.id }} - Finalizada
+                {% endif %}
+            </h1>
             <p class="font-medium text-gray-800">Inicio: {{ session.fecha_inicio }}<p>
 
             {% if session.fecha_fin %}
@@ -23,6 +29,7 @@
             {% endif %}
 
             <p class="font-medium text-gray-800">Estado: {{ session.is_active }}<p></p>
+            {% if session_estatus %}
             <button 
                 {% if session.fecha_inicio %} 
                 class="text-gray-200 bg-slate-400 w-36 my-2 py-1 rounded-full"
@@ -50,6 +57,15 @@
                     Salir de la Sesión
                 </button>
             </a>
+            {% else %}
+            <a href="{% url 'home'%}">
+                <button
+                    class="text-gray-200 bg-emerald-700 w-36 my-2 py-1 rounded-full"
+                    type="button">
+                    Regresar
+                </button>
+            </a>
+            {% endif %}
         </div>
     </form>
 </div>
