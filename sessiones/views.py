@@ -206,22 +206,35 @@ class SessionRedirectView(LoginRequiredMixin, View):
             practica_activa = Practicas.objects.get(pk=request.session["practica_activa"])
             reservacion = Reservaciones.objects.get(practica_id=practica_activa)
 
-            # valicaion reservacion es valida
-            if reservacion.is_valid is not True:
-                validacion = False
-                message = "La reservacion ya no es valida"
-
             # validacion fecha y hora
+            # Cuando aun no es hora de la resevacion
             actual = datetime.now()
-            if reservacion.fecha_reservacion.day is not actual.day or reservacion.fecha_reservacion.hour is not actual.hour:
+            #if reservacion.fecha_reservacion.day is not actual.day or reservacion.fecha_reservacion.hour is not actual.hour:
+            if reservacion.fecha_reservacion > actual:
                 validacion = False
                 message = "Aún no es hora para su reservación"
+            
+            # Cuando se paso la fecha de reservacion
+            if reservacion.fecha_reservacion < actual and reservacion.fecha_reservacion.hour < actual.hour:
+                # Verificar si aun puede reagendar su reservacion
+                validacion = False
+                if reservacion.reagendar:
+                    message = "La fecha de su reservación ya ha pasado, por favor reagendela"
+                else:
+                    message = "Su reservación ya ha vencido"
+                    reservacion.is_valid = False
 
             # verifica que la practica sigue activa
             if practica_activa.is_valid is not True:
                 validacion = False
                 message = "La práctica ya no esta activa"
 
+            # valicaion reservacion es valida
+            if reservacion.is_valid is not True:
+                validacion = False
+                message = "La reservacion ya no es valida"
+
+            reservacion.save()
             # Crea o trae el registro de sesion
             session, created = Sessiones.objects.get_or_create(
                 reservacion_id = reservacion,
@@ -285,6 +298,8 @@ class SessionRegisterView(LoginRequiredMixin, View):
             minutos = (diff_time.seconds % 3600) // 60
             session.duracion = self.format_diff_time(str(hora), str(minutos))
             session.is_active = False
+            session.reservacion_id.is_valid = False
+            session.reservacion_id.save()
 
             session.save()
 
