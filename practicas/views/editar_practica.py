@@ -30,6 +30,7 @@ class EditarPracticaView(LoginRequiredMixin, View):
         form = self.form_class(request.POST)
         practica_id = self.kwargs["practica_id"]
         grupo_id = self.kwargs["grupo_id"]
+        practica = Practicas.objects.get(pk=self.kwargs["practica_id"])
 
         practica_data = {
             "id": practica.id,
