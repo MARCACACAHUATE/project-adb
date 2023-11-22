@@ -4,5 +4,4 @@
 *.sqlite3
 */**/__pycache__
 .vscode
-Dockerfile
 docker-compose*
