@@ -29,9 +29,9 @@ SECRET_KEY = 'django-insecure-h1vlt%tm!ts=j)x8ixbdvj*z6lrk0sqn!x$=oiemknl7nq%fla
 DEBUG = True
 
 ALLOWED_HOSTS = ['*' , "project-adb-production.up.railway.app"]
-CSRF_TRUSTED_ORIGINS = ["project-adb-production.up.railway.app", "https://project-adb-production.up.railway.app"]
-CSRF_ALLOWED_ORIGINS = ["project-adb-production.up.railway.app", "https://project-adb-production.up.railway.app"]
-CORS_ORIGINS_WHITELIST = ["project-adb-production.up.railway.app", "https://project-adb-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://project-adb-production.up.railway.app"]
+CSRF_ALLOWED_ORIGINS = ["https://project-adb-production.up.railway.app"]
+CORS_ORIGINS_WHITELIST = ["https://project-adb-production.up.railway.app"]
 
 STATICFILES_DIRS = [
     f'{BASE_DIR}/static',
