@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-h1vlt%tm!ts=j)x8ixbdvj*z6lrk0sqn!x$=oiemknl7nq%fla
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*' , "project-adb-production.up.railway.app"]
 
 STATICFILES_DIRS = [
     f'{BASE_DIR}/static',
