@@ -7,6 +7,6 @@ ENV PYTHONUNBUFFERED=1
 ENV SECRET_KEY=arrivalaspincheschivas
 ENV DB_ENGINE=MySQL
 WORKDIR /code
-COPY requirement.txt /code/
+COPY requirements.txt /code/
 RUN pip install -r requirements.txt
 COPY . /code/
