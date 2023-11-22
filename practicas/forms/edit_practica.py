@@ -20,5 +20,6 @@ class EditPracticaForm(forms.Form):
 
     def clean_fecha_inicio(self):
         fecha_inicio: datetime = self.cleaned_data["fecha_inicio"]
-        zona_horaria = timezone('America/Mexico_City')
-        return fecha_inicio.replace(tzinfo=zona_horaria) 
+        #zona_horaria = timezone('America/Mexico_City')
+        #return fecha_inicio.replace(tzinfo=zona_horaria) 
+        return fecha_inicio
