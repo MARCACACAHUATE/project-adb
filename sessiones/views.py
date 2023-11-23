@@ -277,7 +277,8 @@ class SessionRegisterView(LoginRequiredMixin, View):
                 "fecha_fin": session.fecha_fin,
                 "duracion": session.duracion,
                 "is_active": estado,
-                "reservacion_id": session.reservacion_id
+                "reservacion_id": session.reservacion_id,
+                "session_estatus": session.is_active,
             }
 
         except Sessiones.DoesNotExist:
