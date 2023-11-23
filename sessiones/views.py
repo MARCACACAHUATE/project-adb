@@ -204,7 +204,11 @@ class SessionRedirectView(LoginRequiredMixin, View):
             validacion: bool = True
             message: str = ""
             practica_activa = Practicas.objects.get(pk=request.session["practica_activa"])
-            reservacion = Reservaciones.objects.get(practica_id=practica_activa)
+            alumno = request.session.get("user_id")
+            reservacion = Reservaciones.objects.get(
+                practica_id=practica_activa,
+                alumno_id = alumno
+            )
 
             # validacion fecha y hora
             # Cuando aun no es hora de la resevacion
