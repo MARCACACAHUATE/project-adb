@@ -21,7 +21,7 @@ class CreateBrigadaView(View):
 
         #response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
 
-        alumnos_siase: dict 
+        #alumnos_siase: dict 
         #if response.status_code == 200:
         #    alumnos_siase = response.json()["alumnos"]
         #    print(alumnos_siase)
@@ -42,7 +42,7 @@ class CreateBrigadaView(View):
 
         #response = requests.get(f"http://127.0.0.1:36165/grupos/{grupo.numero_brigada}")
 
-        alumnos_siase: dict = [] 
+        #alumnos_siase: dict = [] 
         #if response.status_code == 200:
         #    alumnos_siase = response.json()["alumnos"]
         #    print(alumnos_siase)
@@ -57,27 +57,38 @@ class CreateBrigadaView(View):
             csv_file.seek(0)
             reader = csv.DictReader(io.StringIO(csv_file.read().decode('utf-8-sig')))
             alumno_role = Role.objects.get(Role="Alumno")
+
             for row in reader:
 
-                #if row["matricula"] in 
-
-                alumno, created = Usuarios.objects.get_or_create(
-                    matricula=row["matricula"],
-                )
-
-                if created:
-                    alumno.role_id = alumno_role
-                    Registro_Semestre.objects.create(
-                        alumno_id=alumno,
-                        fecha_inicio=inicio_semestre,
-                        fecha_final=fin_semestre
+                try:
+                    alumno, created = Usuarios.objects.get_or_create(
+                        matricula=row["matricula"],
+                        defaults= { "nombre": row["nombre"] }
                     )
-                    alumno.save()
-                    grupo.alumnos.add(alumno)
-                    grupo.save()
 
-                print("El alumno ya fue creado")
-                print(alumno.matricula)
+                    print(created)
+                    if created:
+                        alumno.role_id = alumno_role
+                        Registro_Semestre.objects.create(
+                            alumno_id=alumno,
+                            fecha_inicio=inicio_semestre,
+                            fecha_final=fin_semestre
+                        )
+                        alumno.save()
+                        grupo.alumnos.add(alumno)
+                        grupo.save()
+                    else:
+                        print(f"El alumno con matricula {alumno.matricula} ya fue creado")
+                
+                except KeyError as error:
+                    error_message = "La estructura del archivo csv es incorrecto. Por favor seguir la estructura 'matricula, nombre' en minúscula"
+                    lista_alumnos = grupo.alumnos.all()
+                    return render(request, self.template_name, {
+                        "error_message": error_message,
+                        "form": form,
+                        "grupo": grupo,
+                        "lista_alumnos": lista_alumnos
+                    })
     
             return redirect(f"/grupos/{self.kwargs['grupo_id']}")
 
