@@ -6,7 +6,8 @@ from grupos.views import (
     ListGruposView, 
     GruposListRegisterView,
     DeactivateGrupoView,
-    ActivateGrupoView
+    ActivateGrupoView,
+    DetallesAlumnoGrupoView
 ) 
 from practicas.views import CreatePracticasView, UploadActView, activate_practicas, ListaPracticasView
 
@@ -15,6 +16,7 @@ app_name = 'grupos'  # Esto define un espacio de nombres para las URLs de la apl
 urlpatterns = [
     path('', CreateBrigadaView.as_view(), name='home'),
     path("<int:grupo_id>", CreateBrigadaView.as_view(), name="detail"),
+    path("<int:grupo_id>/estudiante/<int:alumno_id>", DetallesAlumnoGrupoView.as_view(), name="alumno_detalles"),
     path('create', CreateGrupoView.as_view(), name="create_grupo"),
     #path('list', ListGruposView.as_view(), name="list"),
     path('list', GruposListRegisterView.as_view(), name="list"),
