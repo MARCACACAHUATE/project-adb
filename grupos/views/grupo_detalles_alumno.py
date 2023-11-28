@@ -55,6 +55,7 @@ class DetallesAlumnoGrupoView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         pass
 
+    # TODO: Refactorizar esta parte en una Clase base
     def format_date(self, date: datetime) -> str:
         month_index = date.month
         mes = { 

@@ -77,12 +77,13 @@
                     <caption class="caption-top bg-gris font-bold px-4 py-2">
                         Estudiantes
                     </caption>
-                    <tr class="bg-gris hover:bg-green-200">
+                    <tr class="bg-gris">
                         <!--<th class="border-t border-t-white px-4 py-2">No. de Lista</th>-->
                         <th class="border-t border-t-white px-4 py-2">Matrícula</th>
                         <th class="border-t border-t-white px-4 py-2">Nombre del Alumno</th>
                         <th class="border-t border-t-white px-4 py-2">Correo Universitario</th>
                         <th class="border-t border-t-white px-4 py-2">Brigada</th>
+                        <th class="border-t border-t-white px-4 py-2">Ultima Conexión</th>
                         <th class="border-t border-t-white px-4 py-2">Acciones</th>
                     </tr>
                     {% for alumno in lista_alumnos %}
@@ -92,6 +93,7 @@
                         <td class="border-t border-t-white px-4 py-2">{{ alumno.nombre }}</td>
                         <td class="border-t border-t-white px-4 py-2">{{ alumno.correo }}</td>
                         <td class="border-t border-t-white px-4 py-2"> {{ grupo.numero_brigada }}</td>
+                        <td class="border-t border-t-white px-4 py-2"> {{ alumno.last_login }}</td>
                         <td class="border-t border-t-white px-4 py-2">
                             <a href="{% url 'grupos:alumno_detalles' grupo_id=grupo.id alumno_id=alumno.id %}">
                                 <button type="button">

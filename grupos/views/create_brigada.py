@@ -1,18 +1,20 @@
+#import requests
 import csv
 import io
 import requests
-from datetime import date
+from datetime import date, datetime
 from typing import Any
 from dateutil.relativedelta import relativedelta
-#import requests
 from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import View
 from grupos.forms import UploadCsvAlumnos
 from usuarios.models import Usuarios, Registro_Semestre, Role
 from grupos.models import Grupos
 
 
-class CreateBrigadaView(View):
+class CreateBrigadaView(LoginRequiredMixin, View):
+    login_url = "login/"
     form_class = UploadCsvAlumnos
     template_name = "MaestroAltaBrigada.html"
 
@@ -26,7 +28,8 @@ class CreateBrigadaView(View):
         #    alumnos_siase = response.json()["alumnos"]
         #    print(alumnos_siase)
 
-        lista_alumnos = grupo.alumnos.all()
+        alumnos = grupo.alumnos.all()
+        lista_alumnos = self.map_alumnos_list(alumnos)
         return render(request, self.template_name, { 
             "form": self.form_class(),
             "grupo": grupo,
@@ -124,3 +127,41 @@ class CreateBrigadaView(View):
         # Valida el size maximo de la matricula
         if len(matricula) > 10:
             raise ValueError(f"La matrícula del renglon {index} debe ser de 10 digitos como máximo.")
+    
+    def map_alumnos_list(self, lista_alumnos):
+
+        alumnos_parsed = [{
+            "id": alumno.id,
+            "matricula": alumno.matricula,
+            "nombre": alumno.nombre if alumno.nombre or len(alumno.nombre) > 0 else "Sin Nombre",
+            "correo": alumno.correo if alumno.correo else "Sin Correo",
+            "is_verified": alumno.is_verified,
+            "is_active": alumno.is_active,
+            "is_staff": alumno.is_staff,
+            "cerated_at": alumno.cerated_at,
+            "modified_at": alumno.modified_at,
+            "role_id": alumno.role_id,
+            "last_login": self.format_date(alumno.last_login) if alumno.last_login else "Sin Conexión"
+        } for alumno in lista_alumnos]
+
+        return alumnos_parsed
+
+    # TODO: Refactorizar esta parte en una Clase base
+    def format_date(self, date: datetime) -> str:
+        month_index = date.month
+        mes = { 
+            1 :"enero",
+            2 :"febrero",
+            3: "marzo",
+            4: "abril",
+            5: "mayo",
+            6: "junio",
+            7: "julio",
+            8: "agosto",
+            9: "septiembre",
+            10: "octubre",
+            11: "noviembre",
+            12: "diciembre",
+        }
+
+        return date.strftime(f"%d de {mes[month_index]} del %Y %H:%M")
