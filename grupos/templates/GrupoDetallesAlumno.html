@@ -1,5 +1,104 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<p>Arriba las chivas</p>
+  <div class="flex justify-center items-center mt-10">
+    <div class="w-3/4 text-center bg-white rounded-xl p-4">
+        <div class="grid grid-cols-3">
+            <a href="{% url 'grupos:detail' grupo_id=grupo.id%}">
+                <button class="w-32 bg-[#1ab26b] text-white rounded-full py-1 hover:bg-green-900">
+                    Regresar
+                </button>    
+            </a>
+            <h2 class="text-xl font-semibold text-emerald-700">Grupo {{ grupo.numero_brigada }} - Detalles del Alumno</h2>
+        </div>
+
+        <div class="text-left text-gray-800 my-8 text-lg">
+            <p>Nombre: {{ alumno.nombre }}</p>
+            <p>Matricula: {{ alumno.matricula }}</p>
+            <p>Correo: {{ alumno.correo }}</p>
+        </div>
+
+        <div class="">
+            {% if reservaciones|length > 0 %}
+            <div class="overflow-auto h-60 max-h-60 my-4">
+                <table class="container">
+                    <caption class="caption-top bg-gris font-bold px-4 py-2">
+                        Reservaciones
+                    </caption>
+                    <tr class="bg-gris">
+                        <!--<th class="border-t border-t-white px-4 py-2">No. de Lista</th>-->
+                        <th class="border-t border-t-white px-4 py-2">Fecha de Reservacion</th>
+                        <th class="border-t border-t-white px-4 py-2">Estado</th>
+                        <th class="border-t border-t-white px-4 py-2">Practica</th>
+                        <th class="border-t border-t-white px-4 py-2">Reagendar</th>
+                        <th class="border-t border-t-white px-4 py-2">Acciones</th>
+                    </tr>
+                    {% for reservacion in reservaciones %}
+                    <tr class="bg-gris hover:bg-green-200">
+                        <!--<td class="border-t border-t-white px-4 py-2">{{ alumno.id }}</td>-->
+                        <td class="border-t border-t-white px-4 py-2">{{ reservacion.fecha_reservacion }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ reservacion.is_valid }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ reservacion.practica_id.titulo }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ reservacion.reagendar }}</td>
+                        <td class="border-t border-t-white px-4 py-2">
+                            <a href="#">
+                                <button type="button">
+                                    Detalles
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            {% else %}
+            <div class="flex flex-col justify-center overflow-auto h-32 max-h-60 my-4">
+                <p class="text-2xl font-semibold text-gray-700">Sin Reservaciones Realizadas</p>
+            </div>
+            {% endif %}
+
+            {% if sessiones|length > 0 %}
+            <div class="overflow-auto h-60 max-h-60 my-4">
+                <table class="container">
+                    <caption class="caption-top bg-gris font-bold px-4 py-2">
+                        Sesiones
+                    </caption>
+                    <tr class="bg-gris">
+                        <!--<th class="border-t border-t-white px-4 py-2">No. de Lista</th>-->
+                        <th class="border-t border-t-white px-4 py-2">Practica</th>
+                        <th class="border-t border-t-white px-4 py-2">Empezo</th>
+                        <th class="border-t border-t-white px-4 py-2">Termino</th>
+                        <th class="border-t border-t-white px-4 py-2">Duracion</th>
+                        <th class="border-t border-t-white px-4 py-2">Estado</th>
+                        <th class="border-t border-t-white px-4 py-2">Acciones</th>
+                    </tr>
+                    {% for session in sessiones %}
+                    <tr class="bg-gris hover:bg-green-200">
+                        <!--<td class="border-t border-t-white px-4 py-2">{{ alumno.id }}</td>-->
+                        <td class="border-t border-t-white px-4 py-2">{{ session.practica }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ session.fecha_inicio }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ session.fecha_fin }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ session.duracion }}</td>
+                        <td class="border-t border-t-white px-4 py-2">{{ session.is_active }}</td>
+                        <td class="border-t border-t-white px-4 py-2">
+                            <a href="#">
+                                <button type="button">
+                                    Detalles
+                                </button>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+
+            {% else %}
+            <div class="flex flex-col justify-center overflow-auto h-32 max-h-60 my-4">
+                <p class="text-2xl font-semibold text-gray-700">Sin Sesiones Realizadas</p>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
 {% endblock %}
