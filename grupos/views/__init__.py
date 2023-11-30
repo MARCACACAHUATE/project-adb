@@ -4,3 +4,4 @@ from .list_grupos import ListGruposView, GruposListRegisterView
 from .deactivate_grupo import DeactivateGrupoView
 from .activate_grupo import ActivateGrupoView
 from .grupo_detalles_alumno import DetallesAlumnoGrupoView
+from .alumno_detalles_session import AlumnoDetallesSession

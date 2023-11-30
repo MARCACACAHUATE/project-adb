@@ -81,7 +81,7 @@
                         <td class="border-t border-t-white px-4 py-2">{{ session.duracion }}</td>
                         <td class="border-t border-t-white px-4 py-2">{{ session.is_active }}</td>
                         <td class="border-t border-t-white px-4 py-2">
-                            <a href="#">
+                            <a href="{% url 'grupos:alumno_sessiones' grupo_id=grupo.id alumno_id=alumno.id session_id=session.id %}">
                                 <button type="button">
                                     Detalles
                                 </button>

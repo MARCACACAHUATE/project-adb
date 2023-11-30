@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <div class="flex justify-center items-center mt-10">
+    <div class="w-3/4 bg-white rounded-xl p-4">
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="flex flex-col items-center mx-2 my-5">
+                <h1 class="font-bold text-3xl text-gray-800">
+                    {% if session.is_active %}
+                    Sesión {{ session.id }} - {{ session.reservacion_id.practica_id.titulo }}
+                    {% else %}
+                    Sesión {{ session.id }} - Finalizada
+                    {% endif %}
+                </h1>
+            </div>
+
+            <div class="text-lg mx-10">
+                <p class="font-medium text-gray-800">Inicio: {{ session.fecha_inicio }}<p>
+
+                {% if session.fecha_fin %}
+                <p class="font-medium text-gray-800">Termino: {{ session.fecha_fin }}<p></p>
+                {% else %}
+                <p class="font-medium text-gray-800">Termino: <span class="italic">Aún no termina</span></p>
+                {% endif %}
+
+                {% if session.duracion %}
+                <p class="font-medium text-gray-800">Duracion: {{ session.duracion }}<p></p>
+                {% else %}
+                <p class="font-medium text-gray-800">Duracion: <span class="italic">Aún no termina</span><p></p>
+                {% endif %}
+
+                <p class="font-medium text-gray-800">Estado: {{ session.session_estatus }}<p></p>
+
+            </div>
+
+            <div class="flex flex-col items-center mx-2 my-5">
+                <a href="{% url 'grupos:alumno_detalles' grupo_id=grupo_id alumno_id=alumno.id %}">
+                    <button
+                        class="text-gray-200 bg-emerald-700 w-36 my-2 py-1 rounded-full"
+                        type="button">
+                        Regresar
+                    </button>
+                </a>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
